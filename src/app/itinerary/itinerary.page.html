@@ -1,88 +1,343 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar color="primary" style="--background: var(--tm-teal-900); --color: var(--tm-white);">
+  <ion-toolbar class="itinerary-toolbar">
+
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button class="menu-button"></ion-menu-button>
     </ion-buttons>
+
     <ion-title>Itinerary</ion-title>
+
     <ion-buttons slot="end">
-      <ion-button style="color: var(--tm-coral-500); font-weight: bold;">
-        <ion-icon name="add-outline" slot="start"></ion-icon> Add Activity
+      <ion-button class="add-activity-btn">
+        <ion-icon name="add-outline" slot="start"></ion-icon>
+        Add Activity
       </ion-button>
     </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content style="--background: var(--tm-bg-page);">
-  <div style="padding: 24px; max-width: 800px; margin: 0 auto;">
-    <h1 style="color: var(--tm-ink-900);">Palawan Trip Itinerary</h1>
-    <p style="color: var(--tm-ink-400); margin-bottom: 24px;">Manage your scheduled activities.</p>
 
-    <ion-accordion-group>
-      <ion-accordion value="day1" style="background: white; border-radius: 12px; margin-bottom: 12px; overflow: hidden; border: 1px solid var(--tm-border-base);">
-        <ion-item slot="header" color="light">
-          <ion-label>
-            <h2 style="font-weight: 600; color: var(--tm-teal-900);">Day 1: Arrival & Exploration</h2>
-            <p>Oct 12, 2026</p>
-          </ion-label>
-        </ion-item>
-        <div slot="content" style="padding: 16px;">
-          <ion-list lines="full">
-            <ion-item>
-              <ion-label>
-                <h3>10:00 AM - Check-in</h3>
-                <p>Kubo Homestay, El Nido</p>
-              </ion-label>
-              <ion-button fill="clear" color="medium"><ion-icon name="create-outline"></ion-icon></ion-button>
-              <ion-button fill="clear" color="danger"><ion-icon name="trash-outline"></ion-icon></ion-button>
-            </ion-item>
-            <ion-item>
-              <ion-label>
-                <h3>12:30 PM - Lunch</h3>
-                <p>Artcafe, Town Proper</p>
-              </ion-label>
-              <ion-button fill="clear" color="medium"><ion-icon name="create-outline"></ion-icon></ion-button>
-              <ion-button fill="clear" color="danger"><ion-icon name="trash-outline"></ion-icon></ion-button>
-            </ion-item>
-            <ion-item>
-              <ion-label>
-                <h3>03:00 PM - Beach Walk</h3>
-                <p>Nacpan Beach</p>
-              </ion-label>
-              <ion-button fill="clear" color="medium"><ion-icon name="create-outline"></ion-icon></ion-button>
-              <ion-button fill="clear" color="danger"><ion-icon name="trash-outline"></ion-icon></ion-button>
-            </ion-item>
-          </ion-list>
+<ion-content class="itinerary-content">
+
+  <div class="itinerary-container">
+
+    <!-- =========================
+         PAGE HEADER
+    ========================== -->
+
+    <div class="page-header">
+
+      <div class="page-heading">
+        <span class="eyebrow">YOUR JOURNEY</span>
+
+        <h1>Palawan Trip Itinerary</h1>
+
+        <p>
+          Keep your Palawan adventure organized and manage
+          your scheduled activities in one place.
+        </p>
+      </div>
+
+      <div class="trip-date">
+        <ion-icon name="calendar-outline"></ion-icon>
+
+        <div>
+          <span>TRIP DATES</span>
+          <strong>Oct 12 – 13, 2026</strong>
         </div>
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         DAY 1
+    ========================== -->
+
+    <ion-accordion-group value="day1" class="itinerary-days">
+
+      <ion-accordion value="day1" class="day-card">
+
+        <ion-item
+          slot="header"
+          lines="none"
+          class="day-header"
+        >
+
+          <div class="day-number" slot="start">
+            01
+          </div>
+
+          <ion-label>
+            <span class="day-label">DAY 1</span>
+
+            <h2>Arrival & Exploration</h2>
+
+            <p>October 12, 2026</p>
+          </ion-label>
+
+        </ion-item>
+
+
+        <div slot="content" class="day-content">
+
+          <!-- CHECK IN -->
+
+          <div class="activity-row">
+
+            <div class="activity-time">
+              <strong>10:00</strong>
+              <span>AM</span>
+            </div>
+
+            <div class="timeline">
+              <div class="timeline-dot"></div>
+              <div class="timeline-line"></div>
+            </div>
+
+            <div class="activity-info">
+              <h3>Check-in</h3>
+
+              <p>
+                <ion-icon name="location-outline"></ion-icon>
+                Kubo Homestay, El Nido
+              </p>
+            </div>
+
+            <div class="activity-actions">
+
+              <ion-button
+                fill="clear"
+                class="edit-btn"
+              >
+                <ion-icon name="create-outline"></ion-icon>
+              </ion-button>
+
+              <ion-button
+                fill="clear"
+                class="delete-btn"
+              >
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
+
+            </div>
+
+          </div>
+
+
+          <!-- LUNCH -->
+
+          <div class="activity-row">
+
+            <div class="activity-time">
+              <strong>12:30</strong>
+              <span>PM</span>
+            </div>
+
+            <div class="timeline">
+              <div class="timeline-dot"></div>
+              <div class="timeline-line"></div>
+            </div>
+
+            <div class="activity-info">
+              <h3>Lunch</h3>
+
+              <p>
+                <ion-icon name="location-outline"></ion-icon>
+                Artcafe, Town Proper
+              </p>
+            </div>
+
+            <div class="activity-actions">
+
+              <ion-button
+                fill="clear"
+                class="edit-btn"
+              >
+                <ion-icon name="create-outline"></ion-icon>
+              </ion-button>
+
+              <ion-button
+                fill="clear"
+                class="delete-btn"
+              >
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
+
+            </div>
+
+          </div>
+
+
+          <!-- BEACH WALK -->
+
+          <div class="activity-row last">
+
+            <div class="activity-time">
+              <strong>03:00</strong>
+              <span>PM</span>
+            </div>
+
+            <div class="timeline">
+              <div class="timeline-dot"></div>
+            </div>
+
+            <div class="activity-info">
+              <h3>Beach Walk</h3>
+
+              <p>
+                <ion-icon name="location-outline"></ion-icon>
+                Nacpan Beach
+              </p>
+            </div>
+
+            <div class="activity-actions">
+
+              <ion-button
+                fill="clear"
+                class="edit-btn"
+              >
+                <ion-icon name="create-outline"></ion-icon>
+              </ion-button>
+
+              <ion-button
+                fill="clear"
+                class="delete-btn"
+              >
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
+
+            </div>
+
+          </div>
+
+        </div>
+
       </ion-accordion>
 
-      <ion-accordion value="day2" style="background: white; border-radius: 12px; margin-bottom: 12px; overflow: hidden; border: 1px solid var(--tm-border-base);">
-        <ion-item slot="header" color="light">
+
+      <!-- =========================
+           DAY 2
+      ========================== -->
+
+      <ion-accordion value="day2" class="day-card">
+
+        <ion-item
+          slot="header"
+          lines="none"
+          class="day-header"
+        >
+
+          <div class="day-number" slot="start">
+            02
+          </div>
+
           <ion-label>
-            <h2 style="font-weight: 600; color: var(--tm-teal-900);">Day 2: Island Hopping Tour A</h2>
-            <p>Oct 13, 2026</p>
+            <span class="day-label">DAY 2</span>
+
+            <h2>Island Hopping Tour A</h2>
+
+            <p>October 13, 2026</p>
           </ion-label>
+
         </ion-item>
-        <div slot="content" style="padding: 16px;">
-          <ion-list lines="full">
-            <ion-item>
-              <ion-label>
-                <h3>08:00 AM - Meetup</h3>
-                <p>El Nido Port</p>
-              </ion-label>
-              <ion-button fill="clear" color="medium"><ion-icon name="create-outline"></ion-icon></ion-button>
-              <ion-button fill="clear" color="danger"><ion-icon name="trash-outline"></ion-icon></ion-button>
-            </ion-item>
-            <ion-item>
-              <ion-label>
-                <h3>09:30 AM - Big Lagoon</h3>
-                <p>Miniloc Island</p>
-              </ion-label>
-              <ion-button fill="clear" color="medium"><ion-icon name="create-outline"></ion-icon></ion-button>
-              <ion-button fill="clear" color="danger"><ion-icon name="trash-outline"></ion-icon></ion-button>
-            </ion-item>
-          </ion-list>
+
+
+        <div slot="content" class="day-content">
+
+          <!-- MEETUP -->
+
+          <div class="activity-row">
+
+            <div class="activity-time">
+              <strong>08:00</strong>
+              <span>AM</span>
+            </div>
+
+            <div class="timeline">
+              <div class="timeline-dot"></div>
+              <div class="timeline-line"></div>
+            </div>
+
+            <div class="activity-info">
+              <h3>Meetup</h3>
+
+              <p>
+                <ion-icon name="location-outline"></ion-icon>
+                El Nido Port
+              </p>
+            </div>
+
+            <div class="activity-actions">
+
+              <ion-button
+                fill="clear"
+                class="edit-btn"
+              >
+                <ion-icon name="create-outline"></ion-icon>
+              </ion-button>
+
+              <ion-button
+                fill="clear"
+                class="delete-btn"
+              >
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
+
+            </div>
+
+          </div>
+
+
+          <!-- BIG LAGOON -->
+
+          <div class="activity-row last">
+
+            <div class="activity-time">
+              <strong>09:30</strong>
+              <span>AM</span>
+            </div>
+
+            <div class="timeline">
+              <div class="timeline-dot"></div>
+            </div>
+
+            <div class="activity-info">
+              <h3>Big Lagoon</h3>
+
+              <p>
+                <ion-icon name="location-outline"></ion-icon>
+                Miniloc Island
+              </p>
+            </div>
+
+            <div class="activity-actions">
+
+              <ion-button
+                fill="clear"
+                class="edit-btn"
+              >
+                <ion-icon name="create-outline"></ion-icon>
+              </ion-button>
+
+              <ion-button
+                fill="clear"
+                class="delete-btn"
+              >
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
+
+            </div>
+
+          </div>
+
         </div>
+
       </ion-accordion>
+
     </ion-accordion-group>
+
   </div>
+
 </ion-content>

@@ -1,0 +1,496 @@
+/* =========================================
+   TOOLBAR
+========================================= */
+
+.itinerary-toolbar {
+  --background: var(--tm-teal-900);
+  --color: var(--tm-white);
+
+  min-height: 64px;
+  padding: 0 28px;
+}
+
+.itinerary-toolbar ion-title {
+  font-family: var(--tm-font-serif);
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.menu-button {
+  --color: var(--tm-white);
+}
+
+
+/* =========================================
+   ADD ACTIVITY
+========================================= */
+
+.add-activity-btn {
+  --background: var(--tm-coral-500);
+  --background-hover: var(--tm-coral-600);
+  --color: var(--tm-white);
+
+  --border-radius: 999px;
+
+  height: 38px;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+
+/* =========================================
+   PAGE
+========================================= */
+
+.itinerary-content {
+  --background: var(--tm-bg-page);
+}
+
+.itinerary-container {
+  width: 100%;
+  max-width: 980px;
+
+  margin: 0 auto;
+
+  padding: 55px 30px 80px;
+}
+
+
+/* =========================================
+   PAGE HEADER
+========================================= */
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  gap: 40px;
+
+  margin-bottom: 38px;
+}
+
+.page-heading {
+  max-width: 580px;
+}
+
+.eyebrow {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: var(--tm-coral-500);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 1.8px;
+}
+
+.page-heading h1 {
+  margin: 0 0 10px;
+
+  color: var(--tm-teal-900);
+
+  font-family: var(--tm-font-serif);
+
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 600;
+
+  line-height: 1.1;
+}
+
+.page-heading p {
+  max-width: 500px;
+
+  margin: 0;
+
+  color: var(--tm-ink-500);
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================
+   TRIP DATE CARD
+========================================= */
+
+.trip-date {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  min-width: 220px;
+
+  padding: 14px 18px;
+
+  background: var(--tm-bg-surface);
+
+  border: 1px solid var(--tm-border-light);
+  border-radius: var(--tm-radius-md);
+
+  box-shadow: var(--tm-shadow-xs);
+}
+
+.trip-date ion-icon {
+  padding: 9px;
+
+  background: var(--tm-coral-100);
+  color: var(--tm-coral-500);
+
+  border-radius: 50%;
+
+  font-size: 19px;
+}
+
+.trip-date div {
+  display: flex;
+  flex-direction: column;
+}
+
+.trip-date span {
+  color: var(--tm-ink-500);
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+.trip-date strong {
+  margin-top: 3px;
+
+  color: var(--tm-teal-900);
+
+  font-size: 13px;
+}
+
+
+/* =========================================
+   ACCORDIONS
+========================================= */
+
+.itinerary-days {
+  display: flex;
+  flex-direction: column;
+
+  gap: 15px;
+}
+
+.day-card {
+  background: var(--tm-bg-surface);
+
+  border: 1px solid var(--tm-border-light);
+  border-radius: var(--tm-radius-md);
+
+  box-shadow: var(--tm-shadow-sm);
+
+  overflow: hidden;
+
+  transition:
+    box-shadow var(--tm-transition-base),
+    transform var(--tm-transition-base);
+}
+
+.day-card:hover {
+  box-shadow: var(--tm-shadow-md);
+}
+
+
+/* =========================================
+   DAY HEADER
+========================================= */
+
+.day-header {
+  --background: var(--tm-bg-surface);
+  --color: var(--tm-ink-900);
+
+  --padding-start: 20px;
+  --padding-end: 20px;
+
+  --inner-padding-end: 8px;
+
+  --min-height: 90px;
+}
+
+.day-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+
+  margin-right: 16px;
+
+  background: var(--tm-teal-900);
+  color: var(--tm-white);
+
+  border-radius: 50%;
+
+  font-family: var(--tm-font-serif);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.day-label {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: var(--tm-coral-500);
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 1.3px;
+}
+
+.day-header h2 {
+  margin: 0 0 4px;
+
+  color: var(--tm-teal-900);
+
+  font-family: var(--tm-font-serif);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.day-header p {
+  margin: 0;
+
+  color: var(--tm-ink-500);
+
+  font-size: 11px;
+}
+
+
+/* =========================================
+   DAY CONTENT
+========================================= */
+
+.day-content {
+  padding: 8px 24px 22px;
+
+  background: var(--tm-bg-surface);
+
+  border-top: 1px solid var(--tm-border-light);
+}
+
+
+/* =========================================
+   ACTIVITY
+========================================= */
+
+.activity-row {
+  display: grid;
+
+  grid-template-columns: 65px 25px 1fr auto;
+
+  align-items: stretch;
+
+  min-height: 92px;
+
+  padding-top: 18px;
+}
+
+.activity-time {
+  display: flex;
+  flex-direction: column;
+
+  padding-top: 3px;
+}
+
+.activity-time strong {
+  color: var(--tm-teal-900);
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.activity-time span {
+  margin-top: 2px;
+
+  color: var(--tm-ink-500);
+
+  font-size: 9px;
+  font-weight: 600;
+}
+
+
+/* =========================================
+   TIMELINE
+========================================= */
+
+.timeline {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+}
+
+.timeline-dot {
+  position: relative;
+  z-index: 2;
+
+  width: 10px;
+  height: 10px;
+
+  margin-top: 5px;
+
+  background: var(--tm-coral-500);
+
+  border: 3px solid var(--tm-coral-100);
+  border-radius: 50%;
+
+  box-sizing: content-box;
+}
+
+.timeline-line {
+  position: absolute;
+
+  top: 20px;
+  bottom: -18px;
+
+  width: 1px;
+
+  background: var(--tm-border-base);
+}
+
+
+/* =========================================
+   ACTIVITY INFORMATION
+========================================= */
+
+.activity-info {
+  padding: 0 15px;
+}
+
+.activity-info h3 {
+  margin: 0 0 7px;
+
+  color: var(--tm-ink-900);
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.activity-info p {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  margin: 0;
+
+  color: var(--tm-ink-500);
+
+  font-size: 11px;
+}
+
+.activity-info p ion-icon {
+  color: var(--tm-coral-500);
+
+  font-size: 14px;
+}
+
+
+/* =========================================
+   ACTION BUTTONS
+========================================= */
+
+.activity-actions {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 2px;
+}
+
+.activity-actions ion-button {
+  width: 35px;
+  height: 35px;
+
+  margin: 0;
+
+  --border-radius: 50%;
+}
+
+.edit-btn {
+  --color: var(--tm-teal-700);
+}
+
+.edit-btn:hover {
+  --background: var(--tm-teal-100);
+}
+
+.delete-btn {
+  --color: var(--tm-coral-500);
+}
+
+.delete-btn:hover {
+  --background: var(--tm-coral-100);
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 700px) {
+
+  .itinerary-toolbar {
+    padding: 0 5px;
+  }
+
+  .add-activity-btn {
+    font-size: 10px;
+  }
+
+  .itinerary-container {
+    padding: 32px 16px 60px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+
+    gap: 20px;
+  }
+
+  .trip-date {
+    width: 100%;
+  }
+
+  .day-header {
+    --padding-start: 14px;
+  }
+
+  .day-number {
+    width: 42px;
+    height: 42px;
+
+    margin-right: 10px;
+  }
+
+  .day-content {
+    padding: 5px 14px 18px;
+  }
+
+  .activity-row {
+    grid-template-columns: 52px 20px 1fr;
+  }
+
+  .activity-actions {
+    grid-column: 3;
+
+    margin-top: 8px;
+  }
+
+}
