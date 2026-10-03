@@ -1,104 +1,352 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar color="primary" style="--background: var(--tm-teal-900); --color: var(--tm-white);">
+  <ion-toolbar class="budget-toolbar">
+
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button class="menu-button"></ion-menu-button>
     </ion-buttons>
+
     <ion-title>Budget Tracker</ion-title>
+
     <ion-buttons slot="end">
-      <ion-button style="color: var(--tm-coral-500); font-weight: bold;">
-        <ion-icon name="add-outline" slot="start"></ion-icon> Add
+      <ion-button class="add-expense-btn">
+        <ion-icon name="add-outline" slot="start"></ion-icon>
+        Add Expense
       </ion-button>
     </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content style="--background: var(--tm-bg-page);">
-  <div style="padding: 24px; max-width: 800px; margin: 0 auto;">
-    
-    <!-- Summary View -->
-    <div style="background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--tm-border-base); margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
-      <div>
-        <p style="margin: 0; color: var(--tm-ink-400); font-size: 0.9rem;">Total Budget</p>
-        <h2 style="margin: 4px 0 0; color: var(--tm-teal-900);">?25,000</h2>
-      </div>
-      <div>
-        <p style="margin: 0; color: var(--tm-ink-400); font-size: 0.9rem;">Total Spent</p>
-        <h2 style="margin: 4px 0 0; color: var(--tm-coral-500);">?18,500</h2>
-      </div>
-      <div>
-        <p style="margin: 0; color: var(--tm-ink-400); font-size: 0.9rem;">Remaining</p>
-        <h2 style="margin: 4px 0 0; color: var(--tm-gold-500);">?6,500</h2>
-      </div>
-    </div>
 
-    <!-- CSS Bar Chart -->
-    <div style="background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--tm-border-base); margin-bottom: 24px;">
-      <h3 style="margin-top: 0; color: var(--tm-ink-900);">Expenses by Category</h3>
-      
-      <div style="margin-top: 20px;">
-        <!-- Bar 1 -->
-        <div style="display: flex; align-items: center; margin-bottom: 12px;">
-          <div style="width: 100px; font-size: 0.85rem; color: var(--tm-ink-900);">Accommodation</div>
-          <div style="flex: 1; background: var(--tm-bg-surface); border-radius: 10px; height: 16px; margin: 0 16px; overflow: hidden;">
-            <div style="width: 45%; background: var(--tm-teal-900); height: 100%; border-radius: 10px;"></div>
-          </div>
-          <div style="width: 70px; text-align: right; font-size: 0.85rem; font-weight: bold;">?8,500</div>
-        </div>
-        <!-- Bar 2 -->
-        <div style="display: flex; align-items: center; margin-bottom: 12px;">
-          <div style="width: 100px; font-size: 0.85rem; color: var(--tm-ink-900);">Transport</div>
-          <div style="flex: 1; background: var(--tm-bg-surface); border-radius: 10px; height: 16px; margin: 0 16px; overflow: hidden;">
-            <div style="width: 30%; background: var(--tm-coral-500); height: 100%; border-radius: 10px;"></div>
-          </div>
-          <div style="width: 70px; text-align: right; font-size: 0.85rem; font-weight: bold;">?5,000</div>
-        </div>
-        <!-- Bar 3 -->
-        <div style="display: flex; align-items: center; margin-bottom: 12px;">
-          <div style="width: 100px; font-size: 0.85rem; color: var(--tm-ink-900);">Food</div>
-          <div style="flex: 1; background: var(--tm-bg-surface); border-radius: 10px; height: 16px; margin: 0 16px; overflow: hidden;">
-            <div style="width: 25%; background: var(--tm-gold-500); height: 100%; border-radius: 10px;"></div>
-          </div>
-          <div style="width: 70px; text-align: right; font-size: 0.85rem; font-weight: bold;">?3,500</div>
-        </div>
-        <!-- Bar 4 -->
-        <div style="display: flex; align-items: center;">
-          <div style="width: 100px; font-size: 0.85rem; color: var(--tm-ink-900);">Activities</div>
-          <div style="flex: 1; background: var(--tm-bg-surface); border-radius: 10px; height: 16px; margin: 0 16px; overflow: hidden;">
-            <div style="width: 10%; background: #4caf50; height: 100%; border-radius: 10px;"></div>
-          </div>
-          <div style="width: 70px; text-align: right; font-size: 0.85rem; font-weight: bold;">?1,500</div>
+<ion-content class="budget-content">
+
+  <main class="budget-container">
+
+    <!-- PAGE HEADER -->
+    <section class="page-header">
+
+      <div>
+        <span class="eyebrow">TRIP FINANCES</span>
+        <h1>Palawan Trip Budget</h1>
+        <p>
+          Keep track of your travel expenses and see how much
+          you have left for your Palawan adventure.
+        </p>
+      </div>
+
+      <div class="trip-badge">
+        <ion-icon name="wallet-outline"></ion-icon>
+
+        <div>
+          <span>TRIP BUDGET</span>
+          <strong>₱25,000</strong>
         </div>
       </div>
-    </div>
 
-    <!-- Expenses List -->
-    <h3 style="color: var(--tm-ink-900); margin: 0 0 16px;">Recent Expenses</h3>
-    <ion-list lines="full" style="background: white; border-radius: 12px; border: 1px solid var(--tm-border-base);">
-      <ion-item>
-        <ion-icon name="bed-outline" slot="start" style="color: var(--tm-teal-900);"></ion-icon>
-        <ion-label>
-          <h2>Kubo Homestay</h2>
-          <p>Accommodation</p>
-        </ion-label>
-        <ion-note slot="end" color="danger" style="font-weight: bold;">- ?8,500</ion-note>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="airplane-outline" slot="start" style="color: var(--tm-coral-500);"></ion-icon>
-        <ion-label>
-          <h2>Flight to Palawan</h2>
-          <p>Transport</p>
-        </ion-label>
-        <ion-note slot="end" color="danger" style="font-weight: bold;">- ?5,000</ion-note>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="restaurant-outline" slot="start" style="color: var(--tm-gold-500);"></ion-icon>
-        <ion-label>
-          <h2>Seafood Dinner</h2>
-          <p>Food</p>
-        </ion-label>
-        <ion-note slot="end" color="danger" style="font-weight: bold;">- ?1,200</ion-note>
-      </ion-item>
-    </ion-list>
+    </section>
 
-  </div>
+
+    <!-- SUMMARY CARDS -->
+    <section class="summary-grid">
+
+      <div class="summary-card">
+
+        <div class="summary-icon budget-icon">
+          <ion-icon name="wallet-outline"></ion-icon>
+        </div>
+
+        <div class="summary-info">
+          <span>Total Budget</span>
+          <h2>₱25,000</h2>
+          <p>Available trip budget</p>
+        </div>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon spent-icon">
+          <ion-icon name="card-outline"></ion-icon>
+        </div>
+
+        <div class="summary-info">
+          <span>Total Spent</span>
+          <h2 class="spent">₱18,500</h2>
+          <p>74% of your budget</p>
+        </div>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon remaining-icon">
+          <ion-icon name="cash-outline"></ion-icon>
+        </div>
+
+        <div class="summary-info">
+          <span>Remaining</span>
+          <h2 class="remaining">₱6,500</h2>
+          <p>26% still available</p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- BUDGET PROGRESS -->
+    <section class="budget-progress-card">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="section-label">OVERVIEW</span>
+          <h2>Budget Progress</h2>
+        </div>
+
+        <strong>74% spent</strong>
+
+      </div>
+
+      <div class="main-progress">
+        <div class="main-progress-fill"></div>
+      </div>
+
+      <div class="progress-labels">
+        <span>₱0</span>
+        <span>₱25,000</span>
+      </div>
+
+    </section>
+
+
+    <!-- EXPENSE CATEGORY -->
+    <section class="category-card">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="section-label">BREAKDOWN</span>
+          <h2>Expenses by Category</h2>
+        </div>
+
+        <span class="expense-total">
+          Total ₱18,500
+        </span>
+
+      </div>
+
+
+      <div class="category-list">
+
+        <!-- ACCOMMODATION -->
+        <div class="category-row">
+
+          <div class="category-name">
+
+            <div class="category-icon accommodation">
+              <ion-icon name="bed-outline"></ion-icon>
+            </div>
+
+            <div>
+              <strong>Accommodation</strong>
+              <span>46% of expenses</span>
+            </div>
+
+          </div>
+
+          <div class="category-bar">
+            <div class="bar-fill accommodation-bar"></div>
+          </div>
+
+          <strong class="category-price">
+            ₱8,500
+          </strong>
+
+        </div>
+
+
+        <!-- TRANSPORT -->
+        <div class="category-row">
+
+          <div class="category-name">
+
+            <div class="category-icon transport">
+              <ion-icon name="airplane-outline"></ion-icon>
+            </div>
+
+            <div>
+              <strong>Transport</strong>
+              <span>27% of expenses</span>
+            </div>
+
+          </div>
+
+          <div class="category-bar">
+            <div class="bar-fill transport-bar"></div>
+          </div>
+
+          <strong class="category-price">
+            ₱5,000
+          </strong>
+
+        </div>
+
+
+        <!-- FOOD -->
+        <div class="category-row">
+
+          <div class="category-name">
+
+            <div class="category-icon food">
+              <ion-icon name="restaurant-outline"></ion-icon>
+            </div>
+
+            <div>
+              <strong>Food</strong>
+              <span>19% of expenses</span>
+            </div>
+
+          </div>
+
+          <div class="category-bar">
+            <div class="bar-fill food-bar"></div>
+          </div>
+
+          <strong class="category-price">
+            ₱3,500
+          </strong>
+
+        </div>
+
+
+        <!-- ACTIVITIES -->
+        <div class="category-row">
+
+          <div class="category-name">
+
+            <div class="category-icon activities">
+              <ion-icon name="map-outline"></ion-icon>
+            </div>
+
+            <div>
+              <strong>Activities</strong>
+              <span>8% of expenses</span>
+            </div>
+
+          </div>
+
+          <div class="category-bar">
+            <div class="bar-fill activities-bar"></div>
+          </div>
+
+          <strong class="category-price">
+            ₱1,500
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- RECENT EXPENSES -->
+    <section class="recent-section">
+
+      <div class="recent-heading">
+
+        <div>
+          <span class="section-label">TRANSACTIONS</span>
+          <h2>Recent Expenses</h2>
+        </div>
+
+        <button class="view-all-btn">
+          View all
+        </button>
+
+      </div>
+
+
+      <div class="expense-list">
+
+        <!-- HOMESTAY -->
+        <div class="expense-item">
+
+          <div class="expense-icon accommodation">
+            <ion-icon name="bed-outline"></ion-icon>
+          </div>
+
+          <div class="expense-details">
+            <h3>Kubo Homestay</h3>
+            <p>
+              Accommodation
+              <span>•</span>
+              Oct 12, 2026
+            </p>
+          </div>
+
+          <div class="expense-amount">
+            <strong>-₱8,500</strong>
+            <span>Paid</span>
+          </div>
+
+        </div>
+
+
+        <!-- FLIGHT -->
+        <div class="expense-item">
+
+          <div class="expense-icon transport">
+            <ion-icon name="airplane-outline"></ion-icon>
+          </div>
+
+          <div class="expense-details">
+            <h3>Flight to Palawan</h3>
+            <p>
+              Transport
+              <span>•</span>
+              Oct 11, 2026
+            </p>
+          </div>
+
+          <div class="expense-amount">
+            <strong>-₱5,000</strong>
+            <span>Paid</span>
+          </div>
+
+        </div>
+
+
+        <!-- DINNER -->
+        <div class="expense-item">
+
+          <div class="expense-icon food">
+            <ion-icon name="restaurant-outline"></ion-icon>
+          </div>
+
+          <div class="expense-details">
+            <h3>Seafood Dinner</h3>
+            <p>
+              Food
+              <span>•</span>
+              Oct 12, 2026
+            </p>
+          </div>
+
+          <div class="expense-amount">
+            <strong>-₱1,200</strong>
+            <span>Paid</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
 </ion-content>
