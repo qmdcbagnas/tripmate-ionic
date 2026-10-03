@@ -7,11 +7,13 @@
   --color: var(--tm-white);
 
   min-height: 64px;
+
   padding: 0 28px;
 }
 
 .itinerary-toolbar ion-title {
   font-family: var(--tm-font-serif);
+
   font-size: 19px;
   font-weight: 600;
 }
@@ -22,12 +24,13 @@
 
 
 /* =========================================
-   ADD ACTIVITY
+   ADD ACTIVITY BUTTON
 ========================================= */
 
 .add-activity-btn {
   --background: var(--tm-coral-500);
   --background-hover: var(--tm-coral-600);
+
   --color: var(--tm-white);
 
   --border-radius: 999px;
@@ -39,6 +42,8 @@
 
   text-transform: none;
   letter-spacing: 0;
+
+  padding-right: 5px;
 }
 
 
@@ -52,7 +57,7 @@
 
 .itinerary-container {
   width: 100%;
-  max-width: 980px;
+  max-width: 1000px;
 
   margin: 0 auto;
 
@@ -66,6 +71,7 @@
 
 .page-header {
   display: flex;
+
   justify-content: space-between;
   align-items: flex-end;
 
@@ -75,87 +81,105 @@
 }
 
 .page-heading {
-  max-width: 580px;
+  max-width: 600px;
 }
 
 .eyebrow {
   display: block;
 
-  margin-bottom: 8px;
+  margin-bottom: 9px;
 
   color: var(--tm-coral-500);
 
-  font-size: 11px;
+  font-family: var(--tm-font-sans);
+
+  font-size: 10px;
   font-weight: 700;
 
   letter-spacing: 1.8px;
 }
 
 .page-heading h1 {
-  margin: 0 0 10px;
+  margin: 0 0 12px;
 
   color: var(--tm-teal-900);
 
   font-family: var(--tm-font-serif);
 
-  font-size: clamp(30px, 4vw, 46px);
+  font-size: clamp(32px, 4vw, 46px);
   font-weight: 600;
 
   line-height: 1.1;
 }
 
 .page-heading p {
-  max-width: 500px;
+  max-width: 520px;
 
   margin: 0;
 
   color: var(--tm-ink-500);
 
+  font-family: var(--tm-font-sans);
+
   font-size: 14px;
 
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 
 /* =========================================
-   TRIP DATE CARD
+   TRIP DATE
 ========================================= */
 
 .trip-date {
   display: flex;
+
   align-items: center;
 
   gap: 12px;
 
-  min-width: 220px;
+  min-width: 225px;
 
   padding: 14px 18px;
 
   background: var(--tm-bg-surface);
 
   border: 1px solid var(--tm-border-light);
+
   border-radius: var(--tm-radius-md);
 
   box-shadow: var(--tm-shadow-xs);
 }
 
-.trip-date ion-icon {
-  padding: 9px;
+.date-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 38px;
+
+  flex-shrink: 0;
 
   background: var(--tm-coral-100);
-  color: var(--tm-coral-500);
 
   border-radius: 50%;
-
-  font-size: 19px;
 }
 
-.trip-date div {
+.date-icon ion-icon {
+  color: var(--tm-coral-500);
+
+  font-size: 18px;
+}
+
+.date-details {
   display: flex;
+
   flex-direction: column;
 }
 
-.trip-date span {
+.date-details span {
   color: var(--tm-ink-500);
 
   font-size: 9px;
@@ -164,7 +188,7 @@
   letter-spacing: 1px;
 }
 
-.trip-date strong {
+.date-details strong {
   margin-top: 3px;
 
   color: var(--tm-teal-900);
@@ -174,20 +198,27 @@
 
 
 /* =========================================
-   ACCORDIONS
+   ACCORDION GROUP
 ========================================= */
 
 .itinerary-days {
   display: flex;
+
   flex-direction: column;
 
-  gap: 15px;
+  gap: 16px;
 }
+
+
+/* =========================================
+   DAY CARD
+========================================= */
 
 .day-card {
   background: var(--tm-bg-surface);
 
   border: 1px solid var(--tm-border-light);
+
   border-radius: var(--tm-radius-md);
 
   box-shadow: var(--tm-shadow-sm);
@@ -210,6 +241,7 @@
 
 .day-header {
   --background: var(--tm-bg-surface);
+
   --color: var(--tm-ink-900);
 
   --padding-start: 20px;
@@ -222,6 +254,7 @@
 
 .day-number {
   display: flex;
+
   align-items: center;
   justify-content: center;
 
@@ -230,12 +263,16 @@
 
   margin-right: 16px;
 
+  flex-shrink: 0;
+
   background: var(--tm-teal-900);
+
   color: var(--tm-white);
 
   border-radius: 50%;
 
   font-family: var(--tm-font-serif);
+
   font-size: 16px;
   font-weight: 600;
 }
@@ -259,7 +296,8 @@
   color: var(--tm-teal-900);
 
   font-family: var(--tm-font-serif);
-  font-size: 17px;
+
+  font-size: 18px;
   font-weight: 600;
 }
 
@@ -286,26 +324,44 @@
 
 
 /* =========================================
-   ACTIVITY
+   ACTIVITY ROW
 ========================================= */
 
 .activity-row {
   display: grid;
 
-  grid-template-columns: 65px 25px 1fr auto;
+  grid-template-columns:
+    65px
+    25px
+    minmax(0, 1fr)
+    auto;
 
-  align-items: stretch;
+  align-items: center;
 
-  min-height: 92px;
+  min-height: 110px;
 
-  padding-top: 18px;
+  padding: 16px 0;
+
+  border-bottom: 1px solid var(--tm-border-light);
 }
+
+.activity-row.last {
+  border-bottom: none;
+}
+
+
+/* =========================================
+   TIME
+========================================= */
 
 .activity-time {
   display: flex;
+
   flex-direction: column;
 
-  padding-top: 3px;
+  align-self: start;
+
+  padding-top: 15px;
 }
 
 .activity-time strong {
@@ -333,21 +389,26 @@
   position: relative;
 
   display: flex;
+
   justify-content: center;
+
+  align-self: stretch;
 }
 
 .timeline-dot {
   position: relative;
+
   z-index: 2;
 
   width: 10px;
   height: 10px;
 
-  margin-top: 5px;
+  margin-top: 18px;
 
   background: var(--tm-coral-500);
 
   border: 3px solid var(--tm-coral-100);
+
   border-radius: 50%;
 
   box-sizing: content-box;
@@ -356,8 +417,8 @@
 .timeline-line {
   position: absolute;
 
-  top: 20px;
-  bottom: -18px;
+  top: 35px;
+  bottom: -34px;
 
   width: 1px;
 
@@ -370,20 +431,68 @@
 ========================================= */
 
 .activity-info {
-  padding: 0 15px;
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  min-width: 0;
+
+  padding: 0 18px;
 }
 
-.activity-info h3 {
-  margin: 0 0 7px;
+
+/* =========================================
+   ACTIVITY IMAGE
+========================================= */
+
+.activity-image {
+  width: 115px;
+  height: 78px;
+
+  flex-shrink: 0;
+
+  object-fit: cover;
+
+  border-radius: 12px;
+
+  border: 1px solid var(--tm-border-light);
+
+  box-shadow: var(--tm-shadow-xs);
+
+  transition:
+    transform var(--tm-transition-base),
+    box-shadow var(--tm-transition-base);
+}
+
+.activity-image:hover {
+  transform: scale(1.03);
+
+  box-shadow: var(--tm-shadow-md);
+}
+
+
+/* =========================================
+   ACTIVITY DETAILS
+========================================= */
+
+.activity-details {
+  min-width: 0;
+}
+
+.activity-details h3 {
+  margin: 0 0 8px;
 
   color: var(--tm-ink-900);
 
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
 }
 
-.activity-info p {
+.activity-details p {
   display: flex;
+
   align-items: center;
 
   gap: 5px;
@@ -395,7 +504,9 @@
   font-size: 11px;
 }
 
-.activity-info p ion-icon {
+.activity-details p ion-icon {
+  flex-shrink: 0;
+
   color: var(--tm-coral-500);
 
   font-size: 14px;
@@ -403,23 +514,28 @@
 
 
 /* =========================================
-   ACTION BUTTONS
+   EDIT / DELETE
 ========================================= */
 
 .activity-actions {
   display: flex;
-  align-items: flex-start;
+
+  align-items: center;
 
   gap: 2px;
 }
 
 .activity-actions ion-button {
-  width: 35px;
-  height: 35px;
+  width: 36px;
+  height: 36px;
 
   margin: 0;
 
   --border-radius: 50%;
+}
+
+.activity-actions ion-icon {
+  font-size: 17px;
 }
 
 .edit-btn {
@@ -440,13 +556,47 @@
 
 
 /* =========================================
-   RESPONSIVE
+   RESPONSIVE TABLET
 ========================================= */
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
+
+  .itinerary-container {
+    padding: 40px 20px 70px;
+  }
+
+  .page-header {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 22px;
+  }
+
+  .trip-date {
+    width: fit-content;
+  }
+
+  .activity-image {
+    width: 95px;
+    height: 68px;
+  }
+
+}
+
+
+/* =========================================
+   RESPONSIVE MOBILE
+========================================= */
+
+@media (max-width: 600px) {
 
   .itinerary-toolbar {
-    padding: 0 5px;
+    padding: 0 4px;
+  }
+
+  .itinerary-toolbar ion-title {
+    font-size: 16px;
   }
 
   .add-activity-btn {
@@ -454,14 +604,11 @@
   }
 
   .itinerary-container {
-    padding: 32px 16px 60px;
+    padding: 30px 14px 60px;
   }
 
-  .page-header {
-    flex-direction: column;
-    align-items: stretch;
-
-    gap: 20px;
+  .page-heading h1 {
+    font-size: 31px;
   }
 
   .trip-date {
@@ -470,6 +617,7 @@
 
   .day-header {
     --padding-start: 14px;
+    --padding-end: 10px;
   }
 
   .day-number {
@@ -477,6 +625,12 @@
     height: 42px;
 
     margin-right: 10px;
+
+    font-size: 14px;
+  }
+
+  .day-header h2 {
+    font-size: 15px;
   }
 
   .day-content {
@@ -484,13 +638,59 @@
   }
 
   .activity-row {
-    grid-template-columns: 52px 20px 1fr;
+    grid-template-columns:
+      48px
+      18px
+      minmax(0, 1fr);
+
+    min-height: 120px;
+
+    padding: 14px 0;
+  }
+
+  .activity-time {
+    padding-top: 8px;
+  }
+
+  .timeline-dot {
+    margin-top: 11px;
+  }
+
+  .timeline-line {
+    top: 28px;
+    bottom: -30px;
+  }
+
+  .activity-info {
+    gap: 10px;
+
+    padding: 0 6px 0 10px;
+  }
+
+  .activity-image {
+    width: 72px;
+    height: 58px;
+
+    border-radius: 9px;
+  }
+
+  .activity-details h3 {
+    font-size: 13px;
+  }
+
+  .activity-details p {
+    font-size: 10px;
   }
 
   .activity-actions {
     grid-column: 3;
 
-    margin-top: 8px;
+    margin: 7px 0 0 8px;
+  }
+
+  .activity-actions ion-button {
+    width: 32px;
+    height: 32px;
   }
 
 }
