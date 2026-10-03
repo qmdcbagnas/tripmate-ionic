@@ -1,26 +1,205 @@
 <ion-app>
-  <ion-menu contentId="main-content" type="overlay">
+
+  <!-- =========================
+       TRIPMATE SIDE MENU
+  ========================== -->
+  <ion-menu
+    contentId="main-content"
+    type="overlay"
+    class="tripmate-menu"
+  >
+
+    <!-- MENU HEADER -->
     <ion-header class="ion-no-border">
-      <ion-toolbar color="primary" style="--background: var(--tm-teal-900); --color: var(--tm-white);">
-        <ion-title>TripMate Menu</ion-title>
+      <ion-toolbar class="menu-toolbar">
+
+        <div class="menu-brand">
+          <div class="brand-icon">✈</div>
+
+          <div class="brand-text">
+            <h2>TripMate</h2>
+            <p>Explore. Plan. Travel.</p>
+          </div>
+        </div>
+
       </ion-toolbar>
     </ion-header>
-    <ion-content>
-      <ion-list>
+
+
+    <!-- MENU CONTENT -->
+    <ion-content class="menu-content">
+
+      <div class="menu-section-title">
+        MENU
+      </div>
+
+      <ion-list class="menu-list">
+
         <ion-menu-toggle auto-hide="false">
-          <ion-item routerLink="/homepage" routerDirection="root"><ion-label>Home</ion-label></ion-item>
-          <ion-item routerLink="/stays" routerDirection="root"><ion-label>Stays</ion-label></ion-item>
-          <ion-item routerLink="/how-it-works" routerDirection="root"><ion-label>How it Works</ion-label></ion-item>
-          <ion-item routerLink="/become-host" routerDirection="root"><ion-label>Become a Host</ion-label></ion-item>
-          <ion-item routerLink="/itinerary" routerDirection="root"><ion-label>Itinerary</ion-label></ion-item>
-          <ion-item routerLink="/budget-tracker" routerDirection="root"><ion-label>Budget Tracker</ion-label></ion-item>
-          <ion-item routerLink="/reservations" routerDirection="root"><ion-label>Reservations</ion-label></ion-item>
-          <ion-item routerLink="/about" routerDirection="root"><ion-label>About</ion-label></ion-item>
-          <ion-item routerLink="/developers" routerDirection="root"><ion-label>Developers</ion-label></ion-item>
-          <ion-item routerLink="/contactus" routerDirection="root"><ion-label>Contact Us</ion-label></ion-item>
+
+          <!-- HOME -->
+          <ion-item
+            routerLink="/homepage"
+            routerDirection="root"
+            routerLinkActive="active-menu-item"
+            lines="none"
+            detail="false"
+          >
+            <ion-icon name="home-outline" slot="start"></ion-icon>
+            <ion-label>Home</ion-label>
+          </ion-item>
+
+
+          <!-- STAYS -->
+          <ion-item
+            routerLink="/stays"
+            routerDirection="root"
+            routerLinkActive="active-menu-item"
+            lines="none"
+            detail="false"
+          >
+            <ion-icon name="bed-outline" slot="start"></ion-icon>
+            <ion-label>Stays</ion-label>
+          </ion-item>
+
+
+          <!-- HOW IT WORKS -->
+          <ion-item
+            routerLink="/how-it-works"
+            routerDirection="root"
+            routerLinkActive="active-menu-item"
+            lines="none"
+            detail="false"
+          >
+            <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+            <ion-label>How it Works</ion-label>
+          </ion-item>
+
+
+          <!-- BECOME A HOST -->
+          <ion-item
+            routerLink="/become-host"
+            routerDirection="root"
+            routerLinkActive="active-menu-item"
+            lines="none"
+            detail="false"
+          >
+            <ion-icon name="business-outline" slot="start"></ion-icon>
+            <ion-label>Become a Host</ion-label>
+          </ion-item>
+
+
+          <div class="menu-divider"></div>
+
+          <div class="menu-section-title">
+            MY TRIP
+          </div>
+
+
+          <!-- ITINERARY -->
+          <ion-item
+            routerLink="/itinerary"
+            routerDirection="root"
+            routerLinkActive="active-menu-item"
+            lines="none"
+            detail="false"
+          >
+            <ion-icon name="map-outline" slot="start"></ion-icon>
+            <ion-label>Itinerary</ion-label>
+          </ion-item>
+
+
+          <!-- BUDGET TRACKER -->
+          <ion-item
+            routerLink="/budget-tracker"
+            routerDirection="root"
+            routerLinkActive="active-menu-item"
+            lines="none"
+            detail="false"
+          >
+            <ion-icon name="wallet-outline" slot="start"></ion-icon>
+            <ion-label>Budget Tracker</ion-label>
+          </ion-item>
+
+
+          <!-- RESERVATIONS -->
+          <ion-item
+            routerLink="/reservations"
+            routerDirection="root"
+            routerLinkActive="active-menu-item"
+            lines="none"
+            detail="false"
+          >
+            <ion-icon name="calendar-outline" slot="start"></ion-icon>
+            <ion-label>Reservations</ion-label>
+          </ion-item>
+
+
+          <div class="menu-divider"></div>
+
+          <div class="menu-section-title">
+            INFORMATION
+          </div>
+
+
+          <!-- ABOUT -->
+          <ion-item
+            routerLink="/about"
+            routerDirection="root"
+            routerLinkActive="active-menu-item"
+            lines="none"
+            detail="false"
+          >
+            <ion-icon name="people-outline" slot="start"></ion-icon>
+            <ion-label>About</ion-label>
+          </ion-item>
+
+
+          <!-- DEVELOPERS -->
+          <ion-item
+            routerLink="/developers"
+            routerDirection="root"
+            routerLinkActive="active-menu-item"
+            lines="none"
+            detail="false"
+          >
+            <ion-icon name="code-slash-outline" slot="start"></ion-icon>
+            <ion-label>Developers</ion-label>
+          </ion-item>
+
+
+          <!-- CONTACT -->
+          <ion-item
+            routerLink="/contactus"
+            routerDirection="root"
+            routerLinkActive="active-menu-item"
+            lines="none"
+            detail="false"
+          >
+            <ion-icon name="mail-outline" slot="start"></ion-icon>
+            <ion-label>Contact Us</ion-label>
+          </ion-item>
+
         </ion-menu-toggle>
+
       </ion-list>
+
+
+      <!-- BOTTOM TEXT -->
+      <div class="menu-footer">
+        <p>Plan your next adventure</p>
+        <span>with TripMate</span>
+      </div>
+
     </ion-content>
+
   </ion-menu>
+
+
+  <!-- =========================
+       MAIN APPLICATION
+  ========================== -->
+
   <ion-router-outlet id="main-content"></ion-router-outlet>
+
 </ion-app>

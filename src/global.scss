@@ -379,3 +379,283 @@ input[type='range']::-webkit-slider-runnable-track {
   background: var(--tm-border-base);
   border-radius: 2px;
 }
+/* ==========================================================
+   TRIPMATE SIDE MENU
+   ========================================================== */
+
+ion-menu.tripmate-menu {
+  --width: 280px;
+  --min-width: 280px;
+  --max-width: 280px;
+}
+
+/* Menu panel */
+ion-menu.tripmate-menu::part(container) {
+  background: var(--tm-teal-900);
+  border: none;
+  box-shadow: 6px 0 24px rgba(15, 46, 37, 0.22);
+}
+
+/* ==========================================================
+   HEADER
+   ========================================================== */
+
+ion-menu.tripmate-menu ion-header {
+  background: var(--tm-teal-900);
+}
+
+ion-menu.tripmate-menu .menu-toolbar {
+  --background: var(--tm-teal-900);
+  --color: var(--tm-white);
+
+  background: var(--tm-teal-900);
+
+  padding: 12px 0;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ==========================================================
+   BRAND
+   ========================================================== */
+
+ion-menu.tripmate-menu .menu-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 8px 20px;
+}
+
+ion-menu.tripmate-menu .brand-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: var(--tm-coral-500);
+  color: var(--tm-white);
+
+  font-size: 19px;
+}
+
+ion-menu.tripmate-menu .brand-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+ion-menu.tripmate-menu .brand-text h2 {
+  margin: 0;
+
+  color: var(--tm-white);
+
+  font-family: var(--tm-font-serif);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+ion-menu.tripmate-menu .brand-text p {
+  margin: 3px 0 0;
+
+  color: rgba(255, 255, 255, 0.6);
+
+  font-family: var(--tm-font-sans);
+  font-size: 10px;
+}
+
+/* ==========================================================
+   CONTENT
+   ========================================================== */
+
+ion-menu.tripmate-menu ion-content.menu-content {
+  --background: var(--tm-teal-900);
+  --color: var(--tm-white);
+
+  background: var(--tm-teal-900);
+}
+
+/* This is important because your global ion-content rule
+   otherwise gives ion-content a dark text color. */
+ion-menu.tripmate-menu ion-content {
+  --color: var(--tm-white);
+  color: var(--tm-white);
+}
+
+/* ==========================================================
+   LIST
+   ========================================================== */
+
+ion-menu.tripmate-menu .menu-list {
+  background: transparent;
+  padding: 5px 12px 15px;
+}
+
+/* ==========================================================
+   SECTION LABELS
+   ========================================================== */
+
+ion-menu.tripmate-menu .menu-section-title {
+  padding: 16px 14px 7px;
+
+  color: var(--tm-coral-500);
+
+  font-family: var(--tm-font-sans);
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 1.4px;
+}
+
+/* ==========================================================
+   MENU ITEMS
+   ========================================================== */
+
+ion-menu.tripmate-menu .menu-list ion-item {
+  --background: transparent;
+  --color: rgba(255, 255, 255, 0.82);
+
+  --border-color: transparent;
+
+  --padding-start: 14px;
+  --padding-end: 12px;
+
+  --inner-padding-end: 8px;
+
+  --min-height: 46px;
+
+  margin: 3px 0;
+
+  font-family: var(--tm-font-sans);
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+/* Actual internal Ionic item */
+ion-menu.tripmate-menu .menu-list ion-item::part(native) {
+  background: transparent;
+
+  border: 0;
+  border-radius: 10px;
+
+  transition:
+    background-color 160ms ease,
+    transform 160ms ease;
+}
+
+/* ==========================================================
+   LABEL
+   ========================================================== */
+
+ion-menu.tripmate-menu .menu-list ion-label {
+  color: rgba(255, 255, 255, 0.82);
+
+  font-family: var(--tm-font-sans);
+  font-size: 13px;
+}
+
+/* ==========================================================
+   ICONS
+   ========================================================== */
+
+ion-menu.tripmate-menu .menu-list ion-icon {
+  width: 19px;
+  height: 19px;
+
+  margin-right: 12px;
+
+  color: rgba(255, 255, 255, 0.62);
+
+  font-size: 19px;
+}
+
+/* ==========================================================
+   HOVER
+   ========================================================== */
+
+ion-menu.tripmate-menu .menu-list ion-item:hover::part(native) {
+  background: rgba(255, 107, 74, 0.12);
+
+  transform: translateX(2px);
+}
+
+ion-menu.tripmate-menu .menu-list ion-item:hover ion-label {
+  color: var(--tm-white);
+}
+
+ion-menu.tripmate-menu .menu-list ion-item:hover ion-icon {
+  color: var(--tm-coral-500);
+}
+
+/* ==========================================================
+   ACTIVE PAGE
+   ========================================================== */
+
+ion-menu.tripmate-menu
+  .menu-list
+  ion-item.active-menu-item::part(native) {
+  background: var(--tm-coral-500);
+}
+
+ion-menu.tripmate-menu
+  .menu-list
+  ion-item.active-menu-item
+  ion-label {
+  color: var(--tm-white);
+  font-weight: 600;
+}
+
+ion-menu.tripmate-menu
+  .menu-list
+  ion-item.active-menu-item
+  ion-icon {
+  color: var(--tm-white);
+}
+
+/* ==========================================================
+   DIVIDERS
+   ========================================================== */
+
+ion-menu.tripmate-menu .menu-divider {
+  height: 1px;
+
+  margin: 12px 10px 4px;
+
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ==========================================================
+   FOOTER
+   ========================================================== */
+
+ion-menu.tripmate-menu .menu-footer {
+  margin: 22px;
+  padding-top: 17px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+ion-menu.tripmate-menu .menu-footer p {
+  margin: 0 0 4px;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-family: var(--tm-font-sans);
+  font-size: 11px;
+}
+
+ion-menu.tripmate-menu .menu-footer span {
+  color: var(--tm-coral-500);
+
+  font-family: var(--tm-font-sans);
+  font-size: 11px;
+  font-weight: 600;
+}
