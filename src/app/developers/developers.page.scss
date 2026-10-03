@@ -1,0 +1,391 @@
+/* =========================================
+   TOOLBAR
+========================================= */
+
+.developers-toolbar {
+  --background: var(--tm-teal-900);
+  --color: var(--tm-white);
+
+  min-height: 64px;
+  padding: 0 28px;
+}
+
+.developers-toolbar ion-title {
+  font-family: var(--tm-font-serif);
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.menu-button {
+  --color: var(--tm-white);
+}
+
+
+/* =========================================
+   PAGE
+========================================= */
+
+.developers-content {
+  --background: var(--tm-bg-page);
+}
+
+.developers-container {
+  width: 100%;
+  max-width: 1100px;
+
+  margin: 0 auto;
+  padding: 60px 30px 80px;
+}
+
+
+/* =========================================
+   PAGE HEADER
+========================================= */
+
+.page-header {
+  max-width: 650px;
+  margin-bottom: 45px;
+}
+
+.eyebrow {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: var(--tm-coral-500);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 1.8px;
+}
+
+.page-header h1 {
+  margin: 0 0 14px;
+
+  color: var(--tm-teal-900);
+
+  font-family: var(--tm-font-serif);
+
+  font-size: clamp(36px, 5vw, 52px);
+  font-weight: 600;
+
+  line-height: 1.05;
+}
+
+.page-header p {
+  max-width: 600px;
+
+  margin: 0;
+
+  color: var(--tm-ink-500);
+
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+
+/* =========================================
+   TEAM GRID
+========================================= */
+
+.team-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 20px;
+}
+
+
+/* =========================================
+   DEVELOPER CARD
+========================================= */
+
+.developer-card {
+  position: relative;
+
+  min-height: 330px;
+
+  padding: 30px 25px;
+
+  overflow: hidden;
+
+  background: var(--tm-bg-surface);
+
+  border: 1px solid var(--tm-border-light);
+  border-radius: var(--tm-radius-lg);
+
+  box-shadow: var(--tm-shadow-sm);
+
+  transition:
+    transform var(--tm-transition-base),
+    box-shadow var(--tm-transition-base),
+    border-color var(--tm-transition-base);
+}
+
+.developer-card:hover {
+  transform: translateY(-5px);
+
+  border-color: var(--tm-coral-500);
+
+  box-shadow: var(--tm-shadow-md);
+}
+
+
+/* =========================================
+   PROFILE IMAGE
+========================================= */
+
+.profile-image {
+  width: 105px;
+  height: 105px;
+
+  margin-bottom: 25px;
+
+  padding: 4px;
+
+  background: var(--tm-bg-surface);
+
+  border: 2px solid var(--tm-teal-100);
+  border-radius: 50%;
+
+  transition:
+    border-color var(--tm-transition-base),
+    transform var(--tm-transition-base);
+}
+
+.developer-card:hover .profile-image {
+  border-color: var(--tm-coral-500);
+
+  transform: scale(1.03);
+}
+
+.profile-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+
+  border-radius: 50%;
+}
+
+
+/* =========================================
+   DEVELOPER INFORMATION
+========================================= */
+
+.developer-info .role {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: var(--tm-coral-500);
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+}
+
+.developer-info h2 {
+  margin: 0 0 10px;
+
+  color: var(--tm-teal-900);
+
+  font-family: var(--tm-font-serif);
+
+  font-size: 23px;
+  font-weight: 600;
+}
+
+.developer-info p {
+  max-width: 250px;
+
+  margin: 0;
+
+  color: var(--tm-ink-500);
+
+  font-size: 12px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================
+   CARD NUMBER
+========================================= */
+
+.card-number {
+  position: absolute;
+
+  top: 25px;
+  right: 25px;
+
+  color: var(--tm-border-base);
+
+  font-family: var(--tm-font-serif);
+
+  font-size: 25px;
+  font-weight: 600;
+
+  transition: color var(--tm-transition-base);
+}
+
+.developer-card:hover .card-number {
+  color: var(--tm-coral-500);
+}
+
+
+/* =========================================
+   FIRST CARD
+========================================= */
+
+.developer-card:first-child {
+  background: var(--tm-teal-900);
+
+  border-color: var(--tm-teal-900);
+}
+
+.developer-card:first-child .profile-image {
+  border-color: var(--tm-coral-500);
+}
+
+.developer-card:first-child .role {
+  color: var(--tm-coral-500);
+}
+
+.developer-card:first-child h2 {
+  color: var(--tm-white);
+}
+
+.developer-card:first-child p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.developer-card:first-child .card-number {
+  color: rgba(255, 255, 255, 0.15);
+}
+
+
+/* =========================================
+   TEAM FOOTER
+========================================= */
+
+.team-footer {
+  margin-top: 60px;
+
+  padding: 45px;
+
+  text-align: center;
+
+  background: var(--tm-coral-500);
+
+  border-radius: var(--tm-radius-lg);
+}
+
+.team-footer > span {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: var(--tm-teal-900);
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 1.8px;
+}
+
+.team-footer h2 {
+  margin: 0 0 12px;
+
+  color: var(--tm-white);
+
+  font-family: var(--tm-font-serif);
+
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.team-footer p {
+  max-width: 600px;
+
+  margin: 0 auto;
+
+  color: rgba(255, 255, 255, 0.85);
+
+  font-size: 12px;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .developers-toolbar {
+    padding: 0 4px;
+  }
+
+  .developers-toolbar ion-title {
+    font-size: 16px;
+  }
+
+  .developers-container {
+    padding: 35px 15px 60px;
+  }
+
+  .page-header {
+    margin-bottom: 30px;
+  }
+
+  .page-header h1 {
+    font-size: 34px;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .developer-card {
+    min-height: auto;
+
+    padding: 25px;
+  }
+
+  .profile-image {
+    width: 90px;
+    height: 90px;
+  }
+
+  .team-footer {
+    margin-top: 35px;
+
+    padding: 35px 20px;
+  }
+
+  .team-footer h2 {
+    font-size: 25px;
+  }
+
+}

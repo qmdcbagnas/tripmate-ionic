@@ -1,54 +1,179 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar color="primary" style="--background: var(--tm-teal-900); --color: var(--tm-white);">
+  <ion-toolbar class="developers-toolbar">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button class="menu-button"></ion-menu-button>
     </ion-buttons>
+
     <ion-title>Developers</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content style="--background: var(--tm-bg-page); color: var(--tm-ink-900);">
-  <div style="padding: 24px;">
-    <h1>Meet the Team</h1>
-    <p>We are the group behind TripMate.</p>
-    
-    <div style="display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); margin-top: 30px;">
-      
-      <div style="background: white; border-radius: 16px; padding: 24px; text-align: center; border: 1px solid var(--tm-border-base);">
-        <img src="assets/images/Dave.jpg" alt="Christian Dave" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; display: block; border: 3px solid var(--tm-border-base);">
-        <h3>Christian Dave</h3>
-        <p style="color: var(--tm-ink-400); font-size: 0.9rem;">Lead Developer</p>
-        <p style="font-size: 0.95rem; margin-top: 10px;">Focused on Itinerary Management, UI/UX, and core mobile features.</p>
-      </div>
+<ion-content class="developers-content">
 
-      <div style="background: white; border-radius: 16px; padding: 24px; text-align: center; border: 1px solid var(--tm-border-base);">
-        <img src="assets/images/Erin.png" alt="Erin" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; display: block; border: 3px solid var(--tm-border-base);">
-        <h3>Erin</h3>
-        <p style="color: var(--tm-ink-400); font-size: 0.9rem;">Lead Developer</p>
-        <p style="font-size: 0.95rem; margin-top: 10px;">Focused on Budget Tracker, About Page, and Frontend architecture.</p>
-      </div>
+  <main class="developers-container">
 
-      <div style="background: white; border-radius: 16px; padding: 24px; text-align: center; border: 1px solid var(--tm-border-base);">
-        <img src="assets/images/Mitchell.png" alt="Mitchell" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; display: block; border: 3px solid var(--tm-border-base);">
-        <h3>Mitchell</h3>
-        <p style="color: var(--tm-ink-400); font-size: 0.9rem;">Developer</p>
-        <p style="font-size: 0.95rem; margin-top: 10px;">Backend Integration and database modeling.</p>
-      </div>
+    <!-- PAGE HEADER -->
+    <section class="page-header">
+      <span class="eyebrow">MEET THE PEOPLE BEHIND TRIPMATE</span>
 
-      <div style="background: white; border-radius: 16px; padding: 24px; text-align: center; border: 1px solid var(--tm-border-base);">
-        <img src="assets/images/Jhian.jpg" alt="Jhian Carl" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; display: block; border: 3px solid var(--tm-border-base);">
-        <h3>Jhian Carl</h3>
-        <p style="color: var(--tm-ink-400); font-size: 0.9rem;">Developer</p>
-        <p style="font-size: 0.95rem; margin-top: 10px;">API development and Reservations module.</p>
-      </div>
+      <h1>Meet Our Team</h1>
 
-      <div style="background: white; border-radius: 16px; padding: 24px; text-align: center; border: 1px solid var(--tm-border-base);">
-        <img src="assets/images/Danielle.jpg" alt="Danielle" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; display: block; border: 3px solid var(--tm-border-base);">
-        <h3>Danielle</h3>
-        <p style="color: var(--tm-ink-400); font-size: 0.9rem;">Developer</p>
-        <p style="font-size: 0.95rem; margin-top: 10px;">UI refinement and Quality Assurance.</p>
-      </div>
-      
-    </div>
-  </div>
+      <p>
+        We are the team behind TripMate, working together to create
+        a simple and convenient travel experience for every traveler.
+      </p>
+    </section>
+
+
+    <!-- TEAM GRID -->
+    <section class="team-grid">
+
+      <!-- CHRISTIAN DAVE -->
+      <article class="developer-card">
+
+        <div class="profile-image">
+          <img
+            src="assets/images/Dave.jpg"
+            alt="Christian Dave"
+          />
+        </div>
+
+        <div class="developer-info">
+          <span class="role">LEAD DEVELOPER</span>
+
+          <h2>Christian Dave</h2>
+
+          <p>
+            Focused on Itinerary Management, UI/UX,
+            and core mobile features.
+          </p>
+        </div>
+
+        <div class="card-number">01</div>
+
+      </article>
+
+
+      <!-- ERIN -->
+      <article class="developer-card">
+
+        <div class="profile-image">
+          <img
+            src="assets/images/Erin.png"
+            alt="Erin"
+          />
+        </div>
+
+        <div class="developer-info">
+          <span class="role">LEAD DEVELOPER</span>
+
+          <h2>Erin</h2>
+
+          <p>
+            Focused on Budget Tracker, About Page,
+            and Frontend architecture.
+          </p>
+        </div>
+
+        <div class="card-number">02</div>
+
+      </article>
+
+
+      <!-- MITCHELL -->
+      <article class="developer-card">
+
+        <div class="profile-image">
+          <img
+            src="assets/images/Mitchell.png"
+            alt="Mitchell"
+          />
+        </div>
+
+        <div class="developer-info">
+          <span class="role">DEVELOPER</span>
+
+          <h2>Mitchell</h2>
+
+          <p>
+            Focused on backend integration
+            and database modeling.
+          </p>
+        </div>
+
+        <div class="card-number">03</div>
+
+      </article>
+
+
+      <!-- JHIAN -->
+      <article class="developer-card">
+
+        <div class="profile-image">
+          <img
+            src="assets/images/Jhian.jpg"
+            alt="Jhian Carl"
+          />
+        </div>
+
+        <div class="developer-info">
+          <span class="role">DEVELOPER</span>
+
+          <h2>Jhian Carl</h2>
+
+          <p>
+            Focused on API development
+            and the Reservations module.
+          </p>
+        </div>
+
+        <div class="card-number">04</div>
+
+      </article>
+
+
+      <!-- DANIELLE -->
+      <article class="developer-card">
+
+        <div class="profile-image">
+          <img
+            src="assets/images/Danielle.jpg"
+            alt="Danielle"
+          />
+        </div>
+
+        <div class="developer-info">
+          <span class="role">DEVELOPER</span>
+
+          <h2>Danielle</h2>
+
+          <p>
+            Focused on UI refinement
+            and Quality Assurance.
+          </p>
+        </div>
+
+        <div class="card-number">05</div>
+
+      </article>
+
+    </section>
+
+
+    <!-- BOTTOM SECTION -->
+    <section class="team-footer">
+
+      <span>TRIPMATE DEVELOPMENT TEAM</span>
+
+      <h2>Built together for better journeys.</h2>
+
+      <p>
+        Our team combines frontend development, backend integration,
+        UI/UX design, database management, and testing to build TripMate.
+      </p>
+
+    </section>
+
+  </main>
+
 </ion-content>
