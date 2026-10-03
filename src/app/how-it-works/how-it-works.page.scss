@@ -1,0 +1,13 @@
+@import url("../homepage/homepage.page.scss");
+
+ion-content { --background: var(--teal-950); }
+
+ion-header { background: var(--teal-950); } nav { color: var(--cream); }
+
+nav a { color: var(--cream); }
+
+ion-header { position: absolute; top: 0; left: 0; right: 0; z-index: 50; background: transparent !important; }
+
+
+nav a, .back-link { color: var(--tm-white) !important; }
+

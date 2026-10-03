@@ -1,0 +1,104 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary" style="--background: var(--tm-teal-900); --color: var(--tm-white);">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Budget Tracker</ion-title>
+    <ion-buttons slot="end">
+      <ion-button style="color: var(--tm-coral-500); font-weight: bold;">
+        <ion-icon name="add-outline" slot="start"></ion-icon> Add
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="--background: var(--tm-bg-page);">
+  <div style="padding: 24px; max-width: 800px; margin: 0 auto;">
+    
+    <!-- Summary View -->
+    <div style="background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--tm-border-base); margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+      <div>
+        <p style="margin: 0; color: var(--tm-ink-400); font-size: 0.9rem;">Total Budget</p>
+        <h2 style="margin: 4px 0 0; color: var(--tm-teal-900);">?25,000</h2>
+      </div>
+      <div>
+        <p style="margin: 0; color: var(--tm-ink-400); font-size: 0.9rem;">Total Spent</p>
+        <h2 style="margin: 4px 0 0; color: var(--tm-coral-500);">?18,500</h2>
+      </div>
+      <div>
+        <p style="margin: 0; color: var(--tm-ink-400); font-size: 0.9rem;">Remaining</p>
+        <h2 style="margin: 4px 0 0; color: var(--tm-gold-500);">?6,500</h2>
+      </div>
+    </div>
+
+    <!-- CSS Bar Chart -->
+    <div style="background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--tm-border-base); margin-bottom: 24px;">
+      <h3 style="margin-top: 0; color: var(--tm-ink-900);">Expenses by Category</h3>
+      
+      <div style="margin-top: 20px;">
+        <!-- Bar 1 -->
+        <div style="display: flex; align-items: center; margin-bottom: 12px;">
+          <div style="width: 100px; font-size: 0.85rem; color: var(--tm-ink-900);">Accommodation</div>
+          <div style="flex: 1; background: var(--tm-bg-surface); border-radius: 10px; height: 16px; margin: 0 16px; overflow: hidden;">
+            <div style="width: 45%; background: var(--tm-teal-900); height: 100%; border-radius: 10px;"></div>
+          </div>
+          <div style="width: 70px; text-align: right; font-size: 0.85rem; font-weight: bold;">?8,500</div>
+        </div>
+        <!-- Bar 2 -->
+        <div style="display: flex; align-items: center; margin-bottom: 12px;">
+          <div style="width: 100px; font-size: 0.85rem; color: var(--tm-ink-900);">Transport</div>
+          <div style="flex: 1; background: var(--tm-bg-surface); border-radius: 10px; height: 16px; margin: 0 16px; overflow: hidden;">
+            <div style="width: 30%; background: var(--tm-coral-500); height: 100%; border-radius: 10px;"></div>
+          </div>
+          <div style="width: 70px; text-align: right; font-size: 0.85rem; font-weight: bold;">?5,000</div>
+        </div>
+        <!-- Bar 3 -->
+        <div style="display: flex; align-items: center; margin-bottom: 12px;">
+          <div style="width: 100px; font-size: 0.85rem; color: var(--tm-ink-900);">Food</div>
+          <div style="flex: 1; background: var(--tm-bg-surface); border-radius: 10px; height: 16px; margin: 0 16px; overflow: hidden;">
+            <div style="width: 25%; background: var(--tm-gold-500); height: 100%; border-radius: 10px;"></div>
+          </div>
+          <div style="width: 70px; text-align: right; font-size: 0.85rem; font-weight: bold;">?3,500</div>
+        </div>
+        <!-- Bar 4 -->
+        <div style="display: flex; align-items: center;">
+          <div style="width: 100px; font-size: 0.85rem; color: var(--tm-ink-900);">Activities</div>
+          <div style="flex: 1; background: var(--tm-bg-surface); border-radius: 10px; height: 16px; margin: 0 16px; overflow: hidden;">
+            <div style="width: 10%; background: #4caf50; height: 100%; border-radius: 10px;"></div>
+          </div>
+          <div style="width: 70px; text-align: right; font-size: 0.85rem; font-weight: bold;">?1,500</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Expenses List -->
+    <h3 style="color: var(--tm-ink-900); margin: 0 0 16px;">Recent Expenses</h3>
+    <ion-list lines="full" style="background: white; border-radius: 12px; border: 1px solid var(--tm-border-base);">
+      <ion-item>
+        <ion-icon name="bed-outline" slot="start" style="color: var(--tm-teal-900);"></ion-icon>
+        <ion-label>
+          <h2>Kubo Homestay</h2>
+          <p>Accommodation</p>
+        </ion-label>
+        <ion-note slot="end" color="danger" style="font-weight: bold;">- ?8,500</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="airplane-outline" slot="start" style="color: var(--tm-coral-500);"></ion-icon>
+        <ion-label>
+          <h2>Flight to Palawan</h2>
+          <p>Transport</p>
+        </ion-label>
+        <ion-note slot="end" color="danger" style="font-weight: bold;">- ?5,000</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="restaurant-outline" slot="start" style="color: var(--tm-gold-500);"></ion-icon>
+        <ion-label>
+          <h2>Seafood Dinner</h2>
+          <p>Food</p>
+        </ion-label>
+        <ion-note slot="end" color="danger" style="font-weight: bold;">- ?1,200</ion-note>
+      </ion-item>
+    </ion-list>
+
+  </div>
+</ion-content>

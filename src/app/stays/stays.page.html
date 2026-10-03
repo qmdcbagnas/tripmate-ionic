@@ -1,0 +1,255 @@
+<ion-header class="ion-no-border">
+<nav>
+    <ion-menu-button style="color: var(--tm-white);"></ion-menu-button>
+            <a routerLink="/homepage" class="logo">
+                <img src="assets/images/tripmate.svg" alt="TripMate" class="logo-img">
+            </a>
+            <div class="nav-links">
+                <a routerLink="/stays">Stays</a>
+                <a routerLink="/how-it-works">How it works</a>
+                <a routerLink="/become-host">Become a Host</a>
+            </div>
+            <div class="nav-auth" id="navAuth">
+                <!-- Guest state -->
+                <a routerLink="/signup" class="nav-cta" id="navGetStarted">Get started</a>
+                <a routerLink="/login" class="nav-login" id="navLogin">Log in</a>
+                <!-- Logged-in state (hidden by default) -->
+                <div class="user-menu" id="userMenu" style="display: none;">
+                    <button class="user-avatar-btn" id="userAvatarBtn" aria-label="User menu">
+                        <span class="avatar-placeholder" id="avatarPlaceholder">JD</span>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <div class="dropdown-header">
+                            <span class="dropdown-name" id="dropdownName">Juan Dela Cruz</span>
+                            <span class="dropdown-email" id="dropdownEmail">juan@example.com</span>
+                        </div>
+                        <hr class="dropdown-divider">
+                        <a routerLink="/dashboard" class="dropdown-item">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            <span>My Trips</span>
+                        </a>
+                        <a routerLink="/wishlist" class="dropdown-item">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                            <span>Wishlist</span>
+                        </a>
+                        <a routerLink="/profile" class="dropdown-item">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                            <span>Profile</span>
+                        </a>
+                        <hr class="dropdown-divider">
+                        <a href="#" class="dropdown-item" id="logoutBtn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                                <polyline points="16 17 21 12 16 7"/>
+                                <line x1="21" y1="12" x2="9" y2="12"/>
+                            </svg>
+                            <span>Log out</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+</ion-header>
+<ion-content fullscreen="true">
+<div class="hero stays-hero">
+       
+
+        <div class="stays-hero-body">
+            <h1>Every kind of stay, one search.</h1>
+            <p>Hotels, house rentals, cabins, villas and resorts — filter by what actually matters to your trip.</p>
+
+            <div class="hero-search">
+                <div class="hero-search-field">
+                    <label for="searchInput">Search</label>
+                    <input type="text" id="searchInput" placeholder="Try 'Siargao' or 'Driftwood House'" [(ngModel)]="search" (ngModelChange)="applyFilters()">
+                </div>
+                <button class="search-btn" id="heroSearchBtn" type="button">
+                    Search
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="7" />
+                        <path d="M21 21l-4.3-4.3" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ BROWSE LAYOUT ============ -->
+    <main class="stays-main">
+        <button class="filters-toggle" id="filtersToggle" type="button" (click)="isFiltersOpen = true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 6h16M7 12h10M10 18h4" />
+            </svg>
+            Filters
+        </button>
+
+        <div class="stays-layout">
+
+            <!-- ============ FILTER SIDEBAR ============ -->
+            <aside class="filters" id="filtersPanel" [class.is-open]="isFiltersOpen">
+                <div class="filters-head">
+                    <h2>Filters</h2>
+                    <button class="filters-close" id="filtersClose" type="button" aria-label="Close filters" (click)="isFiltersOpen = false">&times;</button>
+                </div>
+
+                <div class="filter-group">
+                    <h3>Price per night</h3>
+                    <div class="price-range">
+                        <div class="price-track">
+                            <div class="price-fill" id="priceFill" [style.left.%]="getLeftPct()" [style.width.%]="getWidthPct()"></div>
+                        </div>
+                        <input type="range" id="priceMin" min="800" max="6000" step="100" [(ngModel)]="minPrice" (ngModelChange)="applyFilters()">
+                        <input type="range" id="priceMax" min="800" max="6000" step="100" [(ngModel)]="maxPrice" (ngModelChange)="applyFilters()">
+                    </div>
+                    <div class="price-values">
+                        <span>&#8369;<span id="priceMinLabel">{{minPrice | number}}</span></span>
+                        <span>&#8369;<span id="priceMaxLabel">{{maxPrice | number}}</span></span>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h3>Property type</h3>
+                    <div class="check-list" id="typeList">
+                        <label class="checkbox-row" *ngFor="let t of typeOptions"><input type="checkbox" [value]="t" [checked]="hasType(t)" (change)="toggleType(t, $event)"><span>{{t}}</span><span class="check-count">{{getTypeCount(t)}}</span></label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h3>Rating</h3>
+                    <div class="check-list" id="ratingList">
+                        <label class="radio-row"><input type="radio" name="rating" [value]="0" [(ngModel)]="minRating" (ngModelChange)="applyFilters()"><span>Any rating</span></label>
+                        <label class="radio-row"><input type="radio" name="rating" [value]="4.5" [(ngModel)]="minRating" (ngModelChange)="applyFilters()"><span>4.5 &amp; up</span></label>
+                        <label class="radio-row"><input type="radio" name="rating" [value]="4.8" [(ngModel)]="minRating" (ngModelChange)="applyFilters()"><span>4.8 &amp; up</span></label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h3>Guests</h3>
+                    <div class="guest-stepper">
+                        <button type="button" class="step-btn" id="filterGuestMinus" aria-label="Fewer guests" (click)="guests > 1 ? guests = guests - 1 : null; applyFilters()">&minus;</button>
+                        <span id="filterGuestCount">{{guests}}</span>
+                        <button type="button" class="step-btn" id="filterGuestPlus" aria-label="More guests" (click)="guests < 10 ? guests = guests + 1 : null; applyFilters()">&plus;</button>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h3>Amenities</h3>
+                    <div class="check-list" id="amenityList">
+                        <label class="checkbox-row" *ngFor="let a of amenityOptions"><input type="checkbox" [value]="a" [checked]="hasAmenity(a)" (change)="toggleAmenity(a, $event)"><span>{{a}}</span></label>
+                    </div>
+                </div>
+
+                <button class="clear-filters" id="clearFilters" type="button" (click)="clearAll()">Clear all filters</button>
+            </aside>
+
+            <!-- ============ RESULTS ============ -->
+            <section class="results">
+                <div class="results-bar">
+                    <p class="results-count" id="resultsCount">{{results.length}} stay{{results.length === 1 ? '' : 's'}}</p>
+                    <div class="sort-field">
+                        <label for="sortSelect">Sort by</label>
+                        <select id="sortSelect" [(ngModel)]="sort" (ngModelChange)="applyFilters()">
+                            <option value="recommended">Recommended</option>
+                            <option value="price-asc">Price: low to high</option>
+                            <option value="price-desc">Price: high to low</option>
+                            <option value="rating-desc">Highest rated</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="active-chips" id="activeChips">
+                    <span class="chip" *ngFor="let chip of activeChips">{{chip.label}}<button type="button" aria-label="Remove filter" (click)="removeChip(chip)">&times;</button></span>
+                </div>
+
+                
+                <div class="stays-grid" id="staysGrid" *ngIf="results.length > 0">
+                    <article class="listing-card" *ngFor="let l of results" [attr.data-id]="l.id">
+                        <div class="listing-media">
+                            <a [routerLink]="['/property']" [queryParams]="{id: l.id}" class="listing-media-link" [attr.aria-label]="'View ' + l.name">
+                                <img [src]="l.img" [alt]="l.name" loading="lazy">
+                            </a>
+                            <span class="listing-badge">{{l.type}}</span>
+                            <button class="fav-btn" [class.is-active]="isFavorite(l.id)" (click)="toggleFavorite($event, l.id)" [attr.aria-label]="'Save ' + l.name">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 21s-7-4.35-9.5-8.36C.65 9.28 2.1 5.5 5.6 5.02 7.9 4.7 9.9 5.9 12 8.3c2.1-2.4 4.1-3.6 6.4-3.28 3.5.48 4.95 4.26 3.1 7.62C19 16.65 12 21 12 21z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="listing-content">
+                            <div class="listing-title-row">
+                                <h3 class="listing-title"><a [routerLink]="['/property']" [queryParams]="{id: l.id}">{{l.name}}</a></h3>
+                                <span class="listing-rating">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="#E8B04B" stroke="#E8B04B"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                    <span>{{l.rating | number:'1.2-2'}}</span>
+                                </span>
+                            </div>
+                            <p class="listing-loc">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                <span>{{l.location}}</span>
+                            </p>
+                            <p class="listing-guests">Up to {{l.guests}} guest{{l.guests > 1 ? 's' : ''}} &middot; {{l.reviews}} reviews</p>
+                            <div class="listing-amenities">
+                                <span class="amenity-pill" *ngFor="let a of l.amenities | slice:0:3">{{a}}</span>
+                            </div>
+                            <div class="listing-footer">
+                                <p class="listing-price"><b class="price-val">₱{{l.price | number}}</b> <span class="price-period">/ night</span></p>
+                                <a class="listing-book" [routerLink]="['/booking']" [queryParams]="{id: l.id}">Reserve</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+
+                <div class="empty-state" id="emptyState" *ngIf="results.length === 0">
+                    <p class="empty-title">No stays match those filters.</p>
+                    <p class="empty-sub">Try widening your price range or clearing a filter.</p>
+                    <button class="btn-ghost" id="emptyClearBtn" type="button" (click)="clearAll()">Clear all filters</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- ============ FOOTER (reused from homepage) ============ -->
+     <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <img src="assets/images/tripmate.svg" alt="TripMate" class="logo-img">
+                </a>
+                <p>A Filipino-built platform for booking hotels and house rentals across the Philippines.</p>
+            </div>
+            <div class="footer-cols">
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <a routerLink="/stays">Stays</a>
+                    <a routerLink="/how-it-works">How it works</a>
+                    <a routerLink="/become-host">Become a Host</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <a routerLink="/cancellation">Cancellation policy</a>
+                    <a routerLink="/contactus">Contact us</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <a routerLink="/about">About</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 TripMate. Made in Quezon City.</span>
+            <span>Terms &middot; Privacy</span>
+        </div>
+    </footer>
+</ion-content>
+
+
+

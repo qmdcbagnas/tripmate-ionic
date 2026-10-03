@@ -1,0 +1,352 @@
+<ion-header class="ion-no-border">
+<nav>
+    <ion-menu-button style="color: var(--tm-white);"></ion-menu-button>
+            <a routerLink="/homepage" class="logo">
+                <img src="assets/images/tripmate.svg" alt="TripMate" class="logo-img">
+            </a>
+        </nav>
+</ion-header>
+<ion-content>
+<!-- ============ NAVBAR ============ -->
+    <header class="booking-nav-wrap">
+        
+    </header>
+
+    <!-- ============ STEPPER ============ -->
+    <div class="stepper-wrap">
+        <ol class="stepper" id="stepper">
+            <li class="step" [class.is-active]="currentStep === 1" [class.is-done]="highestUnlocked > 1 || currentStep > 1">
+                <button class="step-dot" (click)="goToStep(1)" [attr.aria-current]="currentStep === 1">
+                    <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="icon-num">1</span>
+                </button>
+                <span class="step-label">Review</span>
+            </li>
+            <li class="step-line" [class.is-filled]="highestUnlocked > 1 || currentStep > 1"></li>
+            
+            <li class="step" [class.is-active]="currentStep === 2" [class.is-done]="highestUnlocked > 2 || currentStep > 2">
+                <button class="step-dot" (click)="goToStep(2)" [disabled]="highestUnlocked < 2" [attr.aria-current]="currentStep === 2">
+                    <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="icon-num">2</span>
+                </button>
+                <span class="step-label">Payment</span>
+            </li>
+            <li class="step-line" [class.is-filled]="highestUnlocked > 2 || currentStep > 2"></li>
+            
+            <li class="step" [class.is-active]="currentStep === 3" [class.is-done]="highestUnlocked > 3 || currentStep > 3">
+                <button class="step-dot" (click)="goToStep(3)" [disabled]="highestUnlocked < 3" [attr.aria-current]="currentStep === 3">
+                    <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="icon-num">3</span>
+                </button>
+                <span class="step-label">Confirm</span>
+            </li>
+        </ol>
+    </div>
+
+    <main class="booking-main">
+
+        <!-- ============ STEP 1: REVIEW ============ -->
+        <section class="booking-layout panel" *ngIf="currentStep === 1">
+            <div class="panel-col">
+                <h1 class="panel-title">Review your trip</h1>
+
+                <div class="card-block">
+                    <h2 class="block-title">
+                        <span class="block-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        </span>
+                        Trip dates
+                    </h2>
+                    <div class="date-row">
+                        <div class="field">
+                            <label for="checkin">Check in</label>
+                            <input type="date" id="checkin" [(ngModel)]="checkIn" [min]="minCheckIn" (change)="onCheckInChange()">
+                        </div>
+                        <div class="field">
+                            <label for="checkout">Check out</label>
+                            <input type="date" id="checkout" [(ngModel)]="checkOut" [min]="minCheckOut">
+                        </div>
+                    </div>
+                    <p class="hint">{{ nights() }} night{{ nights() > 1 ? 's' : '' }}</p>
+                </div>
+
+                <div class="card-block">
+                    <h2 class="block-title">
+                        <span class="block-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        </span>
+                        Guests
+                    </h2>
+                    <div class="guest-row">
+                        <div>
+                            <p class="guest-label">Guests</p>
+                            <p class="hint">This stay comfortably fits up to {{ listing?.maxGuests }} guests.</p>
+                        </div>
+                        <div class="stepper-control">
+                            <button type="button" class="step-btn" (click)="setGuests(-1)" [disabled]="guests <= 1" aria-label="Remove a guest">&minus;</button>
+                            <span>{{ guests }}</span>
+                            <button type="button" class="step-btn" (click)="setGuests(1)" [disabled]="guests >= listing?.maxGuests" aria-label="Add a guest">&plus;</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-block">
+                    <h2 class="block-title">
+                        <span class="block-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+                        </span>
+                        Cancellation policy
+                    </h2>
+                    <p class="hint">Free cancellation <strong id="cancelDate">1 week before your actual Check-in</strong>. After that, the first night is non-refundable.</p>
+                </div>
+
+                <button class="btn-primary btn-block" (click)="toPayment()" type="button">
+                    Continue to payment
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M13 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Summary Column embedded directly -->
+            <aside class="summary-col">
+                <ng-container *ngTemplateOutlet="summaryCard; context: { withPromo: true }"></ng-container>
+            </aside>
+        </section>
+
+        <!-- ============ STEP 2: PAYMENT ============ -->
+        <section class="booking-layout panel" *ngIf="currentStep === 2">
+            <div class="panel-col">
+                <h1 class="panel-title">Complete your booking</h1>
+
+                <form novalidate>
+                    <div class="card-block">
+                        <h2 class="block-title">
+                            <span class="block-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            </span>
+                            Guest details
+                        </h2>
+
+                        <div class="field-row">
+                            <div class="field" [class.has-error]="formErrors.firstName">
+                                <label for="firstName">First name</label>
+                                <input type="text" id="firstName" placeholder="Maria" autocomplete="given-name" [(ngModel)]="guestForm.firstName" name="firstName" required>
+                                <span class="error-text">{{ formErrors.firstName }}</span>
+                            </div>
+                            <div class="field" [class.has-error]="formErrors.lastName">
+                                <label for="lastName">Last name</label>
+                                <input type="text" id="lastName" placeholder="Santos" autocomplete="family-name" [(ngModel)]="guestForm.lastName" name="lastName" required>
+                                <span class="error-text">{{ formErrors.lastName }}</span>
+                            </div>
+                        </div>
+
+                        <div class="field" [class.has-error]="formErrors.email">
+                            <label for="email">Email address</label>
+                            <input type="email" id="email" placeholder="maria.santos@example.com" autocomplete="email" [(ngModel)]="guestForm.email" name="email" required>
+                            <p class="hint">Booking confirmation will be sent to this email.</p>
+                            <span class="error-text">{{ formErrors.email }}</span>
+                        </div>
+
+                        <div class="field" [class.has-error]="formErrors.phone">
+                            <label for="phone">Phone number</label>
+                            <div class="phone-field">
+                                <span class="phone-prefix">+63</span>
+                                <input type="tel" id="phone" placeholder="912 345 6789" autocomplete="tel-national" [(ngModel)]="guestForm.phone" name="phone" required>
+                            </div>
+                            <span class="error-text">{{ formErrors.phone }}</span>
+                        </div>
+
+                        <div class="field">
+                            <label for="specialRequests">Special requests <span class="hint">(optional)</span></label>
+                            <textarea id="specialRequests" rows="3" placeholder="Arrival time, accessibility needs, or anything your host should know" [(ngModel)]="guestForm.specialRequests" name="specialRequests"></textarea>
+                        </div>
+
+                        <label class="checkbox-row booking-terms" [class.has-error]="formErrors.terms">
+                            <input type="checkbox" id="termsAccepted" [(ngModel)]="guestForm.termsAccepted" name="termsAccepted" required>
+                            <span>I agree to the booking terms and cancellation policy.</span>
+                        </label>
+                        <p class="error-text" *ngIf="formErrors.terms">{{ formErrors.terms }}</p>
+                    </div>
+
+                    <div class="card-block">
+                        <h2 class="block-title">
+                            <span class="block-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                            </span>
+                            Payment method
+                        </h2>
+
+                        <div class="pay-options">
+                            <label class="pay-option" [class.is-selected]="payMethod === 'qrph'" (click)="payMethod = 'qrph'">
+                                <span class="pay-option-head">
+                                    <span class="pay-option-name">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"></rect><path d="M8 8h2v2H8zM14 8h2v2h-2zM8 14h2v2H8zM14 14h2v2h-2z"></path></svg>
+                                        QR Ph
+                                    </span>
+                                    <span class="radio" aria-hidden="true"></span>
+                                </span>
+                                <input type="radio" name="payMethod" value="qrph" [checked]="payMethod === 'qrph'" hidden>
+
+                                <div class="pay-option-body">
+                                    <p class="hint">You'll be redirected to PayMongo's secure checkout to scan and authorize your QR Ph payment.</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="panel-actions">
+                    <button class="btn-ghost" (click)="goToStep(1)" type="button">Back</button>
+                    <button class="btn-primary" (click)="pay()" type="button" [disabled]="isPaying">
+                        <span class="btn-label" [style.opacity]="isPaying ? '0' : '1'">Confirm and pay {{ peso(pricing().total) }}</span>
+                        <span class="btn-spinner" *ngIf="isPaying"></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Summary Column -->
+            <aside class="summary-col">
+                <ng-container *ngTemplateOutlet="summaryCard; context: { withPromo: true }"></ng-container>
+            </aside>
+        </section>
+
+        <!-- ============ STEP 3: CONFIRM ============ -->
+        <section class="panel confirm-panel" *ngIf="currentStep === 3">
+            <div class="confirm-box">
+                <div class="confirm-check">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <h1 class="panel-title">You're booked.</h1>
+                <p class="confirm-sub">A confirmation has been sent to <strong>{{ guestForm.email }}</strong>.</p>
+
+                <div class="confirm-ref">
+                    <span>Booking reference</span>
+                    <strong>{{ bookingRef }}</strong>
+                </div>
+
+                <div class="confirm-summary">
+                    <ng-container *ngTemplateOutlet="summaryCard; context: { withPromo: false }"></ng-container>
+                </div>
+
+                <div class="confirm-actions">
+                    <button class="btn-ghost" (click)="newBooking()" type="button">Book another stay</button>
+                    <button class="btn-ghost" (click)="downloadCalendar()" type="button">Add to calendar</button>
+                    <button class="btn-ghost" (click)="shareBooking()" type="button">Share booking</button>
+                    <a class="btn-primary" routerLink="/homepage">
+                        Back to home
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M13 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ng-template for Summary Card so we can reuse it -->
+    <ng-template #summaryCard let-withPromo="withPromo">
+        <div class="summary-card" *ngIf="listing">
+            <div class="summary-media">
+              <img [src]="listing.img" [alt]="listing.name">
+              <span class="summary-rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#E8B04B" stroke="#E8B04B"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                {{ listing.rating.toFixed(2) }} <span class="count">({{ listing.reviews }} reviews)</span>
+              </span>
+            </div>
+            <div class="summary-body">
+              <p class="summary-name">{{ listing.name }}</p>
+              <p class="summary-loc">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                {{ listing.location }}
+              </p>
+    
+              <div class="summary-dates">
+                <div>
+                  <p class="d-label">Check-in</p>
+                  <p class="d-value">{{ fmtDate(checkIn) }}</p>
+                </div>
+                <span class="d-arrow">&#8594;</span>
+                <div>
+                  <p class="d-label">Check-out</p>
+                  <p class="d-value">{{ fmtDate(checkOut) }}</p>
+                </div>
+                <div class="d-meta">{{ nights() }} Night{{ nights() > 1 ? 's' : '' }}<br>{{ guests }} Guest{{ guests > 1 ? 's' : '' }}</div>
+              </div>
+    
+              <p class="summary-price-title">Price details</p>
+              <div class="price-line"><span>{{ peso(listing.ratePerNight) }} &times; {{ nights() }} night{{ nights() > 1 ? 's' : '' }}</span><b>{{ peso(pricing().subtotal) }}</b></div>
+              <div class="price-line"><span>Cleaning fee</span><b>{{ peso(pricing().cleaning) }}</b></div>
+              <div class="price-line"><span>TripMate service fee</span><b>{{ peso(pricing().serviceFee) }}</b></div>
+              <div class="price-line"><span>Taxes</span><b>{{ peso(pricing().taxes) }}</b></div>
+              
+              <div class="price-line is-promo" *ngIf="promoCode">
+                  <span>Promo &middot; {{ promoCode }} 
+                      <span *ngIf="withPromo" class="remove-promo" (click)="removePromo()">Remove</span>
+                  </span>
+                  <b>&minus;{{ peso(pricing().discount) }}</b>
+              </div>
+    
+              <div class="summary-total">
+                <span class="t-label">Total</span>
+                <span class="t-value">{{ peso(pricing().total) }}</span>
+              </div>
+    
+              <div class="promo-row" *ngIf="withPromo">
+                  <ng-container *ngIf="!promoCode">
+                      <button type="button" class="promo-toggle" (click)="togglePromo()">Have a promo code?</button>
+                      <div class="promo-form" [class.is-open]="showPromoForm">
+                        <input type="text" placeholder="Enter code" [(ngModel)]="promoInput">
+                        <button type="button" (click)="applyPromo()">Apply</button>
+                      </div>
+                      <p class="promo-msg" [class.is-error]="promoError">{{ promoError }}</p>
+                  </ng-container>
+              </div>
+            </div>
+        </div>
+    </ng-template>
+
+    <!-- ============ FOOTER ============ -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <img src="assets/images/tripmate.svg" alt="TripMate" class="logo-img">
+                </a>
+                <p>A Filipino-built platform for booking hotels and house rentals across the Philippines.</p>
+            </div>
+            <div class="footer-cols">
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <a routerLink="/stays">Stays</a>
+                    <a href="homepage.html#how">How it works</a>
+                    <a routerLink="/become-host">Become a Host</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <a routerLink="/cancellation">Cancellation policy</a>
+                    <a routerLink="/contactus">Contact us</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <a routerLink="/about">About</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 TripMate. Made in Quezon City.</span>
+            <span>Terms &middot; Privacy</span>
+        </div>
+    </footer>
+</ion-content>
+
+
