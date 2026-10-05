@@ -365,9 +365,7 @@
 .hero.page-hero {
 	min-height: 0;
 	overflow: visible;
-	background:
-		radial-gradient(ellipse at 85% 0%, rgba(255, 107, 74, 0.22) 0%, transparent 50%),
-		linear-gradient(160deg, var(--teal-950) 0%, var(--teal-800) 100%);
+	background: #0B3D3A;
 }
 
 .page-hero-body { padding: 80px clamp(20px, 5vw, 64px) 96px; }
@@ -385,7 +383,7 @@
 .result-panel { background: rgba(250, 247, 239, 0.06); border: 1px solid rgba(250, 247, 239, 0.14); }
 .result-placeholder { color: rgba(250, 247, 239, 0.55); }
 .result-panel .result-detail { color: var(--cream); }
-.policy-faq { padding: 0 clamp(20px, 5vw, 64px) 110px; }
+.policy-faq { padding: 80px clamp(20px, 5vw, 64px) 110px; }
 .pfaq-q { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 500; }
 
 @media (max-width: 900px) {

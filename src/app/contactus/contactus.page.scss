@@ -75,7 +75,6 @@
 
 :root { --cream-dark: var(--cream-dim); --error: #C23B1E; }
 
-/* ---------- Hero ---------- */
 .hero.page-hero,
 .page-hero {
 	position: relative;
@@ -93,7 +92,6 @@
 	background-repeat: no-repeat !important;
 }
 
-/* Keep the homepage overlay, but behind the content */
 .hero.page-hero::after,
 .page-hero::after {
 	z-index: 0;
@@ -105,7 +103,6 @@
 	padding: 80px clamp(20px, 5vw, 64px) 150px;
 }
 
-/* ---------- Cards ---------- */
 .contact-main {
 	position: relative;
 	z-index: 6;
@@ -115,8 +112,7 @@
 .contact-panel { position: relative; z-index: 1; padding: 40px 36px; }
 .contact-card  { position: relative; z-index: 1; padding: 40px clamp(24px, 4vw, 44px); background: var(--white); }
 
-/* ---------- FAQ ---------- */
-.contact-faq { padding: 0 clamp(20px, 5vw, 64px) 110px; }
+.contact-faq { padding: 80px clamp(20px, 5vw, 64px) 110px; }
 .faq-q { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 500; }
 
 @media (max-width: 900px) {
