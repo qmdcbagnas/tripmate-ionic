@@ -88,7 +88,7 @@ main {
   flex: 1;
   display: flex;
   justify-content: center;
-  padding: 0 20px 70px;
+  padding: 120px 20px 70px;
 }
 
 .card {
@@ -335,5 +335,6 @@ ion-header { position: absolute; top: 0; left: 0; right: 0; z-index: 50; backgro
 
 
 nav a, .back-link { color: var(--tm-white) !important; }
+
 
 

@@ -1,107 +1,210 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { SupabaseService } from './supabase.service';
+import { environment } from '../../environments/environment';
 
-export interface User {
+export interface AppUser {
   id: string;
-  name: string;
+  full_name: string;
   email: string;
-  password?: string;
-  type: string;
-  businessName?: string;
+  role: 'guest' | 'host' | 'admin';
+  avatar_url?: string;
   phone?: string;
-  role?: string;
+  businessName?: string;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+// ── Mock user store (used when USE_MOCK_DATA = true) ──────────────────────────
+interface MockUser extends AppUser { password: string; }
+const MOCK_USERS_KEY = 'tripmate_mock_users';
+const MOCK_SESSION_KEY = 'tripmate_mock_session';
+
+@Injectable({ providedIn: 'root' })
 export class AuthService {
-  private USERS_KEY = "tripmate_users";
-  private USER_KEY = "tripmate_user";
-  private SESSION_KEY = "tripmate_session";
+  private _currentUser = new BehaviorSubject<AppUser | null>(null);
+  currentUser$ = this._currentUser.asObservable();
 
-  getUsers(): User[] {
-    try {
-      const parsed = JSON.parse(localStorage.getItem(this.USERS_KEY) || '[]');
-      return Array.isArray(parsed) ? parsed : [];
-    } catch {
-      return [];
+  constructor(private supabase: SupabaseService, private router: Router) {
+    this.restoreSession();
+  }
+
+  // ── Session restore ─────────────────────────────────────────────────────────
+  private async restoreSession() {
+    if (environment.USE_MOCK_DATA) {
+      const stored = localStorage.getItem(MOCK_SESSION_KEY);
+      if (stored) {
+        try { this._currentUser.next(JSON.parse(stored)); } catch {}
+      }
+      return;
     }
+
+    const { data } = await this.supabase.auth.getSession();
+    if (data.session?.user) {
+      const profile = await this.fetchProfile(data.session.user.id);
+      this._currentUser.next(profile);
+    }
+
+    // Listen for auth state changes (token refresh, sign-out, etc.)
+    this.supabase.auth.onAuthStateChange(async (event, session) => {
+      if (session?.user) {
+        const profile = await this.fetchProfile(session.user.id);
+        this._currentUser.next(profile);
+      } else {
+        this._currentUser.next(null);
+      }
+    });
   }
 
-  saveUsers(users: User[]) {
-    localStorage.setItem(this.USERS_KEY, JSON.stringify(users));
-  }
-
-  findUser(email: string): User | null {
-    const normalized = (email || "").trim().toLowerCase();
-    if (!normalized) return null;
-    return this.getUsers().find(u => (u.email || "").toLowerCase() === normalized) || null;
-  }
-
-  findUserById(id: string): User | null {
-    if (!id) return null;
-    return this.getUsers().find(u => u.id === id) || null;
-  }
-
-  generateId(): string {
-    return "u_" + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
-  }
-
-  createUser(data: Partial<User>): User {
-    const users = this.getUsers();
-    const user: User = {
-      id: this.generateId(),
-      name: data.name || '',
-      email: (data.email || '').trim(),
-      password: data.password,
-      type: data.type || 'guest',
-      businessName: data.businessName || "",
-      phone: "",
+  private async fetchProfile(userId: string): Promise<AppUser | null> {
+    const { data, error } = await this.supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', userId)
+      .single();
+    if (error || !data) return null;
+    return {
+      id: data.id,
+      full_name: data.full_name,
+      email: data.email,
+      role: data.role,
+      avatar_url: data.avatar_url,
+      phone: data.phone,
     };
-    users.push(user);
-    this.saveUsers(users);
-    return user;
   }
 
-  loginUser(user: User) {
-    const { password, ...safeUser } = user;
-    localStorage.setItem(this.USER_KEY, JSON.stringify(safeUser));
-    localStorage.setItem(this.SESSION_KEY, JSON.stringify(true));
-  }
+  // ── SIGN UP ─────────────────────────────────────────────────────────────────
+  async signUp(payload: {
+    full_name: string;
+    email: string;
+    password: string;
+    role: 'guest' | 'host';
+    businessName?: string;
+  }): Promise<AppUser> {
+    // ── Mock mode ──
+    if (environment.USE_MOCK_DATA) {
+      const existing = this.getMockUsers().find(u => u.email === payload.email);
+      if (existing) throw new Error('An account with this email already exists.');
 
-  logoutUser() {
-    localStorage.removeItem(this.USER_KEY);
-    localStorage.removeItem(this.SESSION_KEY);
-  }
-
-  getCurrentUser(): User | null {
-    try {
-      return JSON.parse(localStorage.getItem(this.USER_KEY) || 'null');
-    } catch {
-      return null;
+      const newUser: MockUser = {
+        id: 'mock_' + Date.now(),
+        full_name: payload.full_name,
+        email: payload.email,
+        password: payload.password,
+        role: payload.role,
+        businessName: payload.businessName,
+      };
+      this.saveMockUser(newUser);
+      const { password: _, ...safe } = newUser;
+      localStorage.setItem(MOCK_SESSION_KEY, JSON.stringify(safe));
+      this._currentUser.next(safe);
+      return safe;
     }
+
+    // ── Supabase mode ──
+    const { data, error } = await this.supabase.auth.signUp({
+      email: payload.email,
+      password: payload.password,
+      options: {
+        data: {
+          full_name: payload.full_name,
+          role: payload.role,
+        },
+      },
+    });
+    if (error) throw new Error(error.message);
+    if (!data.user) throw new Error('Signup failed — no user returned.');
+
+    // If host, upsert into profiles with business name
+    if (payload.role === 'host' && payload.businessName) {
+      await this.supabase.from('profiles').upsert({
+        id: data.user.id,
+        full_name: payload.full_name,
+        email: payload.email,
+        role: 'host',
+      });
+    }
+
+    const profile = await this.fetchProfile(data.user.id);
+    this._currentUser.next(profile);
+    return profile!;
+  }
+
+  // ── SIGN IN ─────────────────────────────────────────────────────────────────
+  async signIn(email: string, password: string): Promise<AppUser> {
+    // ── Mock mode ──
+    if (environment.USE_MOCK_DATA) {
+      const user = this.getMockUsers().find(
+        u => u.email === email && u.password === password
+      );
+      if (!user) throw new Error('Invalid email or password.');
+      const { password: _, ...safe } = user;
+      localStorage.setItem(MOCK_SESSION_KEY, JSON.stringify(safe));
+      this._currentUser.next(safe);
+      return safe;
+    }
+
+    // ── Supabase mode ──
+    const { data, error } = await this.supabase.auth.signInWithPassword({ email, password });
+    if (error) throw new Error(error.message);
+    if (!data.user) throw new Error('Login failed.');
+
+    const profile = await this.fetchProfile(data.user.id);
+    this._currentUser.next(profile);
+    return profile!;
+  }
+
+  // ── SIGN OUT ────────────────────────────────────────────────────────────────
+  async signOut() {
+    if (environment.USE_MOCK_DATA) {
+      localStorage.removeItem(MOCK_SESSION_KEY);
+      this._currentUser.next(null);
+      this.router.navigateByUrl('/homepage');
+      return;
+    }
+
+    await this.supabase.auth.signOut();
+    this._currentUser.next(null);
+    this.router.navigateByUrl('/homepage');
+  }
+
+  // ── Helpers ──────────────────────────────────────────────────────────────────
+  getCurrentUser(): AppUser | null {
+    return this._currentUser.value;
   }
 
   isLoggedIn(): boolean {
-    return !!this.getCurrentUser() && !!localStorage.getItem(this.SESSION_KEY);
+    return !!this._currentUser.value;
   }
 
-  updateUser(id: string, updates: Partial<User>): User | null {
-    const users = this.getUsers();
-    const index = users.findIndex(u => u.id === id);
-    if (index === -1) return null;
+  isHost(): boolean {
+    return this._currentUser.value?.role === 'host';
+  }
 
-    const { password, id: _ignoredId, ...safeUpdates } = updates as any;
-    users[index] = { ...users[index], ...safeUpdates };
-    this.saveUsers(users);
+  // ── Mock user store ──────────────────────────────────────────────────────────
+  private getMockUsers(): MockUser[] {
+    try { return JSON.parse(localStorage.getItem(MOCK_USERS_KEY) || '[]'); } catch { return []; }
+  }
 
-    const current = this.getCurrentUser();
-    if (current && current.id === id) {
-      const { password: _pw, ...safeUser } = users[index];
-      localStorage.setItem(this.USER_KEY, JSON.stringify(safeUser));
-    }
+  private saveMockUser(user: MockUser) {
+    const users = this.getMockUsers();
+    users.push(user);
+    localStorage.setItem(MOCK_USERS_KEY, JSON.stringify(users));
+  }
 
-    const { password: _pw2, ...result } = users[index];
-    return result;
+  // ── Legacy compat (for pages still using old ApiService.register/login) ─────
+  /** @deprecated Use signUp() instead */
+  async register(payload: any): Promise<AppUser> {
+    return this.signUp({
+      full_name: payload.name,
+      email: payload.email,
+      password: payload.password,
+      role: payload.role || 'guest',
+      businessName: payload.businessName,
+    });
+  }
+
+  /** @deprecated Use signIn() instead */
+  async login(payload: any): Promise<AppUser> {
+    return this.signIn(payload.email || payload.identifier, payload.password);
   }
 }

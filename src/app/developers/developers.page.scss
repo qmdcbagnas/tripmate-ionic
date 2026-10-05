@@ -244,29 +244,29 @@
    FIRST CARD
 ========================================= */
 
-.developer-card:first-child {
+.developer-card {
   background: var(--tm-teal-900);
 
   border-color: var(--tm-teal-900);
 }
 
-.developer-card:first-child .profile-image {
+.developer-card .profile-image {
   border-color: var(--tm-coral-500);
 }
 
-.developer-card:first-child .role {
+.developer-card .role {
   color: var(--tm-coral-500);
 }
 
-.developer-card:first-child h2 {
+.developer-card h2 {
   color: var(--tm-white);
 }
 
-.developer-card:first-child p {
+.developer-card p {
   color: rgba(255, 255, 255, 0.72);
 }
 
-.developer-card:first-child .card-number {
+.developer-card .card-number {
   color: rgba(255, 255, 255, 0.15);
 }
 

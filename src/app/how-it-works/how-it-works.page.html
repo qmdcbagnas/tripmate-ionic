@@ -1,28 +1,23 @@
-<ion-header class="ion-no-border how-header">
-  <nav class="tripmate-nav">
-
-    <ion-menu-button class="menu-button"></ion-menu-button>
-
-    <a routerLink="/homepage" class="logo">
-      <img
-        src="assets/images/tripmate.svg"
-        alt="TripMate"
-        class="logo-img"
-      />
-    </a>
-
-    <div class="nav-links">
-      <a routerLink="/stays">Stays</a>
-      <a routerLink="/how-it-works" class="active-link">How it works</a>
-      <a routerLink="/become-host">Become a Host</a>
+<ion-header class="ion-no-border" style="position: absolute; top: 0; left: 0; right: 0; z-index: 50; background: transparent !important;">
+  <header class="top-nav" style="display: flex; justify-content: space-between; padding: 28px clamp(20px, 5vw, 64px) 0; align-items: center;">
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <ion-menu-button style="color: var(--tm-white);"></ion-menu-button>
+      <a routerLink="/homepage" class="logo" style="display: flex; align-items: center; gap: 9px; font-family: 'Fraunces', serif; font-size: 21px; font-weight: 600; color: white; text-decoration: none;">
+        <img src="assets/images/tripmate.svg" alt="TripMate" style="height: 40px;">
+      </a>
+    </div>
+    
+    <div style="display: flex; gap: 36px; align-items: center;" class="hide-mobile">
+      <a routerLink="/stays" style="color: white; text-decoration: none; font-size: 14.5px; font-weight: 500;">Stays</a>
+      <a routerLink="/how-it-works" style="color: white; text-decoration: none; font-size: 14.5px; font-weight: 500;">How it works</a>
+      <a routerLink="/become-host" style="color: white; text-decoration: none; font-size: 14.5px; font-weight: 500;">Become a Host</a>
     </div>
 
-    <div class="nav-auth">
-      <a routerLink="/signup" class="nav-cta">Get started</a>
-      <a routerLink="/login" class="nav-login">Log in</a>
+    <div style="display: flex; align-items: center; gap: 12px;" class="hide-mobile">
+      <a routerLink="/signup" style="background: var(--tm-coral-500); color: white; padding: 11px 22px; border-radius: 100px; font-size: 14.5px; font-weight: 500; text-decoration: none;">Get started</a>
+      <a routerLink="/login" style="color: white; font-size: 14.5px; font-weight: 500; text-decoration: none;">Log in</a>
     </div>
-
-  </nav>
+  </header>
 </ion-header>
 
 
