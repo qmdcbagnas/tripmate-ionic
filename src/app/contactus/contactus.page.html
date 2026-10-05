@@ -1,114 +1,595 @@
 <ion-header class="ion-no-border">
-  <header class="top-nav" style="display: flex; justify-content: space-between; padding: 28px clamp(20px, 5vw, 64px) 16px; background: var(--tm-bg-page);">
-    <div style="display: flex; align-items: center; gap: 16px;">
-      <ion-menu-button style="color: var(--tm-teal-900);"></ion-menu-button>
-      <a routerLink="/homepage" class="logo" style="display: flex; align-items: center; gap: 9px; font-family: 'Fraunces', serif; font-size: 21px; font-weight: 600; color: var(--tm-teal-900); text-decoration: none;">
-        <img src="assets/images/tripmate.svg" alt="TripMate" style="height: 40px; filter: brightness(0) saturate(100%) invert(13%) sepia(21%) saturate(2396%) hue-rotate(119deg) brightness(97%) contrast(98%);">
+  <nav class="navbar">
+    <div class="nav-left">
+      <ion-menu-button></ion-menu-button>
+
+      <a routerLink="/homepage" class="logo">
+        <img src="assets/images/tripmate.svg" alt="TripMate">
       </a>
     </div>
-    <div style="display: flex; gap: 36px; align-items: center;">
-      <a routerLink="/stays" style="color: var(--tm-teal-900); text-decoration: none; font-size: 14.5px; font-weight: 500;">Stays</a>
-      <a routerLink="/how-it-works" style="color: var(--tm-teal-900); text-decoration: none; font-size: 14.5px; font-weight: 500;">How it works</a>
-      <a routerLink="/become-host" style="color: var(--tm-teal-900); text-decoration: none; font-size: 14.5px; font-weight: 500;">Become a Host</a>
+
+    <div class="nav-links">
+      <a routerLink="/stays">Stays</a>
+      <a routerLink="/how-it-works">How it works</a>
+      <a routerLink="/become-host">Become a Host</a>
     </div>
-    <div style="display: flex; align-items: center; gap: 12px;">
-      <a routerLink="/signup" style="background: var(--tm-coral-500); color: white; padding: 11px 22px; border-radius: 100px; font-size: 14.5px; font-weight: 500; text-decoration: none;">Get started</a>
-      <a routerLink="/login" style="color: var(--tm-teal-900); font-size: 14.5px; font-weight: 500; text-decoration: none;">Log in</a>
+
+    <div class="nav-auth">
+      <a routerLink="/signup" class="get-started">Get started</a>
+      <a routerLink="/login">Log in</a>
     </div>
-  </header>
+  </nav>
 </ion-header>
 
-<ion-content style="--background: var(--tm-bg-page);">
-  <div style="padding: 40px clamp(20px, 5vw, 64px) 80px; max-width: 1180px; margin: 0 auto;">
-    
-    <div style="margin-bottom: 60px;">
-      <p style="color: var(--tm-ink-400); font-size: 13px; margin-bottom: 16px;"><a routerLink="/homepage" style="color: inherit; text-decoration: none;">Home</a> / Contact us</p>
-      <h1 style="color: var(--tm-teal-950); font-family: 'Fraunces', serif; font-size: clamp(42px, 6vw, 64px); font-weight: 500; margin: 0 0 16px 0;">Got a question?<br>Ask a real person.</h1>
-      <p style="color: var(--tm-ink-500); font-size: 17px; line-height: 1.6; max-width: 600px; margin: 0;">Trouble with a booking, a payment, or listing your place? Send us a message and we'll get back to you by email.</p>
+
+<ion-content>
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <section class="contact-hero">
+
+    <div class="hero-inner">
+
+      <p class="breadcrumb">
+        <a routerLink="/homepage">Home</a>
+        <span>/</span>
+        Contact us
+      </p>
+
+      <h1>
+        Got a question? Ask a<br>
+        real person.
+      </h1>
+
+      <p class="hero-text">
+        Trouble with a booking, a payment, or listing your place?
+        Send us a message and we'll get back to you by email.
+      </p>
+
     </div>
 
-    <div style="display: grid; grid-template-columns: minmax(280px, 1fr) minmax(300px, 1.5fr); gap: 60px; align-items: start;">
-      
-      <!-- Left Panel (Other ways to reach us) -->
-      <aside style="background: var(--tm-teal-950); color: var(--tm-bg-page); padding: 40px; border-radius: 20px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 12px 32px rgba(15, 46, 37, 0.15);">
-        <h2 style="font-family: 'Fraunces', serif; font-size: 28px; font-weight: 500; margin: 0 0 12px 0;">Other ways to reach us</h2>
-        <p style="color: rgba(250, 247, 239, 0.7); font-size: 14.5px; line-height: 1.6; margin: 0 0 32px 0;">We usually reply within one business day.</p>
-        
-        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 24px;">
-          <li style="display: flex; gap: 16px; align-items: flex-start;">
-            <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--tm-gold-500); color: var(--tm-teal-950); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" /></svg>
-            </div>
-            <div>
-              <h3 style="margin: 0 0 4px 0; font-size: 14px; color: white;">Email</h3>
-              <a href="mailto:tripmateQC@gmail.com" style="color: var(--tm-gold-500); font-size: 14px; text-decoration: none;">tripmateQC@gmail.com</a>
-            </div>
-          </li>
-          <li style="display: flex; gap: 16px; align-items: flex-start;">
-            <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--tm-gold-500); color: var(--tm-teal-950); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
-            </div>
-            <div>
-              <h3 style="margin: 0 0 4px 0; font-size: 14px; color: white;">Phone</h3>
-              <p style="margin: 0; color: rgba(250, 247, 239, 0.7); font-size: 14px;">(02) 8123 4567<br>Mon-Fri, 9am - 6pm PHT</p>
-            </div>
-          </li>
-          <li style="display: flex; gap: 16px; align-items: flex-start;">
-            <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--tm-gold-500); color: var(--tm-teal-950); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" /></svg>
-            </div>
-            <div>
-              <h3 style="margin: 0 0 4px 0; font-size: 14px; color: white;">Messenger</h3>
-              <a href="#" style="color: var(--tm-gold-500); font-size: 14px; text-decoration: none;">m.me/tripmatePH</a>
-            </div>
-          </li>
-        </ul>
-        
-        <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(250, 247, 239, 0.16);">
-          <p style="margin: 0; color: rgba(250, 247, 239, 0.7); font-size: 14px;">For press or partnership inquiries, email <a href="mailto:partnerships@tripmate.ph" style="color: var(--tm-gold-500); text-decoration: none;">partnerships@tripmate.ph</a></p>
+  </section>
+
+
+  <!-- =========================
+       CONTACT FORM SECTION
+  ========================== -->
+
+  <section class="contact-area">
+
+    <div class="contact-wrapper">
+
+      <!-- LEFT CARD -->
+
+      <aside class="contact-info">
+
+        <h2>Other ways to<br>reach us</h2>
+
+        <p class="reply-text">
+          We usually reply within one business day.
+        </p>
+
+
+        <!-- EMAIL -->
+
+        <div class="contact-row">
+
+          <div class="contact-icon">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+              <path d="M3 7l9 6 9-6"></path>
+            </svg>
+          </div>
+
+          <div>
+            <strong>Email</strong>
+
+            <a href="mailto:tripmateQC@gmail.com">
+              tripmateQC@gmail.com
+            </a>
+          </div>
+
         </div>
+
+
+        <!-- LOCATION -->
+
+        <div class="contact-row">
+
+          <div class="contact-icon">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </div>
+
+          <div>
+            <strong>Where we're based</strong>
+            <span>Quezon City, Metro Manila, Philippines</span>
+          </div>
+
+        </div>
+
+
+        <!-- SUPPORT HOURS -->
+
+        <div class="contact-row">
+
+          <div class="contact-icon">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="9"></circle>
+              <path d="M12 7v5l3 2"></path>
+            </svg>
+          </div>
+
+          <div>
+            <strong>Support hours</strong>
+            <span>
+              Monday to Saturday, 9:00 am to 6:00 pm (PHT)
+            </span>
+          </div>
+
+        </div>
+
+
+        <div class="existing-booking">
+          Looking for an existing booking?
+          You'll find it under
+          <a routerLink="/dashboard">My Trips</a>
+          once you're logged in.
+        </div>
+
       </aside>
 
-      <!-- Right Panel (Contact Form) -->
-      <div style="background: white; border-radius: 20px; padding: 40px; box-shadow: 0 16px 48px rgba(11, 61, 58, 0.08); border: 1px solid var(--tm-border-base);">
-        <h2 style="font-family: 'Fraunces', serif; font-size: 28px; font-weight: 500; color: var(--tm-teal-950); margin: 0 0 12px 0;">Send a message</h2>
-        <p style="color: var(--tm-ink-500); font-size: 15px; margin: 0 0 32px 0;">We'll route it to the right person.</p>
-        
-        <form id="contactForm" (ngSubmit)="handleSubmit()" novalidate style="display: flex; flex-direction: column; gap: 24px;">
-          <div style="display: flex; gap: 20px;">
-            <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
-              <label for="cfName" style="font-size: 13px; font-weight: 600; color: var(--tm-ink-900);">Full name</label>
-              <input type="text" id="cfName" name="name" [(ngModel)]="formData.name" placeholder="Juan Dela Cruz" required style="width: 100%; padding: 14px; border-radius: 12px; border: 1px solid var(--tm-border-base); outline: none; font-size: 15px;">
-            </div>
-            <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
-              <label for="cfEmail" style="font-size: 13px; font-weight: 600; color: var(--tm-ink-900);">Email</label>
-              <input type="email" id="cfEmail" name="email" [(ngModel)]="formData.email" placeholder="juan@example.com" required style="width: 100%; padding: 14px; border-radius: 12px; border: 1px solid var(--tm-border-base); outline: none; font-size: 15px;">
-            </div>
-          </div>
-          
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-            <label for="cfTopic" style="font-size: 13px; font-weight: 600; color: var(--tm-ink-900);">What can we help with?</label>
-            <select id="cfTopic" name="topic" [(ngModel)]="formData.topic" required style="width: 100%; padding: 14px; border-radius: 12px; border: 1px solid var(--tm-border-base); outline: none; font-size: 15px; background: white;">
-              <option value="">Choose a topic</option>
-              <option value="booking">A booking</option>
-              <option value="payment">Payment issue</option>
-              <option value="hosting">Hosting a property</option>
-              <option value="other">Something else</option>
-            </select>
-          </div>
-          
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-            <label for="cfMessage" style="font-size: 13px; font-weight: 600; color: var(--tm-ink-900);">Message</label>
-            <textarea id="cfMessage" name="message" [(ngModel)]="formData.message" rows="5" required style="width: 100%; padding: 14px; border-radius: 12px; border: 1px solid var(--tm-border-base); outline: none; font-size: 15px; resize: vertical;"></textarea>
-          </div>
-          
-          <button type="submit" [disabled]="isSending" style="width: auto; align-self: flex-start; padding: 14px 28px; border-radius: 100px; background: var(--tm-coral-500); color: white; border: none; font-size: 15px; font-weight: 600; cursor: pointer;">
-            {{ isSending ? 'Sending...' : 'Send message' }}
-          </button>
-        </form>
-      </div>
-    </div>
-    
-  </div>
-</ion-content>
 
+      <!-- RIGHT FORM -->
+
+      <div
+        class="contact-card"
+        id="contactCard"
+        [class.sent]="isSent"
+      >
+
+        <!-- NORMAL FORM -->
+
+        <ng-container *ngIf="!isSent">
+
+          <div class="form-heading">
+            <h2>Send a message</h2>
+
+            <p>
+              Tell us what's going on and we'll reply to the email
+              you enter below.
+            </p>
+          </div>
+
+
+          <form
+            class="contact-form"
+            (ngSubmit)="handleSubmit()"
+            novalidate
+          >
+
+            <!-- NAME + EMAIL -->
+
+            <div class="form-grid">
+
+              <div class="field">
+
+                <label for="cfName">
+                  Full name
+                </label>
+
+                <input
+                  id="cfName"
+                  type="text"
+                  name="name"
+                  [(ngModel)]="formData.name"
+                  (input)="clearError('name')"
+                  placeholder="Juan Dela Cruz"
+                >
+
+                <span
+                  class="field-error"
+                  *ngIf="errors.name"
+                >
+                  {{ errors.name }}
+                </span>
+
+              </div>
+
+
+              <div class="field">
+
+                <label for="cfEmail">
+                  Email
+                </label>
+
+                <input
+                  id="cfEmail"
+                  type="email"
+                  name="email"
+                  [(ngModel)]="formData.email"
+                  (input)="clearError('email')"
+                  placeholder="juan@example.com"
+                >
+
+                <span
+                  class="field-error"
+                  *ngIf="errors.email"
+                >
+                  {{ errors.email }}
+                </span>
+
+              </div>
+
+
+              <!-- TOPIC -->
+
+              <div class="field">
+
+                <label for="cfTopic">
+                  What can we help with?
+                </label>
+
+                <select
+                  id="cfTopic"
+                  name="topic"
+                  [(ngModel)]="formData.topic"
+                  (change)="clearError('topic')"
+                >
+
+                  <option value="">
+                    Choose a topic
+                  </option>
+
+                  <option value="booking">
+                    A booking
+                  </option>
+
+                  <option value="payments">
+                    Payment issue
+                  </option>
+
+                  <option value="cancellations">
+                    Cancellation
+                  </option>
+
+                  <option value="hosting">
+                    Hosting a property
+                  </option>
+
+                  <option value="report">
+                    Report a listing or review
+                  </option>
+
+                  <option value="other">
+                    Something else
+                  </option>
+
+                </select>
+
+                <span
+                  class="field-error"
+                  *ngIf="errors.topic"
+                >
+                  {{ errors.topic }}
+                </span>
+
+              </div>
+
+
+              <!-- BOOKING REFERENCE -->
+
+              <div class="field">
+
+                <label for="cfReference">
+                  Booking reference
+                  <span>(optional)</span>
+                </label>
+
+                <input
+                  id="cfReference"
+                  type="text"
+                  name="reference"
+                  [(ngModel)]="formData.reference"
+                  (input)="clearError('reference')"
+                  placeholder="e.g. TM-4821"
+                >
+
+                <span
+                  class="field-error"
+                  *ngIf="errors.reference"
+                >
+                  {{ errors.reference }}
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div class="field message-field">
+
+              <label for="cfMessage">
+                Message
+              </label>
+
+              <textarea
+                id="cfMessage"
+                name="message"
+                [(ngModel)]="formData.message"
+                (input)="clearError('message')"
+                [maxlength]="maxLength"
+                placeholder="Share as much detail as you can, such as dates, the stay's name, or what you were trying to do."
+              ></textarea>
+
+              <div class="message-bottom">
+
+                <span
+                  class="field-error"
+                  *ngIf="errors.message"
+                >
+                  {{ errors.message }}
+                </span>
+
+                <span class="char-count">
+                  {{ formData.message.length }} / {{ maxLength }}
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <!-- ALERT -->
+
+            <div
+              class="form-alert"
+              *ngIf="formAlert"
+            >
+              {{ formAlert }}
+            </div>
+
+
+            <!-- FORM BOTTOM -->
+
+            <div class="form-actions">
+
+              <small>
+                We only use your details to reply to this message.
+              </small>
+
+              <button
+                type="submit"
+                class="send-btn"
+                [disabled]="isSending"
+              >
+                <span>
+                  {{ isSending ? 'Sending...' : 'Send message' }}
+                </span>
+
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M22 2L11 13"></path>
+                  <path d="M22 2L15 22L11 13L2 9L22 2Z"></path>
+                </svg>
+              </button>
+
+            </div>
+
+          </form>
+
+        </ng-container>
+
+
+        <!-- SUCCESS STATE -->
+
+        <div
+          class="success-state"
+          *ngIf="isSent"
+          id="formSuccess"
+          tabindex="-1"
+        >
+
+          <div class="success-icon">✓</div>
+
+          <h2>Message sent.</h2>
+
+          <p>
+            Thanks {{ firstName }}. We'll get back to you as soon
+            as possible.
+          </p>
+
+          <div class="ticket">
+            <span>Your reference</span>
+            <strong>{{ ticketId }}</strong>
+          </div>
+
+          <button
+            type="button"
+            class="send-btn"
+            (click)="reset()"
+          >
+            Send another message
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       DYNAMIC FAQ
+  ========================== -->
+
+  <section class="faq-section">
+
+    <div class="faq-wrapper">
+
+      <div class="faq-intro">
+
+        <h2>Quick answers.</h2>
+
+        <p>
+          The things people ask us most. If yours isn't here,
+          the form above is the fastest way to reach us.
+        </p>
+
+      </div>
+
+
+      <div class="faq-list">
+
+        <div
+          class="faq-item"
+          *ngFor="let faq of faqs; let i = index"
+          [class.open]="faq.open"
+        >
+
+          <button
+            type="button"
+            class="faq-question"
+            (click)="toggleFaq(i)"
+          >
+
+            <span>
+              {{ faq.question }}
+            </span>
+
+            <span class="faq-symbol">
+              {{ faq.open ? '−' : '+' }}
+            </span>
+
+          </button>
+
+
+          <div class="faq-answer">
+
+            <div class="faq-answer-inner">
+              <p>
+                {{ faq.answer }}
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer class="footer">
+
+    <div class="footer-top">
+
+      <div class="footer-brand">
+
+        <img
+          src="assets/images/tripmate.svg"
+          alt="TripMate"
+        >
+
+        <p>
+          A Filipino-built platform for booking hotels
+          and house rentals across the Philippines.
+        </p>
+
+      </div>
+
+
+      <div class="footer-links">
+
+        <div>
+          <h4>Explore</h4>
+
+          <a routerLink="/stays">Stays</a>
+          <a routerLink="/how-it-works">How it works</a>
+          <a routerLink="/become-host">Become a Host</a>
+        </div>
+
+
+        <div>
+          <h4>Support</h4>
+
+          <a routerLink="/cancellation">
+            Cancellation policy
+          </a>
+
+          <a routerLink="/contactus">
+            Contact us
+          </a>
+        </div>
+
+
+        <div>
+          <h4>Company</h4>
+
+          <a routerLink="/about">
+            About
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <span>
+        © 2026 TripMate. Made in Quezon City.
+      </span>
+
+      <span>
+        Terms · Privacy
+      </span>
+
+    </div>
+
+  </footer>
+
+</ion-content>
