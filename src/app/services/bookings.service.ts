@@ -86,10 +86,10 @@ export class BookingsService {
   async createBooking(booking: Partial<Booking>): Promise<Booking | null> {
     if (environment.USE_MOCK_DATA) {
       const newBooking: Booking = {
-        id: 'bk-' + Date.now(),
-        status: 'pending',
-        created_at: new Date().toISOString(),
         ...booking as Booking,
+        id: 'bk-' + Date.now(),
+        status: (booking.status || 'pending') as any,
+        created_at: new Date().toISOString(),
       };
       const bookings = this.getMockBookings();
       bookings.push(newBooking);
@@ -127,3 +127,4 @@ export class BookingsService {
     if (error) throw new Error(error.message);
   }
 }
+

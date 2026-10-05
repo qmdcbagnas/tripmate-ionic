@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar , IonMenuButton } from '@ionic/angular';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonMenuButton } from '@ionic/angular';
+import { AuthService, AppUser } from '../services/auth.service';
+import { WishlistService, WishlistItem } from '../services/wishlist.service';
+import { PropertiesService, Property } from '../services/properties.service';
 
 @Component({
   selector: 'app-wishlist',
@@ -11,54 +14,83 @@ import { IonContent, IonHeader, IonTitle, IonToolbar , IonMenuButton } from '@io
   imports: [RouterLink, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonMenuButton]
 })
 export class WishlistPage implements OnInit {
-  propertyData: any = {
-      "happy-hut": {
-          id: "happy-hut", name: "Happy Hut", type: "Cabin",
-          location: "San Felipe, Zambales", price: 2000, rating: 4.92, reviews: 86, guests: 4,
-          img: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/630810990.jpg?k=f0a258fd952f19c7285f4e99e64664bc423cd779166b639a29d87037cb90b2ac&o="
-      }
-  };
-  wishlist: any[] = [];
-  currentSort: string = 'recent';
-  currentView: string = 'grid';
+  user: AppUser | null = null;
+  initials = '';
+  wishlist: WishlistItem[] = [];
+  propertiesMap: Record<string, Property> = {};
+  currentSort = 'recent';
+  currentView = 'grid';
+  userDropdownOpen = false;
+  isLoading = true;
 
-  constructor() {}
+  constructor(
+    private auth: AuthService,
+    private wishlistService: WishlistService,
+    private propertiesService: PropertiesService,
+    private router: Router
+  ) {}
 
-  ngOnInit() {
-      // Mock data for test
-      this.wishlist = [
-          { propertyId: 'happy-hut', savedAt: new Date().toISOString() }
-      ];
-      this.sortWishlist();
+  async ngOnInit() {
+    this.user = this.auth.getCurrentUser();
+    if (!this.user) {
+      this.router.navigate(['/login'], { queryParams: { redirect: 'wishlist' } });
+      return;
+    }
+    this.initials = (this.user.full_name || 'Guest')
+      .split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2);
+    await this.loadWishlist();
   }
 
-  getProperty(id: string) {
-      return this.propertyData[id];
+  async loadWishlist() {
+    this.isLoading = true;
+    try {
+      // Load all properties to build a lookup map
+      const allProps = await this.propertiesService.getAllProperties();
+      this.propertiesMap = {};
+      allProps.forEach(p => { this.propertiesMap[p.id] = p; });
+
+      this.wishlist = await this.wishlistService.getWishlist();
+      this.sortWishlist();
+    } catch (e) {
+      console.error('loadWishlist error:', e);
+    } finally {
+      this.isLoading = false;
+    }
+  }
+
+  getProperty(propertyId: string): Property | null {
+    return this.propertiesMap[propertyId] ?? null;
   }
 
   sortWishlist() {
-      this.wishlist.sort((a, b) => {
-          const propA = this.propertyData[a.propertyId] || { price: 0, rating: 0 };
-          const propB = this.propertyData[b.propertyId] || { price: 0, rating: 0 };
-          
-          if (this.currentSort === 'price-asc') return propA.price - propB.price;
-          if (this.currentSort === 'price-desc') return propB.price - propA.price;
-          if (this.currentSort === 'rating') return propB.rating - propA.rating;
-          return new Date(b.savedAt).getTime() - new Date(a.savedAt).getTime();
-      });
+    this.wishlist.sort((a, b) => {
+      const pA = this.propertiesMap[a.property_id];
+      const pB = this.propertiesMap[b.property_id];
+      if (!pA || !pB) return 0;
+      if (this.currentSort === 'price-asc') return (pA.price_per_night) - (pB.price_per_night);
+      if (this.currentSort === 'price-desc') return (pB.price_per_night) - (pA.price_per_night);
+      if (this.currentSort === 'rating') return (pB.average_rating ?? 0) - (pA.average_rating ?? 0);
+      return new Date(b.created_at ?? 0).getTime() - new Date(a.created_at ?? 0).getTime();
+    });
   }
 
-  onSortChange() {
-      this.sortWishlist();
+  onSortChange() { this.sortWishlist(); }
+  setView(view: string) { this.currentView = view; }
+
+  async removeFromWishlist(propertyId: string) {
+    await this.wishlistService.removeFromWishlist(propertyId);
+    this.wishlist = this.wishlist.filter(w => w.property_id !== propertyId);
   }
 
-  setView(view: string) {
-      this.currentView = view;
+  toggleUserDropdown(event: Event) {
+    event.stopPropagation();
+    this.userDropdownOpen = !this.userDropdownOpen;
   }
 
-  removeFromWishlist(id: string) {
-      this.wishlist = this.wishlist.filter(w => w.propertyId !== id);
+  closeUserDropdown() { this.userDropdownOpen = false; }
+
+  async logout(event: Event) {
+    event.preventDefault();
+    await this.auth.signOut();
   }
 }
-
-

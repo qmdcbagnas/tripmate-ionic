@@ -93,11 +93,11 @@
 
                 <div class="wishlist-grid stagger-in stagger-in-4" id="wishlistGrid" [attr.data-view]="currentView" *ngIf="wishlist.length > 0">
                     <article class="wishlist-card" *ngFor="let item of wishlist">
-                        <ng-container *ngIf="getProperty(item.propertyId) as property">
+                        <ng-container *ngIf="getProperty(item.property_id) as property">
                             <a [routerLink]="['/property']" [queryParams]="{id: property.id}" class="wishlist-image-link">
                                 <div class="wishlist-image">
-                                    <img [src]="property.img" [alt]="property.name" loading="lazy">
-                                    <span class="wishlist-badge">{{property.type}}</span>
+                                    <img [src]="property.images?.[0] || 'https://via.placeholder.com/300'" [alt]="property.name" loading="lazy">
+                                    <span class="wishlist-badge">{{property.property_type}}</span>
                                 </div>
                             </a>
                             <div class="wishlist-content">
@@ -118,15 +118,15 @@
                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                                             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
                                         </svg>
-                                        {{property.rating | number:'1.2-2'}}
+                                        {{property.average_rating | number:'1.2-2'}}
                                     </span>
-                                    <span class="wishlist-reviews">{{property.reviews}} reviews</span>
+                                    <span class="wishlist-reviews">{{property.total_reviews}} reviews</span>
                                 </div>
                                 <div class="wishlist-footer">
-                                    <span class="wishlist-price"><b>₱{{property.price | number}}</b> <span>/ night</span></span>
+                                    <span class="wishlist-price"><b>₱{{property.price_per_night | number}}</b> <span>/ night</span></span>
                                     <a [routerLink]="['/property']" [queryParams]="{id: property.id}" class="btn-primary btn-sm">View Details</a>
                                 </div>
-                                <p class="wishlist-saved">Saved on {{item.savedAt | date:'mediumDate'}}</p>
+                                <p class="wishlist-saved">Saved on {{item.created_at | date:'mediumDate'}}</p>
                             </div>
                         </ng-container>
                     </article>
@@ -178,5 +178,7 @@
         </div>
     </footer>
 </ion-content>
+
+
 
 

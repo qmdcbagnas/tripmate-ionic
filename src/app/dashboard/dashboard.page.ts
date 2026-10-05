@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar , IonMenuButton } from '@ionic/angular';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonMenuButton } from '@ionic/angular';
+import { AuthService, AppUser } from '../services/auth.service';
+import { BookingsService, Booking } from '../services/bookings.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,71 +13,57 @@ import { IonContent, IonHeader, IonTitle, IonToolbar , IonMenuButton } from '@io
   imports: [RouterLink, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonMenuButton]
 })
 export class DashboardPage implements OnInit {
-  user: any = null;
+  user: AppUser | null = null;
   initials: string = '';
-  
-  allBookingsRaw: any[] = [];
-  myBookings: any[] = [];
+
+  allBookings: Booking[] = [];
   currentFilter: string = 'upcoming';
 
-  categories: { [key: string]: any[] } = {
-    upcoming: [],
-    past: [],
-    pending: [],
-    cancelled: []
+  categories: { [key: string]: Booking[] } = {
+    upcoming: [], past: [], pending: [], cancelled: []
   };
 
   userDropdownOpen = false;
   sidebarOpen = false;
+  isLoading = true;
 
-  constructor(private router: Router) { }
+  constructor(private auth: AuthService, private bookingsService: BookingsService, private router: Router) {}
 
-  ngOnInit() {
-    this.checkAuth();
-    this.loadBookings();
-  }
+  async ngOnInit() {
+    this.user = this.auth.getCurrentUser();
 
-  checkAuth() {
-    try {
-      this.user = JSON.parse(localStorage.getItem('tripmate_user') || 'null');
-    } catch {
-      this.user = null;
-    }
-    
-    if (!this.user || !localStorage.getItem('tripmate_session')) {
+    if (!this.user) {
       this.router.navigate(['/login'], { queryParams: { redirect: 'dashboard' } });
       return;
     }
 
-    this.initials = (this.user.name || 'Guest').split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2);
+    this.initials = (this.user.full_name || 'Guest')
+      .split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2);
+
+    await this.loadBookings();
   }
 
-  readAllBookings() {
+  async loadBookings() {
+    this.isLoading = true;
     try {
-      const parsed = JSON.parse(localStorage.getItem('tripmate_bookings') || '[]');
-      return Array.isArray(parsed) ? parsed : [];
-    } catch {
-      return [];
+      this.allBookings = await this.bookingsService.getUserBookings();
+      this.categorizeBookings();
+    } catch (e) {
+      console.error('loadBookings error:', e);
+    } finally {
+      this.isLoading = false;
     }
-  }
-
-  loadBookings() {
-    if (!this.user) return;
-    this.allBookingsRaw = this.readAllBookings();
-    this.myBookings = this.allBookingsRaw.filter(b => b.userId === this.user.id);
-    this.categorizeBookings();
   }
 
   categorizeBookings() {
     const now = new Date();
     this.categories = { upcoming: [], past: [], pending: [], cancelled: [] };
 
-    this.myBookings.forEach(booking => {
-      const checkout = new Date(booking.checkout);
-
-      if (booking.status === "cancelled") {
+    this.allBookings.forEach(booking => {
+      const checkout = new Date(booking.check_out);
+      if (booking.status === 'cancelled') {
         this.categories['cancelled'].push(booking);
-      } else if (booking.status === "pending") {
+      } else if (booking.status === 'pending') {
         this.categories['pending'].push(booking);
       } else if (!isNaN(checkout.getTime()) && checkout < now) {
         this.categories['past'].push(booking);
@@ -92,63 +80,42 @@ export class DashboardPage implements OnInit {
 
   getFilterTitle() {
     const titles: any = {
-      upcoming: "Upcoming Trips",
-      past: "Past Trips",
-      pending: "Pending Requests",
-      cancelled: "Cancelled Trips"
+      upcoming: 'Upcoming Trips',
+      past: 'Past Trips',
+      pending: 'Pending Requests',
+      cancelled: 'Cancelled Trips'
     };
-    return titles[this.currentFilter] || "";
-  }
-
-  peso(n: number) {
-    return "₱" + Math.round(Number(n) || 0).toLocaleString("en-PH");
+    return titles[this.currentFilter] || '';
   }
 
   formatDate(dateStr: string) {
     const date = new Date(dateStr);
-    if (isNaN(date.getTime())) return "—";
-    return date.toLocaleDateString("en-PH", { year: "numeric", month: "short", day: "numeric" });
+    if (isNaN(date.getTime())) return '—';
+    return date.toLocaleDateString('en-PH', { year: 'numeric', month: 'short', day: 'numeric' });
   }
 
-  cancelBooking(bookingId: string) {
-    if (!confirm("Are you sure you want to cancel this booking? This action cannot be undone.")) return;
-
-    const fullBookings = this.readAllBookings();
-    const index = fullBookings.findIndex(b => b.id === bookingId);
-    if (index !== -1) {
-      fullBookings[index].status = "cancelled";
-      fullBookings[index].cancelledAt = new Date().toISOString();
-      localStorage.setItem('tripmate_bookings', JSON.stringify(fullBookings));
-    }
-    this.loadBookings();
+  async cancelBooking(bookingId: string) {
+    if (!confirm('Are you sure you want to cancel this booking?')) return;
+    await this.bookingsService.cancelBooking(bookingId);
+    await this.loadBookings();
   }
 
-  writeReview(bookingId: string) {
-    const rating = Number(prompt("Rate your stay from 1 to 5:", "5"));
-    if (!Number.isInteger(rating) || rating < 1 || rating > 5) return;
-    const comment = prompt("Write a short review:", "Great stay!") || "";
-    alert("Review submitted. Thank you!");
-  }
-
-  toggleSidebar() {
-    this.sidebarOpen = !this.sidebarOpen;
-  }
+  toggleSidebar() { this.sidebarOpen = !this.sidebarOpen; }
 
   toggleUserDropdown(event: Event) {
     event.stopPropagation();
     this.userDropdownOpen = !this.userDropdownOpen;
   }
 
-  closeUserDropdown() {
-    this.userDropdownOpen = false;
-  }
+  closeUserDropdown() { this.userDropdownOpen = false; }
+  peso(n: number) { return "?" + Math.round(Number(n) || 0).toLocaleString("en-PH"); }
+  writeReview(bookingId: string) { alert("Reviews coming soon!"); }
 
-  logout(event: Event) {
+
+
+  async logout(event: Event) {
     event.preventDefault();
-    localStorage.removeItem('tripmate_user');
-    localStorage.removeItem('tripmate_session');
-    this.router.navigate(['/homepage']);
+    await this.auth.signOut();
   }
 }
-
 
