@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 
 import { guestGuard } from './guest.guard';
 
+
 export const routes: Routes = [
   {
     path: '',
@@ -107,6 +108,8 @@ export const routes: Routes = [
     loadComponent: () => import('./privacy-policy/privacy-policy.page').then( m => m.PrivacyPolicyPage)
   },
 ];
+
+
 
 
 

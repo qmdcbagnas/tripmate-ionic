@@ -30,8 +30,7 @@ export class ProfilePage implements OnInit {
   constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit() {
-    this.user = this.auth.getCurrentUser();
-    if (!this.user) {
+        if (!this.user) {
       this.router.navigate(['/login'], { queryParams: { redirect: 'profile' } });
       return;
     }
@@ -135,6 +134,14 @@ export class ProfilePage implements OnInit {
   closeUserDropdown() { this.userDropdownOpen = false; }
   async logout(event: Event) { event.preventDefault(); await this.auth.signOut(); }
 }
+
+
+
+
+
+
+
+
 
 
 

@@ -5,9 +5,14 @@
 <ion-content style="--background: #F8F5EE;">
   <main class="dashboard-container" style="max-width: 1200px; margin: 0 auto; padding: 32px 24px;">
     
-    <div class="content-header" style="margin-bottom: 32px;">
-      <h1 style="font-family: 'Fraunces', serif; color: #0F2E25; font-size: 2.2rem; margin-bottom: 8px;">My Reservations</h1>
-      <p style="color: #666; font-size: 1.1rem; margin: 0;">Manage your bookings and travel plans.</p>
+        <div class="content-header" style="margin-bottom: 32px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <h1 style="font-family: 'Fraunces', serif; color: #0F2E25; font-size: 2.2rem; margin-bottom: 8px;">My Reservations</h1>
+        <p style="color: #666; font-size: 1.1rem; margin: 0;">Manage your bookings and travel plans.</p>
+      </div>
+      <button (click)="printAllBookings()" style="background: transparent; border: 2px solid #0F2E25; color: #0F2E25; padding: 10px 24px; border-radius: 100px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 1rem; transition: all 0.2s;" onmouseover="this.style.background='#0F2E25'; this.style.color='white'" onmouseout="this.style.background='transparent'; this.style.color='#0F2E25'">
+        <ion-icon name="print-outline"></ion-icon> Print All
+      </button>
     </div>
 
     <!-- TABS -->
@@ -85,3 +90,4 @@
 
   </main>
 </ion-content>
+

@@ -145,7 +145,7 @@ import { Subscription } from 'rxjs';
   imports: [IonApp, IonRouterOutlet, IonMenu, IonHeader, IonToolbar, IonContent, IonList, IonItem, IonIcon, IonLabel, IonMenuToggle, RouterLink, CommonModule],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  user: AppUser | null = null;
+  user: AppUser | null | undefined = undefined;
   initials: string = '';
   private authSub!: Subscription;
 
@@ -155,9 +155,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.authSub = this.authService.currentUser$.subscribe(user => {
-      this.user = user;
-      if (user && user.full_name) {
-        this.initials = user.full_name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+      this.user = (user === 'loading' ? null : user) as AppUser | null | undefined;
+      if (user && user !== 'loading' && (user as any)?.full_name) {
+        this.initials = (user as any).full_name.split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2);
       } else {
         this.initials = 'G';
       }
@@ -191,6 +191,16 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.authSub) this.authSub.unsubscribe();
   }
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

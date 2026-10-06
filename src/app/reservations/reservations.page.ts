@@ -6,6 +6,7 @@ import { addIcons } from 'ionicons';
 import { calendarOutline, locationOutline, peopleOutline, moonOutline, chatbubbleOutline, checkmarkCircleOutline, checkmarkOutline, starOutline, printOutline } from 'ionicons/icons';
 import { AuthService, AppUser } from '../services/auth.service';
 import { BookingsService, Booking } from '../services/bookings.service';
+import { PdfService } from '../services/pdf.service';
 import { AuthButtonsComponent } from '../components/auth-buttons/auth-buttons.component';
 
 @Component({
@@ -22,17 +23,20 @@ export class ReservationsPage implements OnInit {
   currentFilter: string = 'upcoming';
   isLoading = true;
 
-  constructor(private auth: AuthService, private bookingsService: BookingsService, private router: Router) {
+  constructor(private auth: AuthService, private bookingsService: BookingsService, private router: Router, private pdfService: PdfService) {
     addIcons({ calendarOutline, locationOutline, peopleOutline, moonOutline, chatbubbleOutline, checkmarkCircleOutline, checkmarkOutline, starOutline, printOutline });
   }
 
-  async ngOnInit() {
-    this.user = this.auth.getCurrentUser();
-    if (!this.user) {
-      this.router.navigate(['/login']);
-      return;
-    }
-    await this.loadBookings();
+  ngOnInit() {
+    this.auth.currentUser$.subscribe(async (user) => {
+      if (user === 'loading') return;
+      this.user = (user as any) as AppUser | null;
+      if (user) {
+        await this.loadBookings();
+      } else {
+        this.isLoading = false;
+      }
+    });
   }
 
   async loadBookings() {
@@ -88,7 +92,17 @@ export class ReservationsPage implements OnInit {
   }
 
   printBooking(booking: Booking) {
-    // Basic window print for now, full PDF in next step
-    window.print();
+    this.pdfService.generateSingleReservationPdf(booking);
+  }
+
+  printAllBookings() {
+    this.pdfService.generateAllReservationsPdf(this.allBookings);
   }
 }
+
+
+
+
+
+
+

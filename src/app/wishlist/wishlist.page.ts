@@ -34,14 +34,18 @@ export class WishlistPage implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.user = this.auth.getCurrentUser();
-    if (!this.user) {
+        if (!this.user) {
       this.router.navigate(['/login'], { queryParams: { redirect: 'wishlist' } });
       return;
     }
-    this.initials = (this.user.full_name || 'Guest')
-      .split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2);
-    await this.loadWishlist();
+    this.auth.currentUser$.subscribe((u) => {
+      if (u === 'loading') return;
+      this.user = (u as any) as AppUser | null;
+      if (u) {
+        this.initials = ((u as any)?.full_name || 'Guest').split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2);
+        this.loadWishlist();
+      }
+    });
   }
 
   async loadWishlist() {
@@ -97,5 +101,14 @@ export class WishlistPage implements OnInit {
     await this.auth.signOut();
   }
 }
+
+
+
+
+
+
+
+
+
 
 

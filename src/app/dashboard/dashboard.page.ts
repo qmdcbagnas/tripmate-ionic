@@ -33,17 +33,20 @@ export class DashboardPage implements OnInit {
   constructor(private auth: AuthService, private bookingsService: BookingsService, private router: Router) {}
 
   async ngOnInit() {
-    this.user = this.auth.getCurrentUser();
-
+    
     if (!this.user) {
       this.router.navigate(['/login'], { queryParams: { redirect: 'dashboard' } });
       return;
     }
 
-    this.initials = (this.user.full_name || 'Guest')
-      .split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2);
-
-    await this.loadBookings();
+    this.auth.currentUser$.subscribe(async (u) => {
+      if (u === 'loading') return;
+      this.user = (u as any) as AppUser | null;
+      if (u) {
+        this.initials = ((u as any)?.full_name || 'Guest').split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2);
+        await this.loadBookings();
+      }
+    });
   }
 
   async loadBookings() {
@@ -121,6 +124,15 @@ export class DashboardPage implements OnInit {
     await this.auth.signOut();
   }
 }
+
+
+
+
+
+
+
+
+
 
 
 
