@@ -1,3 +1,4 @@
+import { AuthButtonsComponent } from '../components/auth-buttons/auth-buttons.component';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -18,6 +19,7 @@ import {
   styleUrls: ['./booking.page.scss'],
 
   imports: [
+    AuthButtonsComponent,
     RouterLink,
     IonContent,
     IonHeader,

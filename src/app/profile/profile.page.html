@@ -1,23 +1,5 @@
 <ion-header class="ion-no-border" style="background: #0F2E25;">
-  <header class="top-nav" style="display: flex; justify-content: space-between; padding: 15px clamp(20px, 5vw, 64px); align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1);">
-    <div style="display: flex; align-items: center; gap: 16px;">
-      <ion-menu-button style="color: white;"></ion-menu-button>
-      <ion-back-button defaultHref="/homepage" style="color: white; display: block;"></ion-back-button>
-      <a routerLink="/homepage" class="logo" style="display: flex; align-items: center; gap: 9px; text-decoration: none;">
-        <img src="assets/images/tripmate.svg" alt="TripMate" style="height: 32px;">
-      </a>
-    </div>
-    
-    <div style="display: flex; gap: 36px; align-items: center;" class="hide-mobile">
-      <a routerLink="/stays" style="color: white; text-decoration: none; font-size: 14.5px; font-weight: 500;">Stays</a>
-      <a routerLink="/how-it-works" style="color: white; text-decoration: none; font-size: 14.5px; font-weight: 500;">How it works</a>
-      <a routerLink="/become-host" style="color: white; text-decoration: none; font-size: 14.5px; font-weight: 500;">Become a Host</a>
-    </div>
-
-    <div style="display: flex; align-items: center; gap: 12px;">
-      <app-auth-buttons></app-auth-buttons>
-    </div>
-  </header>
+  <app-auth-buttons></app-auth-buttons>
 
   <nav class="dashboard-tabs" style="background: #0F2E25; border-bottom: 1px solid rgba(0,0,0,0.05); padding: 0 20px;">
       <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" data-tab="trips">Trips</a>
@@ -167,6 +149,8 @@
     {{ toastMessage }}
   </div>
 </ion-content>
+
+
 
 
 

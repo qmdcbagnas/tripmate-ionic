@@ -43,9 +43,7 @@ export class BecomeHostPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.auth.isLoggedIn()) {
-      this.router.navigateByUrl('/dashboard');
-    }
+    
   }
 
   setMode(mode: 'guest' | 'host') {
@@ -102,5 +100,6 @@ export class BecomeHostPage implements OnInit {
     setTimeout(() => { this.showToast = false; }, 3200);
   }
 }
+
 
 
