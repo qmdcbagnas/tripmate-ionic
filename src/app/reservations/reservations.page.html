@@ -1,348 +1,87 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar class="reservations-toolbar">
-
-    <ion-buttons slot="start">
-      <ion-menu-button class="menu-button"></ion-menu-button>
-    </ion-buttons>
-
-    <ion-title>Reservations</ion-title>
-
-  </ion-toolbar>
+<ion-header class="ion-no-border" style="background: #0F2E25;">
+  <app-auth-buttons></app-auth-buttons>
 </ion-header>
 
+<ion-content style="--background: #F8F5EE;">
+  <main class="dashboard-container" style="max-width: 1200px; margin: 0 auto; padding: 32px 24px;">
+    
+    <div class="content-header" style="margin-bottom: 32px;">
+      <h1 style="font-family: 'Fraunces', serif; color: #0F2E25; font-size: 2.2rem; margin-bottom: 8px;">My Reservations</h1>
+      <p style="color: #666; font-size: 1.1rem; margin: 0;">Manage your bookings and travel plans.</p>
+    </div>
 
-<ion-content class="reservations-content">
+    <!-- TABS -->
+    <div class="tabs-container" style="display: flex; gap: 16px; margin-bottom: 32px; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 16px; overflow-x: auto;">
+      <button class="tab-btn" [class.active]="currentFilter === 'upcoming'" (click)="setFilter('upcoming')" style="background: none; border: none; font-size: 1rem; font-weight: 600; cursor: pointer; padding: 10px 20px; border-radius: 100px; white-space: nowrap; transition: all 0.2s;" [ngStyle]="currentFilter === 'upcoming' ? {'background': '#FF6B4A', 'color': 'white'} : {'color': '#666'}">
+        Upcoming ({{categories['upcoming'].length}})
+      </button>
+      <button class="tab-btn" [class.active]="currentFilter === 'past'" (click)="setFilter('past')" style="background: none; border: none; font-size: 1rem; font-weight: 600; cursor: pointer; padding: 10px 20px; border-radius: 100px; white-space: nowrap; transition: all 0.2s;" [ngStyle]="currentFilter === 'past' ? {'background': '#FF6B4A', 'color': 'white'} : {'color': '#666'}">
+        Past ({{categories['past'].length}})
+      </button>
+      <button class="tab-btn" [class.active]="currentFilter === 'pending'" (click)="setFilter('pending')" style="background: none; border: none; font-size: 1rem; font-weight: 600; cursor: pointer; padding: 10px 20px; border-radius: 100px; white-space: nowrap; transition: all 0.2s;" [ngStyle]="currentFilter === 'pending' ? {'background': '#FF6B4A', 'color': 'white'} : {'color': '#666'}">
+        Pending ({{categories['pending'].length}})
+      </button>
+      <button class="tab-btn" [class.active]="currentFilter === 'cancelled'" (click)="setFilter('cancelled')" style="background: none; border: none; font-size: 1rem; font-weight: 600; cursor: pointer; padding: 10px 20px; border-radius: 100px; white-space: nowrap; transition: all 0.2s;" [ngStyle]="currentFilter === 'cancelled' ? {'background': '#FF6B4A', 'color': 'white'} : {'color': '#666'}">
+        Cancelled ({{categories['cancelled'].length}})
+      </button>
+    </div>
 
-  <main class="reservations-container">
+    <!-- LOADING STATE -->
+    <div *ngIf="isLoading" style="display: flex; justify-content: center; padding: 64px 0;">
+      <ion-spinner name="crescent" color="primary" style="transform: scale(1.5);"></ion-spinner>
+    </div>
 
-    <!-- PAGE HEADER -->
-    <section class="page-header">
+    <!-- EMPTY STATE -->
+    <div class="empty-state" *ngIf="!isLoading && categories[currentFilter].length === 0" style="text-align: center; padding: 80px 24px; background: white; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); max-width: 600px; margin: 0 auto;">
+      <ion-icon name="calendar-outline" style="font-size: 56px; color: #FF6B4A; margin-bottom: 24px; display: block; margin-inline: auto; background: rgba(255,107,74,0.1); padding: 24px; border-radius: 50%; width: max-content;"></ion-icon>
+      <h3 style="font-family: 'Fraunces', serif; color: #0F2E25; font-size: 1.8rem; margin: 0 0 12px 0;">No reservations found</h3>
+      <p style="color: #666; margin-bottom: 32px; font-size: 1.1rem;">You have no {{currentFilter}} reservations — start exploring!</p>
+      <a routerLink="/stays" style="background: #FF6B4A; color: white; padding: 14px 32px; border-radius: 100px; text-decoration: none; font-weight: 600; display: inline-block;">Explore Stays</a>
+    </div>
 
-      <div>
-        <span class="eyebrow">MY BOOKINGS</span>
-
-        <h1>Your Reservations</h1>
-
-        <p>
-          View and manage your upcoming stays, booking details,
-          and previous TripMate experiences.
-        </p>
-      </div>
-
-      <div class="booking-summary">
-
-        <div class="summary-icon">
-          <ion-icon name="calendar-outline"></ion-icon>
+    <!-- BOOKINGS GRID -->
+    <div class="bookings-grid" *ngIf="!isLoading && categories[currentFilter].length > 0" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px;">
+      <article class="reservation-card" *ngFor="let booking of categories[currentFilter]" style="background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; flex-direction: column; transition: transform 0.2s;">
+        
+        <div class="card-image" style="height: 220px; position: relative;">
+          <img [src]="booking.property?.images?.[0] || 'assets/images/placeholder.jpg'" alt="Property" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='assets/images/placeholder.jpg'" />
+          
+          <!-- Status Badges -->
+          <span *ngIf="booking.status === 'confirmed'" style="position: absolute; top: 16px; left: 16px; background: #2ECC71; color: white; padding: 6px 14px; border-radius: 100px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Confirmed</span>
+          <span *ngIf="booking.status === 'pending'" style="position: absolute; top: 16px; left: 16px; background: #F1C40F; color: white; padding: 6px 14px; border-radius: 100px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; text-shadow: 0 1px 2px rgba(0,0,0,0.2);">Pending</span>
+          <span *ngIf="booking.status === 'cancelled'" style="position: absolute; top: 16px; left: 16px; background: #E74C3C; color: white; padding: 6px 14px; border-radius: 100px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Cancelled</span>
+          <span *ngIf="booking.status === 'completed' || (booking.status !== 'cancelled' && booking.status !== 'pending' && booking.status !== 'confirmed')" style="position: absolute; top: 16px; left: 16px; background: #95A5A6; color: white; padding: 6px 14px; border-radius: 100px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Past</span>
         </div>
 
-        <div>
-          <span>UPCOMING STAYS</span>
-          <strong>1 Reservation</strong>
-        </div>
+        <div class="card-content" style="padding: 24px; flex: 1; display: flex; flex-direction: column;">
+          <h3 style="font-family: 'Fraunces', serif; color: #0F2E25; font-size: 1.4rem; margin: 0 0 8px 0;">{{ booking.property?.name || 'Property Name' }}</h3>
+          <p style="color: #666; font-size: 0.95rem; margin: 0 0 20px 0; display: flex; align-items: center; gap: 6px;">
+            <ion-icon name="location-outline" style="color: #FF6B4A;"></ion-icon> {{ booking.property?.location || 'Location' }}
+          </p>
 
-      </div>
-
-    </section>
-
-
-    <!-- =========================================
-         UPCOMING
-    ========================================== -->
-
-    <section class="reservation-section">
-
-      <div class="section-heading">
-
-        <div>
-          <span class="section-label">NEXT ADVENTURE</span>
-          <h2>Upcoming</h2>
-        </div>
-
-        <span class="reservation-count">
-          1 booking
-        </span>
-
-      </div>
-
-
-      <!-- UPCOMING RESERVATION CARD -->
-
-      <article class="reservation-card upcoming-card">
-
-        <div class="reservation-image">
-
-          <img
-            src="https://images.unsplash.com/photo-1542718610-a1d656d1884c?q=80&w=1200&auto=format&fit=crop"
-            alt="Sunset Villa"
-          />
-
-          <span class="status-badge confirmed">
-            <ion-icon name="checkmark-circle-outline"></ion-icon>
-            Confirmed
-          </span>
-
-        </div>
-
-
-        <div class="reservation-body">
-
-          <div class="property-header">
-
-            <div>
-
-              <span class="property-type">
-                VILLA
-              </span>
-
-              <h3>Sunset Villa</h3>
-
-              <p>
-                <ion-icon name="location-outline"></ion-icon>
-                Coron, Palawan
-              </p>
-
+          <div class="booking-details" style="background: #F8F5EE; border-radius: 12px; padding: 16px; margin-bottom: 24px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+              <span style="color: #666; font-size: 0.9rem;">Check-in / Out:</span>
+              <strong style="color: #0F2E25; font-size: 0.9rem;">{{ formatDate(booking.check_in) }} - {{ formatDate(booking.check_out) }}</strong>
             </div>
-
-            <div class="booking-number">
-              <span>BOOKING ID</span>
-              <strong>#TM1026</strong>
+            <div style="display: flex; justify-content: space-between; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 12px; margin-top: 12px;">
+              <span style="color: #666; font-size: 0.9rem;">Total Price:</span>
+              <strong style="color: #FF6B4A; font-size: 1.1rem;">PHP {{ booking.total_price | number }}</strong>
             </div>
-
           </div>
-
-
-          <!-- BOOKING DETAILS -->
-
-          <div class="booking-details">
-
-            <div class="detail-item">
-
-              <div class="detail-icon">
-                <ion-icon name="calendar-outline"></ion-icon>
-              </div>
-
-              <div>
-                <span>CHECK-IN</span>
-                <strong>Nov 15, 2026</strong>
-              </div>
-
-            </div>
-
-
-            <div class="detail-item">
-
-              <div class="detail-icon">
-                <ion-icon name="calendar-outline"></ion-icon>
-              </div>
-
-              <div>
-                <span>CHECK-OUT</span>
-                <strong>Nov 20, 2026</strong>
-              </div>
-
-            </div>
-
-
-            <div class="detail-item">
-
-              <div class="detail-icon">
-                <ion-icon name="people-outline"></ion-icon>
-              </div>
-
-              <div>
-                <span>GUESTS</span>
-                <strong>2 Adults</strong>
-              </div>
-
-            </div>
-
-
-            <div class="detail-item">
-
-              <div class="detail-icon">
-                <ion-icon name="moon-outline"></ion-icon>
-              </div>
-
-              <div>
-                <span>DURATION</span>
-                <strong>5 Nights</strong>
-              </div>
-
-            </div>
-
-          </div>
-
 
           <!-- ACTIONS -->
-
-          <div class="reservation-actions">
-
-            <ion-button
-              fill="solid"
-              class="contact-btn"
-            >
-              <ion-icon
-                name="chatbubble-outline"
-                slot="start"
-              ></ion-icon>
-
-              Contact Host
-            </ion-button>
-
-
-            <ion-button
-              fill="clear"
-              class="cancel-btn"
-            >
-              Cancel Reservation
-            </ion-button>
-
+          <div class="actions" style="margin-top: auto; display: flex; gap: 12px;">
+            <button *ngIf="currentFilter === 'upcoming' || currentFilter === 'pending'" (click)="cancelBooking(booking.id)" style="flex: 1; padding: 12px; border-radius: 100px; background: transparent; border: 2px solid #E74C3C; color: #E74C3C; font-weight: 700; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='#FEF2F2'" onmouseout="this.style.background='transparent'">
+              Cancel
+            </button>
+            <button (click)="printBooking(booking)" style="flex: 1; padding: 12px; border-radius: 100px; background: transparent; border: 2px solid #0F2E25; color: #0F2E25; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s;" onmouseover="this.style.background='#F8F5EE'" onmouseout="this.style.background='transparent'">
+              <ion-icon name="print-outline"></ion-icon> Print
+            </button>
           </div>
-
         </div>
-
       </article>
-
-    </section>
-
-
-
-    <!-- =========================================
-         PAST RESERVATIONS
-    ========================================== -->
-
-    <section class="reservation-section past-section">
-
-      <div class="section-heading">
-
-        <div>
-          <span class="section-label">TRAVEL HISTORY</span>
-          <h2>Past Reservations</h2>
-        </div>
-
-        <span class="reservation-count">
-          1 stay
-        </span>
-
-      </div>
-
-
-      <!-- PAST RESERVATION -->
-
-      <article class="reservation-card past-card">
-
-        <div class="reservation-image">
-
-          <img
-            src="https://images.unsplash.com/photo-1449844908441-8829872d2607?q=80&w=1200&auto=format&fit=crop"
-            alt="Baguio Pine Cabin"
-          />
-
-          <span class="status-badge completed">
-            <ion-icon name="checkmark-outline"></ion-icon>
-            Completed
-          </span>
-
-        </div>
-
-
-        <div class="reservation-body">
-
-          <div class="property-header">
-
-            <div>
-
-              <span class="property-type">
-                CABIN
-              </span>
-
-              <h3>Baguio Pine Cabin</h3>
-
-              <p>
-                <ion-icon name="location-outline"></ion-icon>
-                Baguio City, Philippines
-              </p>
-
-            </div>
-
-            <div class="booking-number">
-              <span>BOOKING ID</span>
-              <strong>#TM0126</strong>
-            </div>
-
-          </div>
-
-
-          <!-- DETAILS -->
-
-          <div class="booking-details">
-
-            <div class="detail-item">
-
-              <div class="detail-icon">
-                <ion-icon name="calendar-outline"></ion-icon>
-              </div>
-
-              <div>
-                <span>CHECK-IN</span>
-                <strong>Jan 5, 2026</strong>
-              </div>
-
-            </div>
-
-
-            <div class="detail-item">
-
-              <div class="detail-icon">
-                <ion-icon name="calendar-outline"></ion-icon>
-              </div>
-
-              <div>
-                <span>CHECK-OUT</span>
-                <strong>Jan 8, 2026</strong>
-              </div>
-
-            </div>
-
-
-            <div class="detail-item">
-
-              <div class="detail-icon">
-                <ion-icon name="moon-outline"></ion-icon>
-              </div>
-
-              <div>
-                <span>DURATION</span>
-                <strong>3 Nights</strong>
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="reservation-actions">
-
-            <ion-button
-              fill="outline"
-              class="review-btn"
-            >
-              <ion-icon
-                name="star-outline"
-                slot="start"
-              ></ion-icon>
-
-              Leave a Review
-            </ion-button>
-
-          </div>
-
-        </div>
-
-      </article>
-
-    </section>
+    </div>
 
   </main>
-
 </ion-content>

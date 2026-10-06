@@ -1,69 +1,94 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
-import {
-  IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
-  IonMenuButton,
-  IonButtons,
-  IonButton,
-  IonIcon
-} from '@ionic/angular';
-
+import { RouterLink, Router } from '@angular/router';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonMenuButton, IonButtons, IonButton, IonIcon, IonSpinner } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-
-import {
-  calendarOutline,
-  locationOutline,
-  peopleOutline,
-  moonOutline,
-  chatbubbleOutline,
-  checkmarkCircleOutline,
-  checkmarkOutline,
-  starOutline
-} from 'ionicons/icons';
-
+import { calendarOutline, locationOutline, peopleOutline, moonOutline, chatbubbleOutline, checkmarkCircleOutline, checkmarkOutline, starOutline, printOutline } from 'ionicons/icons';
+import { AuthService, AppUser } from '../services/auth.service';
+import { BookingsService, Booking } from '../services/bookings.service';
+import { AuthButtonsComponent } from '../components/auth-buttons/auth-buttons.component';
 
 @Component({
   selector: 'app-reservations',
   templateUrl: './reservations.page.html',
   styleUrls: ['./reservations.page.scss'],
-
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
-    IonMenuButton,
-    IonButtons,
-    IonButton,
-    IonIcon
-  ]
+  standalone: true,
+  imports: [CommonModule, RouterLink, IonContent, IonHeader, IonTitle, IonToolbar, IonMenuButton, IonButtons, IonButton, IonIcon, IonSpinner, AuthButtonsComponent]
 })
-
 export class ReservationsPage implements OnInit {
+  user: AppUser | null = null;
+  allBookings: Booking[] = [];
+  categories: { [key: string]: Booking[] } = { upcoming: [], past: [], pending: [], cancelled: [] };
+  currentFilter: string = 'upcoming';
+  isLoading = true;
 
-  constructor() {
+  constructor(private auth: AuthService, private bookingsService: BookingsService, private router: Router) {
+    addIcons({ calendarOutline, locationOutline, peopleOutline, moonOutline, chatbubbleOutline, checkmarkCircleOutline, checkmarkOutline, starOutline, printOutline });
+  }
 
-    addIcons({
-      calendarOutline,
-      locationOutline,
-      peopleOutline,
-      moonOutline,
-      chatbubbleOutline,
-      checkmarkCircleOutline,
-      checkmarkOutline,
-      starOutline
+  async ngOnInit() {
+    this.user = this.auth.getCurrentUser();
+    if (!this.user) {
+      this.router.navigate(['/login']);
+      return;
+    }
+    await this.loadBookings();
+  }
+
+  async loadBookings() {
+    this.isLoading = true;
+    try {
+      this.allBookings = await this.bookingsService.getUserBookings();
+      this.categorizeBookings();
+    } catch (e) {
+      console.error(e);
+    } finally {
+      this.isLoading = false;
+    }
+  }
+
+  categorizeBookings() {
+    const now = new Date();
+    this.categories = { upcoming: [], past: [], pending: [], cancelled: [] };
+
+    this.allBookings.forEach(booking => {
+      const checkout = new Date(booking.check_out);
+      if (booking.status === 'cancelled') {
+        this.categories['cancelled'].push(booking);
+      } else if (booking.status === 'pending') {
+        this.categories['pending'].push(booking);
+      } else if (!isNaN(checkout.getTime()) && checkout < now) {
+        this.categories['past'].push(booking);
+      } else {
+        this.categories['upcoming'].push(booking);
+      }
     });
-
   }
 
-  ngOnInit() {
+  setFilter(filter: string) {
+    this.currentFilter = filter;
   }
 
+  formatDate(dateStr: string) {
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return '—';
+    return date.toLocaleDateString('en-PH', { year: 'numeric', month: 'short', day: 'numeric' });
+  }
+
+  async cancelBooking(bookingId: string) {
+    if (!confirm('Are you sure you want to cancel this booking?')) return;
+    this.isLoading = true;
+    try {
+      await this.bookingsService.cancelBooking(bookingId);
+      await this.loadBookings();
+    } catch (e) {
+      console.error(e);
+      this.isLoading = false;
+    }
+  }
+
+  printBooking(booking: Booking) {
+    // Basic window print for now, full PDF in next step
+    window.print();
+  }
 }
