@@ -1,0 +1,8 @@
+.page-container { background: var(--tm-bg-cream, #F8F5EE); min-height: 100%; padding: 48px 24px; }
+.header-section { text-align: center; margin-bottom: 32px; max-width: 800px; margin-inline: auto; }
+.page-title { font-family: 'Fraunces', serif; color: #0F2E25; font-size: 2.5rem; margin-bottom: 8px; }
+.page-subtitle { color: #666666; font-size: 1.1rem; }
+.content-card { background: white; border-radius: 16px; padding: 48px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); max-width: 800px; margin: 0 auto; }
+.document-content h2 { font-family: 'Fraunces', serif; color: #0F2E25; font-size: 1.4rem; margin: 32px 0 12px 0; }
+.document-content h2:first-child { margin-top: 0; }
+.document-content p { color: #666666; line-height: 1.7; margin: 0 0 16px 0; }

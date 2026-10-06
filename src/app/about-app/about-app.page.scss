@@ -1,0 +1,15 @@
+.page-container { background: var(--tm-bg-cream, #F8F5EE); min-height: 100%; padding: 48px 24px; }
+.header-section { text-align: center; margin-bottom: 32px; max-width: 800px; margin-inline: auto; }
+.app-logo { height: 80px; margin-bottom: 24px; border-radius: 16px; }
+.page-title { font-family: 'Fraunces', serif; color: #0F2E25; font-size: 2.5rem; margin-bottom: 8px; }
+.app-version { color: #FF6B4A; font-weight: 600; font-size: 1.1rem; }
+.content-card { background: white; border-radius: 16px; padding: 48px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); max-width: 600px; margin: 0 auto; text-align: center; }
+.story-text { color: #0F2E25; font-size: 1.2rem; line-height: 1.6; margin-bottom: 48px; }
+.tech-stack h3 { font-family: 'Fraunces', serif; color: #666666; font-size: 1.2rem; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
+.stack-tags { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px; }
+.tag { padding: 8px 16px; border-radius: 100px; font-weight: 600; font-size: 0.9rem; }
+.tag.ionic { background: #E3F2FD; color: #3880FF; }
+.tag.angular { background: #FFEBEE; color: #DD0031; }
+.tag.supabase { background: #E8F5E9; color: #3ECF8E; }
+.credits { border-top: 1px solid rgba(0,0,0,0.1); padding-top: 32px; color: #666666; }
+.credits strong { color: #0F2E25; }

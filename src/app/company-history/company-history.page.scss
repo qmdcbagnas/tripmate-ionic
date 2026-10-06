@@ -1,0 +1,13 @@
+.page-container { background: var(--tm-bg-cream, #F8F5EE); min-height: 100%; padding: 48px 24px; }
+.header-section { text-align: center; margin-bottom: 48px; max-width: 800px; margin-inline: auto; }
+.page-title { font-family: 'Fraunces', serif; color: #0F2E25; font-size: 2.5rem; margin-bottom: 16px; }
+.page-subtitle { color: #666666; font-size: 1.1rem; }
+.content-card { background: white; border-radius: 16px; padding: 48px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); max-width: 800px; margin: 0 auto; }
+.story-text { color: #666666; font-size: 1.1rem; line-height: 1.8; margin-bottom: 48px; text-align: center; }
+.timeline-title { font-family: 'Fraunces', serif; color: #0F2E25; font-size: 1.8rem; margin-bottom: 32px; text-align: center; }
+.timeline { position: relative; max-width: 600px; margin: 0 auto; padding-left: 24px; border-left: 3px solid rgba(255,107,74,0.2); }
+.timeline-item { position: relative; padding-bottom: 32px; padding-left: 24px; }
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-dot { position: absolute; left: -31.5px; top: 0; width: 16px; height: 16px; border-radius: 50%; background: #FF6B4A; border: 4px solid white; box-shadow: 0 0 0 3px rgba(255,107,74,0.2); }
+.timeline-content h3 { font-family: 'Fraunces', serif; color: #0F2E25; font-size: 1.3rem; margin: 0 0 8px 0; }
+.timeline-content p { color: #666666; line-height: 1.6; margin: 0; }

@@ -1,3 +1,4 @@
+import { AuthButtonsComponent } from '../components/auth-buttons/auth-buttons.component';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -16,6 +17,7 @@ import {
   templateUrl: './developers.page.html',
   styleUrls: ['./developers.page.scss'],
   imports: [
+    AuthButtonsComponent,
     IonContent,
     IonHeader,
     IonTitle,

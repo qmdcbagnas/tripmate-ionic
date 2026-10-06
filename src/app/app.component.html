@@ -209,42 +209,53 @@
           </div>
 
 
-          <!-- ABOUT -->
-          <ion-item
-            routerLink="/about"
-            routerDirection="root"
-            routerLinkActive="active-menu-item"
-            lines="none"
-            detail="false"
-          >
-            <ion-icon name="people-outline" slot="start"></ion-icon>
+                    <!-- ABOUT -->
+          <ion-item routerLink="/about" routerDirection="root" routerLinkActive="active-menu-item" lines="none" detail="false">
+            <ion-icon name="information-circle-outline" slot="start"></ion-icon>
             <ion-label>About</ion-label>
           </ion-item>
-
-
+          <!-- COMPANY HISTORY -->
+          <ion-item routerLink="/company-history" routerDirection="root" routerLinkActive="active-menu-item" lines="none" detail="false">
+            <ion-icon name="time-outline" slot="start"></ion-icon>
+            <ion-label>Company History</ion-label>
+          </ion-item>
+          <!-- ABOUT COMPANY -->
+          <ion-item routerLink="/about-company" routerDirection="root" routerLinkActive="active-menu-item" lines="none" detail="false">
+            <ion-icon name="business-outline" slot="start"></ion-icon>
+            <ion-label>About Company</ion-label>
+          </ion-item>
+          <!-- ABOUT SERVICES -->
+          <ion-item routerLink="/about-services" routerDirection="root" routerLinkActive="active-menu-item" lines="none" detail="false">
+            <ion-icon name="layers-outline" slot="start"></ion-icon>
+            <ion-label>About Services</ion-label>
+          </ion-item>
+          <!-- ABOUT APP -->
+          <ion-item routerLink="/about-app" routerDirection="root" routerLinkActive="active-menu-item" lines="none" detail="false">
+            <ion-icon name="phone-portrait-outline" slot="start"></ion-icon>
+            <ion-label>About the App</ion-label>
+          </ion-item>
           <!-- DEVELOPERS -->
-          <ion-item
-            routerLink="/developers"
-            routerDirection="root"
-            routerLinkActive="active-menu-item"
-            lines="none"
-            detail="false"
-          >
+          <ion-item routerLink="/developers" routerDirection="root" routerLinkActive="active-menu-item" lines="none" detail="false">
             <ion-icon name="code-slash-outline" slot="start"></ion-icon>
             <ion-label>Developers</ion-label>
           </ion-item>
-
-
           <!-- CONTACT -->
-          <ion-item
-            routerLink="/contactus"
-            routerDirection="root"
-            routerLinkActive="active-menu-item"
-            lines="none"
-            detail="false"
-          >
+          <ion-item routerLink="/contactus" routerDirection="root" routerLinkActive="active-menu-item" lines="none" detail="false">
             <ion-icon name="mail-outline" slot="start"></ion-icon>
             <ion-label>Contact Us</ion-label>
+          </ion-item>
+
+          <div class="menu-divider"></div>
+          <div class="menu-section-title">LEGAL</div>
+          <!-- TERMS OF SERVICE -->
+          <ion-item routerLink="/terms-of-service" routerDirection="root" routerLinkActive="active-menu-item" lines="none" detail="false">
+            <ion-icon name="document-text-outline" slot="start"></ion-icon>
+            <ion-label>Terms of Service</ion-label>
+          </ion-item>
+          <!-- PRIVACY POLICY -->
+          <ion-item routerLink="/privacy-policy" routerDirection="root" routerLinkActive="active-menu-item" lines="none" detail="false">
+            <ion-icon name="shield-half-outline" slot="start"></ion-icon>
+            <ion-label>Privacy Policy</ion-label>
           </ion-item>
 
         </ion-menu-toggle>
@@ -270,5 +281,6 @@
   <ion-router-outlet id="main-content"></ion-router-outlet>
 
 </ion-app>
+
 
 

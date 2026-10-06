@@ -64,7 +64,7 @@
         <div class="checkbox-row" style="display: flex; align-items: flex-start; gap: 12px; margin-top: 10px;">
           <input type="checkbox" id="agreed" name="agreed" [(ngModel)]="agreed" style="width: 20px; height: 20px; margin-top: 2px;">
           <label for="agreed" style="color: white; font-size: 14px; line-height: 1.5;">
-            I agree to the <a href="#" style="color: var(--tm-gold-500); text-decoration: none;">Terms of Service</a> and <a href="#" style="color: var(--tm-gold-500); text-decoration: none;">Privacy Policy</a>.
+            I agree to the <a routerLink="/terms-of-service" style="color: var(--tm-gold-500); text-decoration: underline;">Terms of Service</a> and <a routerLink="/privacy-policy" style="color: var(--tm-gold-500); text-decoration: underline;">Privacy Policy</a>.
           </label>
         </div>
 
@@ -75,6 +75,7 @@
     </div>
   </div>
 </ion-content>
+
 
 
 

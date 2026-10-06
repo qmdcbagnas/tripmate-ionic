@@ -1,0 +1,13 @@
+.page-container { background: var(--tm-bg-cream, #F8F5EE); min-height: 100%; padding: 48px 24px; }
+.header-section { text-align: center; margin-bottom: 48px; max-width: 800px; margin-inline: auto; }
+.page-title { font-family: 'Fraunces', serif; color: #0F2E25; font-size: 2.5rem; margin-bottom: 16px; }
+.page-subtitle { color: #666666; font-size: 1.1rem; }
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto; }
+.content-card { background: white; border-radius: 16px; padding: 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.mv-card h2 { font-family: 'Fraunces', serif; color: #0F2E25; font-size: 1.8rem; margin: 0 0 16px 0; }
+.mv-card p { color: #666666; line-height: 1.6; margin: 0; font-size: 1.05rem; }
+.values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto; }
+.value-card { background: white; border-radius: 16px; padding: 40px 32px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; }
+.icon-wrap { width: 64px; height: 64px; border-radius: 16px; background: rgba(255,107,74,0.1); color: #FF6B4A; display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto 24px; }
+.value-card h3 { font-family: 'Fraunces', serif; color: #0F2E25; font-size: 1.5rem; margin: 0 0 12px 0; }
+.value-card p { color: #666666; line-height: 1.6; margin: 0; }
