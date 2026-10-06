@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ChangeDetectorRef } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { RouterLink, Router, NavigationEnd } from '@angular/router';
 import { AuthService, AppUser } from '../../services/auth.service';
@@ -103,7 +103,7 @@ export class AuthButtonsComponent implements OnInit, OnDestroy {
   private routerSub!: Subscription;
   private clickListener!: (e: MouseEvent) => void;
 
-  constructor(private auth: AuthService, private router: Router, private location: Location) {
+  constructor(private auth: AuthService, private router: Router, private location: Location, private cdr: ChangeDetectorRef) {
     addIcons({ logOutOutline, personCircleOutline, heartOutline, mapOutline, calendarOutline, businessOutline, arrowBackOutline });
   }
 
@@ -116,6 +116,7 @@ export class AuthButtonsComponent implements OnInit, OnDestroy {
       } else {
         this.initials = 'G';
       }
+      this.cdr.detectChanges();
     });
 
     this.routerSub = this.router.events.pipe(
@@ -148,5 +149,7 @@ export class AuthButtonsComponent implements OnInit, OnDestroy {
     this.dropdownOpen = false;
   }
 }
+
+
 
 
