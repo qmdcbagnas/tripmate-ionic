@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuthButtonsComponent } from '../components/auth-buttons/auth-buttons.component';
 import { IonContent, IonHeader, IonTitle, IonToolbar , IonMenuButton } from '@ionic/angular';
 
 interface Listing {
@@ -21,7 +22,7 @@ interface Listing {
   selector: 'app-stays',
   templateUrl: './stays.page.html',
   styleUrls: ['./stays.page.scss'],
-  imports: [RouterLink, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonMenuButton]
+  imports: [AuthButtonsComponent, RouterLink, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonMenuButton]
 })
 export class StaysPage implements OnInit {
   listings: Listing[] = [
@@ -267,5 +268,6 @@ export class StaysPage implements OnInit {
       return rightPct - leftPct;
   }
 }
+
 
 

@@ -1,3 +1,4 @@
+import { AuthButtonsComponent } from '../components/auth-buttons/auth-buttons.component';
 import {
   Component,
   OnInit,
@@ -32,6 +33,7 @@ import {
   styleUrls: ['./contactus.page.scss'],
 
   imports: [
+    AuthButtonsComponent,
     CommonModule,
     FormsModule,
     RouterLink,
@@ -594,3 +596,7 @@ export class ContactusPage implements OnInit {
   }
 
 }
+
+
+
+

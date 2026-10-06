@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuthButtonsComponent } from '../components/auth-buttons/auth-buttons.component';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonMenuButton } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { PropertiesService } from '../services/properties.service';
@@ -10,7 +11,7 @@ import { PropertiesService } from '../services/properties.service';
   selector: 'app-become-host',
   templateUrl: './become-host.page.html',
   styleUrls: ['./become-host.page.scss'],
-  imports: [RouterLink, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonMenuButton]
+  imports: [AuthButtonsComponent, RouterLink, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonMenuButton]
 })
 export class BecomeHostPage implements OnInit {
   mode: 'guest' | 'host' = 'host';
@@ -101,3 +102,5 @@ export class BecomeHostPage implements OnInit {
     setTimeout(() => { this.showToast = false; }, 3200);
   }
 }
+
+

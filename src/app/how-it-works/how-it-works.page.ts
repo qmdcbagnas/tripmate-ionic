@@ -1,3 +1,4 @@
+import { AuthButtonsComponent } from '../components/auth-buttons/auth-buttons.component';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -14,6 +15,7 @@ import {
   templateUrl: './how-it-works.page.html',
   styleUrls: ['./how-it-works.page.scss'],
   imports: [
+    AuthButtonsComponent,
     RouterLink,
     CommonModule,
     FormsModule,
@@ -29,3 +31,5 @@ export class HowItWorksPage implements OnInit {
   ngOnInit() {}
 
 }
+
+

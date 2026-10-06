@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuthButtonsComponent } from '../components/auth-buttons/auth-buttons.component';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonMenuButton } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 
@@ -9,7 +10,7 @@ import { AuthService } from '../services/auth.service';
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
-  imports: [RouterLink, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonMenuButton]
+  imports: [AuthButtonsComponent, RouterLink, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonMenuButton]
 })
 export class LoginPage implements OnInit {
   mode: 'guest' | 'host' = 'guest';
@@ -78,3 +79,4 @@ export class LoginPage implements OnInit {
     setTimeout(() => { this.showToast = false; }, 3200);
   }
 }
+

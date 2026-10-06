@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuthButtonsComponent } from '../components/auth-buttons/auth-buttons.component';
 import { IonContent, IonHeader, IonTitle, IonToolbar , IonMenuButton } from '@ionic/angular';
 
 interface Stay {
@@ -17,7 +18,7 @@ interface Stay {
   selector: 'app-homepage',
   templateUrl: './homepage.page.html',
   styleUrls: ['./homepage.page.scss'],
-  imports: [RouterLink, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonMenuButton]
+  imports: [AuthButtonsComponent, RouterLink, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonMenuButton]
 })
 export class HomepagePage implements OnInit, OnDestroy {
   featuredStays: Stay[] = [];
@@ -135,5 +136,6 @@ export class HomepagePage implements OnInit, OnDestroy {
     this.isMobileNavOpen = !this.isMobileNavOpen;
   }
 }
+
 
 

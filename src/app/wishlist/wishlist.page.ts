@@ -1,8 +1,9 @@
+import { AuthButtonsComponent } from '../components/auth-buttons/auth-buttons.component';
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonMenuButton } from '@ionic/angular';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonMenuButton, IonBackButton } from '@ionic/angular';
 import { AuthService, AppUser } from '../services/auth.service';
 import { WishlistService, WishlistItem } from '../services/wishlist.service';
 import { PropertiesService, Property } from '../services/properties.service';
@@ -11,7 +12,9 @@ import { PropertiesService, Property } from '../services/properties.service';
   selector: 'app-wishlist',
   templateUrl: './wishlist.page.html',
   styleUrls: ['./wishlist.page.scss'],
-  imports: [RouterLink, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonMenuButton]
+  imports: [
+    RouterLinkActive,
+    AuthButtonsComponent,RouterLink, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonMenuButton, IonBackButton]
 })
 export class WishlistPage implements OnInit {
   user: AppUser | null = null;
@@ -94,3 +97,5 @@ export class WishlistPage implements OnInit {
     await this.auth.signOut();
   }
 }
+
+

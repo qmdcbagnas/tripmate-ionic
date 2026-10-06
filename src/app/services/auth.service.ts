@@ -154,6 +154,30 @@ export class AuthService {
   }
 
   // ── SIGN OUT ────────────────────────────────────────────────────────────────
+    // ?? Update Profile Data (including Avatar)
+  async updateProfile(updates: Partial<AppUser>) {
+    const user = this._currentUser.getValue();
+    if (!user) return;
+
+    const updatedUser = { ...user, ...updates };
+
+    if (environment.USE_MOCK_DATA) {
+      const users = JSON.parse(localStorage.getItem(MOCK_USERS_KEY) || '[]');
+      const idx = users.findIndex((u: any) => u.id === user.id);
+      if (idx !== -1) {
+        users[idx] = { ...users[idx], ...updates };
+        localStorage.setItem(MOCK_USERS_KEY, JSON.stringify(users));
+      }
+      localStorage.setItem(MOCK_SESSION_KEY, JSON.stringify(updatedUser));
+      this._currentUser.next(updatedUser);
+      return;
+    }
+
+    // Real Supabase Update
+    await this.supabase.client.from('profiles').update(updates).eq('id', user.id);
+    this._currentUser.next(updatedUser);
+  }
+
   async signOut() {
     if (environment.USE_MOCK_DATA) {
       localStorage.removeItem(MOCK_SESSION_KEY);
@@ -208,3 +232,4 @@ export class AuthService {
     return this.signIn(payload.email || payload.identifier, payload.password);
   }
 }
+

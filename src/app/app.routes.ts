@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 
+import { guestGuard } from './guest.guard';
+
 export const routes: Routes = [
   {
     path: '',
@@ -38,10 +40,7 @@ export const routes: Routes = [
     path: 'forgot-password',
     loadComponent: () => import('./forgot-password/forgot-password.page').then( m => m.ForgotPasswordPage)
   },
-  {
-    path: 'login',
-    loadComponent: () => import('./login/login.page').then( m => m.LoginPage)
-  },
+  { path: 'login', loadComponent: () => import('./login/login.page').then( m => m.LoginPage), canActivate: [guestGuard] },
   {
     path: 'profile',
     loadComponent: () => import('./profile/profile.page').then( m => m.ProfilePage)
@@ -50,10 +49,7 @@ export const routes: Routes = [
     path: 'property',
     loadComponent: () => import('./property/property.page').then( m => m.PropertyPage)
   },
-  {
-    path: 'signup',
-    loadComponent: () => import('./signup/signup.page').then( m => m.SignupPage)
-  },
+  { path: 'signup', loadComponent: () => import('./signup/signup.page').then( m => m.SignupPage), canActivate: [guestGuard] },
   {
     path: 'stays',
     loadComponent: () => import('./stays/stays.page').then( m => m.StaysPage)
@@ -87,3 +83,6 @@ export const routes: Routes = [
     loadComponent: () => import('./reservations/reservations.page').then( m => m.ReservationsPage)
   },
 ];
+
+
+

@@ -26,8 +26,22 @@
     </ion-header>
 
 
-    <!-- MENU CONTENT -->
+        <!-- MENU CONTENT -->
     <ion-content class="menu-content">
+
+            <!-- LOGGED IN USER PROFILE DISPLAY -->
+      <div class="side-profile" *ngIf="user">
+        <div class="side-avatar" (click)="triggerUpload()" style="cursor: pointer; position: relative;" title="Upload Photo">
+          <img *ngIf="user.avatar_url" [src]="user.avatar_url" alt="Profile" />
+          <span *ngIf="!user.avatar_url">{{ initials }}</span>
+          <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.5);color:white;font-size:0.5rem;text-align:center;padding:2px 0;">ADD</div>
+        </div>
+        <input type="file" id="sideMenuAvatarUpload" accept="image/*" (change)="onFileSelected($event)" style="display: none;">
+        <div class="side-info">
+          <h3 class="side-name">{{ user.full_name || 'TripMate User' }}</h3>
+          <p class="side-email">{{ user.email }}</p>
+        </div>
+      </div>
 
       <div class="menu-section-title">
         MENU
@@ -89,11 +103,64 @@
           </ion-item>
 
 
-          <div class="menu-divider"></div>
+                    <div class="menu-divider" *ngIf="user"></div>
 
-          <div class="menu-section-title">
-            MY TRIP
+          <div class="menu-section-title" *ngIf="user">
+            ACCOUNT
           </div>
+
+          <!-- MY TRIPS -->
+          <ion-item
+            *ngIf="user"
+            routerLink="/dashboard"
+            routerDirection="root"
+            routerLinkActive="active-menu-item"
+            lines="none"
+            detail="false"
+          >
+            <ion-icon name="calendar-outline" slot="start"></ion-icon>
+            <ion-label>My Trips</ion-label>
+          </ion-item>
+
+          <!-- WISHLIST -->
+          <ion-item
+            *ngIf="user"
+            routerLink="/wishlist"
+            routerDirection="root"
+            routerLinkActive="active-menu-item"
+            lines="none"
+            detail="false"
+          >
+            <ion-icon name="heart-outline" slot="start"></ion-icon>
+            <ion-label>Wishlist</ion-label>
+          </ion-item>
+
+          <!-- PROFILE -->
+          <ion-item
+            *ngIf="user"
+            routerLink="/profile"
+            routerDirection="root"
+            routerLinkActive="active-menu-item"
+            lines="none"
+            detail="false"
+          >
+            <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+            <ion-label>Profile</ion-label>
+          </ion-item>
+
+          <!-- LOGOUT -->
+          <ion-item
+            *ngIf="user"
+            (click)="logout()"
+            lines="none"
+            detail="false"
+            style="cursor: pointer;"
+          >
+            <ion-icon name="log-out-outline" slot="start"></ion-icon>
+            <ion-label>Log out</ion-label>
+          </ion-item>
+
+          <div class="menu-divider"></div>
 
 
           <!-- ITINERARY -->
@@ -203,3 +270,5 @@
   <ion-router-outlet id="main-content"></ion-router-outlet>
 
 </ion-app>
+
+

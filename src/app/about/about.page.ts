@@ -2,13 +2,14 @@ import { Component, OnInit, ElementRef, ViewChildren, QueryList, AfterViewInit, 
 import { RouterLink } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuthButtonsComponent } from '../components/auth-buttons/auth-buttons.component';
 import { IonContent, IonHeader, IonTitle, IonToolbar , IonMenuButton } from '@ionic/angular';
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.page.html',
   styleUrls: ['./about.page.scss'],
-  imports: [RouterLink, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonMenuButton]
+  imports: [AuthButtonsComponent, RouterLink, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonMenuButton]
 })
 export class AboutPage implements OnInit, AfterViewInit {
   @ViewChildren('factFigure') factFigures!: QueryList<ElementRef>;
@@ -66,5 +67,7 @@ export class AboutPage implements OnInit, AfterViewInit {
       requestAnimationFrame(tick);
   }
 }
+
+
 
 

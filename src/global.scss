@@ -661,3 +661,307 @@ ion-menu.tripmate-menu .menu-footer span {
 }
 @media (max-width: 768px) { .hide-mobile { display: none !important; } }
 
+
+/* OVERRIDE USER DROPDOWN STYLES (DARK THEME) */
+.user-dropdown {
+  background-color: #0F2E25 !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+  color: #FFFFFF !important;
+  overflow: hidden !important;
+}
+.user-dropdown .dropdown-header {
+  background: transparent !important;
+  padding: 16px 20px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+.user-dropdown .dropdown-name {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+  margin-bottom: 4px !important;
+}
+.user-dropdown .dropdown-email {
+  color: #F8F5EE !important;
+  opacity: 0.8 !important;
+  font-size: 0.85rem !important;
+}
+.user-dropdown .dropdown-divider {
+  display: none !important;
+}
+.user-dropdown .dropdown-item {
+  color: #FFFFFF !important;
+  padding: 12px 20px !important;
+  margin: 4px 8px !important;
+  border-radius: 8px !important;
+  transition: all 0.2s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+.user-dropdown .dropdown-item svg {
+  color: #F8F5EE !important;
+  width: 18px !important;
+  height: 18px !important;
+}
+.user-dropdown .dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #FF6B4A !important;
+}
+.user-dropdown .dropdown-item:hover svg {
+  color: #FF6B4A !important;
+}
+
+/* OVERHAUL STYLES FOR LOGGED-IN PAGES */
+.dashboard-tabs {
+  background: white !important;
+  border-bottom: 1px solid rgba(0,0,0,0.05) !important;
+  padding: 0 20px !important;
+  display: flex !important;
+  justify-content: center !important;
+  gap: 32px !important;
+}
+.dashboard-tabs a {
+  padding: 16px 0 !important;
+  font-weight: 500 !important;
+  color: #666666 !important;
+  text-decoration: none !important;
+  border-bottom: 2px solid transparent !important;
+  transition: all 0.2s ease !important;
+}
+.dashboard-tabs a.active, .dashboard-tabs a:hover {
+  color: #FF6B4A !important;
+  border-bottom-color: #FF6B4A !important;
+}
+
+/* Base background for Dashboard, Profile, Wishlist */
+app-dashboard ion-content, app-profile ion-content, app-wishlist ion-content {
+  --background: #F8F5EE !important;
+}
+
+/* White Card Containers */
+.profile-section, .profile-header-card, .trip-card, .empty-state, .trips-grid .trip-card, .wishlist-grid .trip-card {
+  background: white !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+  border: none !important;
+  overflow: hidden;
+}
+.profile-section {
+  padding: 24px !important;
+  margin-bottom: 24px !important;
+}
+
+/* Typography Overrides */
+.section-header h2, .profile-header-card h2, .empty-state h3, .trip-title {
+  font-family: 'Fraunces', serif !important;
+  color: #0F2E25 !important;
+}
+.form-group label, .notification-settings span {
+  font-family: 'Inter', sans-serif !important;
+  color: #666666 !important;
+  font-weight: 500 !important;
+  margin-bottom: 8px !important;
+  display: block !important;
+}
+.form-input {
+  color: #0F2E25 !important;
+  border: 1px solid rgba(0,0,0,0.1) !important;
+  border-radius: 8px !important;
+  padding: 12px 16px !important;
+  width: 100% !important;
+  font-size: 1rem !important;
+  font-family: 'Inter', sans-serif !important;
+  background: white !important;
+  margin-bottom: 16px !important;
+}
+.form-input:focus {
+  outline: none !important;
+  border-color: #FF6B4A !important;
+}
+
+/* Profile Specific Fixes */
+.profile-avatar-large {
+  width: 100px !important;
+  height: 100px !important;
+  border: 3px solid white !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+}
+.avatar-edit-overlay {
+  display: none !important; /* Hide the messy badge */
+}
+.profile-header-card {
+  display: flex !important;
+  align-items: center !important;
+  position: relative !important;
+}
+.edit-photo-btn {
+  background: white !important;
+  border: 1px solid rgba(0,0,0,0.1) !important;
+  border-radius: 100px !important;
+  padding: 6px 12px !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  color: #666666 !important;
+  cursor: pointer !important;
+  margin-left: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  transition: all 0.2s ease !important;
+}
+.edit-photo-btn:hover {
+  border-color: #FF6B4A !important;
+  color: #FF6B4A !important;
+}
+
+/* Buttons */
+.btn-primary, button[type="submit"] {
+  background: #FF6B4A !important;
+  color: white !important;
+  border-radius: 100px !important;
+  padding: 12px 24px !important;
+  font-weight: 600 !important;
+  border: none !important;
+  cursor: pointer !important;
+  display: inline-block !important;
+  width: auto !important;
+}
+.btn-primary:hover, button[type="submit"]:hover {
+  background: #e55a39 !important;
+}
+
+/* Checkboxes */
+input[type="checkbox"] {
+  accent-color: #FF6B4A !important;
+  width: 18px !important;
+  height: 18px !important;
+  cursor: pointer !important;
+}
+.notification-settings .form-group label {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin-bottom: 16px !important;
+  cursor: pointer !important;
+}
+.notification-settings .form-group label span {
+  margin-bottom: 0 !important;
+}
+
+/* Dashboard / Wishlist Empty States */
+.empty-state {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 48px 24px !important;
+  text-align: center !important;
+  max-width: 500px !important;
+  margin: 0 auto !important;
+}
+.empty-state-icon {
+  color: #FF6B4A !important;
+  margin-bottom: 16px !important;
+}
+.empty-state-icon svg {
+  width: 48px !important;
+  height: 48px !important;
+}
+.empty-state p {
+  color: #666666 !important;
+  margin-bottom: 24px !important;
+}
+
+/* Sort By Dropdown styling matching Stays */
+.sort-dropdown {
+  background: white !important;
+  border: 1px solid rgba(0,0,0,0.1) !important;
+  border-radius: 100px !important;
+  padding: 8px 16px !important;
+  font-family: 'Inter', sans-serif !important;
+  color: #0F2E25 !important;
+  font-weight: 500 !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+  cursor: pointer !important;
+}
+
+/* OVERRIDE EMPTY STATES GLOBALLY */
+.empty-state, .wishlist-empty-state {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 64px 24px !important;
+  text-align: center !important;
+  max-width: 500px !important;
+  margin: 32px auto !important;
+  background: white !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+  border: none !important;
+}
+.empty-state-icon, .wishlist-empty-icon {
+  width: auto !important;
+  height: auto !important;
+  margin-bottom: 16px !important;
+  background: transparent !important;
+  border: none !important;
+  display: block !important;
+}
+.empty-state-icon svg, .wishlist-empty-icon svg {
+  width: 36px !important;
+  height: 36px !important;
+  color: #FF6B4A !important;
+}
+.empty-state h3, .wishlist-empty-state h3 {
+  font-family: 'Fraunces', serif !important;
+  font-size: 1.5rem !important;
+  color: #0F2E25 !important;
+  margin-bottom: 8px !important;
+}
+.empty-state p, .wishlist-empty-state p {
+  font-family: 'Inter', sans-serif !important;
+  color: #666666 !important;
+  font-size: 0.95rem !important;
+  margin-bottom: 24px !important;
+}
+.dashboard-main, .dashboard-container {
+    background: transparent !important;
+}
+.dashboard-sidebar {
+    background: white !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+    padding: 16px 0 !important;
+    border: none !important;
+    height: max-content !important;
+}
+.sidebar-nav button.active {
+    background: rgba(255,107,74,0.1) !important;
+    color: #FF6B4A !important;
+    border-right: 3px solid #FF6B4A !important;
+}
+.sidebar-nav button {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 500 !important;
+    color: #666666 !important;
+}
+
+/* Fix Wishlist Sort Select */
+.sort-select {
+  background: white !important;
+  border: 1px solid rgba(0,0,0,0.1) !important;
+  border-radius: 100px !important;
+  padding: 10px 20px !important;
+  font-family: 'Inter', sans-serif !important;
+  color: #0F2E25 !important;
+  font-weight: 500 !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02) !important;
+  cursor: pointer !important;
+  outline: none !important;
+}
+.sort-select:focus {
+  border-color: #FF6B4A !important;
+}

@@ -1,15 +1,18 @@
+import { AuthButtonsComponent } from '../components/auth-buttons/auth-buttons.component';
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonMenuButton } from '@ionic/angular';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonMenuButton, IonBackButton } from '@ionic/angular';
 import { AuthService, AppUser } from '../services/auth.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
-  imports: [RouterLink, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonMenuButton]
+  imports: [
+    RouterLinkActive,
+    AuthButtonsComponent,RouterLink, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonMenuButton, IonBackButton]
 })
 export class ProfilePage implements OnInit {
   user: AppUser | null = null;
@@ -59,6 +62,28 @@ export class ProfilePage implements OnInit {
   }
 
   isValidEmail(email: string) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+
+  
+  triggerUpload() {
+    const fileInput = document.getElementById('avatarUpload') as HTMLInputElement;
+    if (fileInput) fileInput.click();
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = async (e: any) => {
+      const base64 = e.target.result;
+      if (this.user) {
+        this.user.avatar_url = base64;
+        await this.auth.updateProfile({ avatar_url: base64 });
+        this.displayToast('Profile photo updated!');
+      }
+    };
+    reader.readAsDataURL(file);
+  }
 
   onAccountSubmit() {
     const { firstName, lastName, email } = this.account;
@@ -110,3 +135,6 @@ export class ProfilePage implements OnInit {
   closeUserDropdown() { this.userDropdownOpen = false; }
   async logout(event: Event) { event.preventDefault(); await this.auth.signOut(); }
 }
+
+
+

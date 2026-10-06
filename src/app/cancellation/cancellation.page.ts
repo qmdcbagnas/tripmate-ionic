@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuthButtonsComponent } from '../components/auth-buttons/auth-buttons.component';
 import { IonContent, IonHeader, IonTitle, IonToolbar , IonMenuButton } from '@ionic/angular';
 
 @Component({
   selector: 'app-cancellation',
   templateUrl: './cancellation.page.html',
   styleUrls: ['./cancellation.page.scss'],
-  imports: [RouterLink, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonMenuButton]
+  imports: [AuthButtonsComponent, RouterLink, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonMenuButton]
 })
 export class CancellationPage implements OnInit {
   checkinDate: string = '';
@@ -82,5 +83,6 @@ export class CancellationPage implements OnInit {
     this.showResult = true;
   }
 }
+
 
 

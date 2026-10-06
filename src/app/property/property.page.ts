@@ -1,3 +1,4 @@
+import { AuthButtonsComponent } from '../components/auth-buttons/auth-buttons.component';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -8,7 +9,8 @@ import { IonContent, IonHeader, IonTitle, IonToolbar , IonMenuButton } from '@io
   selector: 'app-property',
   templateUrl: './property.page.html',
   styleUrls: ['./property.page.scss'],
-  imports: [RouterLink, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonMenuButton]
+  imports: [
+    AuthButtonsComponent,RouterLink, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonMenuButton]
 })
 export class PropertyPage implements OnInit {
   propertyData: any = {
@@ -155,5 +157,9 @@ export class PropertyPage implements OnInit {
       this.router.navigate(['/booking'], { queryParams: { id: this.property.id, guests: this.guestCount } });
   }
 }
+
+
+
+
 
 
